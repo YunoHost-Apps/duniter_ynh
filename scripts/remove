@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Retrieve argument
+port=$2
+
+# Delete uCoin node daemon
+pm2 delete ucoind
+
+# Remove uCoin node
+sudo npm remove ucoin pm2
+sudo apt-get -y remove nodejs node-gyp npm
+
+# Close opened port
+sudo yunohost firewall disallow TCP $port
+
+# Reload SSOwat
+sudo yunohost app ssowatconf

@@ -1,0 +1,39 @@
+#!/bin/bash
+
+# Retrieve arguments
+domain=$1
+port=$2
+sync_node=$3
+sync_port=$4
+salt=$5
+pwd=$6
+
+# Install dependencies: nodejs, npm
+sudo apt-get -y -qq install nodejs npm nodejs-legacy
+sudo npm install -g npm
+sudo apt-get -y -qq install node-gyp
+
+# Install uCoin node and pm2 daemon manager
+sudo npm install -g ucoin pm2
+
+# Check port availability
+sudo yunohost app checkport $port
+if [[ ! $? -eq 0 ]]; then
+  exit 1
+fi
+
+# Open port in firewall
+sudo yunohost firewall allow TCP $port > /dev/null 2>&1
+
+# Init and configure uCoin node
+ucoind init $sync_node $sync_port
+ucoind config --noupnp --remoteh $domain --port $port --salt $salt --passwd $pwd
+
+# Launch uCoin node with daemon pm2
+pm2 start /usr/bin/ucoind -- start --noupnp
+
+# Add uCoin daemon to the YunoHost monitoring
+#sudo yunohost service add ucoin --log pm2 logs
+
+# Reload SSOwat
+#sudo yunohost app ssowatconf
