@@ -1,0 +1,69 @@
+{
+    "name": "uCoin",
+    "id": "ucoin",
+    "description": {
+        "en": "uCoin node which permits participate chainblocks writing. Monetary system with universal dividende, libre money, Relative Money Theory",
+        "fr": "Nœux uCoin qui permet de participer l'écriture de blocs. Système monétaire à Dividende universel, monnaie libre, Thérorie Relative de la Monnaie"
+    },
+    "url": "http://ucoin.io/",
+    "licence": "MIT",
+    "maintainer": {
+        "name": "Moul",
+        "email": "moul@moul.re",
+        "url": "https://moul.re/"
+    },
+    "multi_instance": "true",
+    "arguments": {
+        "install" : [
+            {
+                "name": "domain",
+                "ask": {
+                    "en": "Domain name for uCoin node installation",
+                    "fr": "Nom de domaine d’installation du nœud uCoin"
+                },
+                "example": "example.com"
+            },
+            {
+                "name": "port",
+                "ask": {
+                    "en": "Port of uCoin node",
+                    "fr": "Port du nœud uCoin"
+                },
+                "example": "9201",
+                "default": "9201"
+            },
+            {
+                "name": "sync_node",
+                "ask": {
+                    "en": "Node to synchronise with",
+                    "fr": "Nœud avec lequel synchroniser"
+                },
+                "example": "metab.ucoin.io",
+                "default": "metab.ucoin.io"
+            },
+            {
+                "name": "sync_port",
+                "ask": {
+                    "en": "Port to synchronise with",
+                    "fr": "Port avec lequel faire la synchronisation"
+                },
+                "example": "9201",
+                "default": "9201"
+            },
+            {   
+                "name": "salt",
+                "ask": {
+                    "en": "Enter salt of your account",
+                    "fr": "Entrez le salt de votre compte"
+                }
+            },
+            {   
+                "name": "pwd",
+                "ask": {
+                    "en": "Password of your account",
+                    "fr": "Mot de passe de votre compte"
+                }
+            }
+        ]
+    }
+}
