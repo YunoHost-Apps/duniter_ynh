@@ -18,8 +18,8 @@
             {
                 "name": "domain",
                 "ask": {
-                    "en": "Domain name for uCoin node installation",
-                    "fr": "Nom de domaine d’installation du nœud uCoin"
+                    "en": "Domain name on which install uCoin node",
+                    "fr": "Nom de domaine sur lequel installer le nœud uCoin"
                 },
                 "example": "example.com"
             },
@@ -35,8 +35,8 @@
             {
                 "name": "sync_node",
                 "ask": {
-                    "en": "Node to synchronise with",
-                    "fr": "Nœud avec lequel synchroniser"
+                    "en": "Node which synchronise with",
+                    "fr": "Nœud avec lequel faire la synchronisation"
                 },
                 "example": "metab.ucoin.io",
                 "default": "metab.ucoin.io"
@@ -44,8 +44,8 @@
             {
                 "name": "sync_port",
                 "ask": {
-                    "en": "Port to synchronise with",
-                    "fr": "Port avec lequel faire la synchronisation"
+                    "en": "Port of synchronization",
+                    "fr": "Port de synchronisation"
                 },
                 "example": "9201",
                 "default": "9201"
@@ -53,8 +53,8 @@
             {   
                 "name": "salt",
                 "ask": {
-                    "en": "Enter salt of your account",
-                    "fr": "Entrez le salt de votre compte"
+                    "en": "Salt of your account",
+                    "fr": "Salt de votre compte"
                 }
             },
             {   
