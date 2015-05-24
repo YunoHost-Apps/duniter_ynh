@@ -12,6 +12,3 @@ sudo apt-get -y remove nodejs node-gyp npm
 
 # Close opened port
 sudo yunohost firewall disallow TCP $port
-
-# Reload SSOwat
-sudo yunohost app ssowatconf

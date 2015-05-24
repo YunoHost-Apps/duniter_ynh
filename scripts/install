@@ -31,9 +31,3 @@ ucoind config --noupnp --remoteh $domain --port $port --salt $salt --passwd $pwd
 
 # Launch uCoin node with daemon pm2
 pm2 start /usr/bin/ucoind -- start --noupnp
-
-# Add uCoin daemon to the YunoHost monitoring
-#sudo yunohost service add ucoin --log pm2 logs
-
-# Reload SSOwat
-#sudo yunohost app ssowatconf

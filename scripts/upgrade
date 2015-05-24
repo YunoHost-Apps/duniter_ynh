@@ -1,27 +1,10 @@
 #!/bin/bash
-app=ucoin
 
-# Retrieve arguments
-domain=$(sudo yunohost app setting $app domain)
-path=$(sudo yunohost app setting $app path)
-is_public=$(sudo yunohost app setting $app is_public)
-
-# Remove trailing "/" for next commands
-path=${path%/}
+# Stop uCoin daemon
+pm2 stop ucoind
 
 # Upgrade ucoin package
-sudo apt-get update
+sudo npm install -g ucoin
 
-# If app is public, add url to SSOWat conf as skipped_uris
-if [ "$is_public" = "Yes" ];
-then
-  # See install script
-  sudo yunohost app setting $app unprotected_uris -v "/"
-  # Remove old settings
-  sudo yunohost app setting $app skipped_uris -d
-fi
-
-# Restart services
-sudo service nginx reload
-sudo yunohost app ssowatconf
-
+# Restart uCoin daemon
+pm2 restart ucoind
