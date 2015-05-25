@@ -1,4 +1,4 @@
-# uCoin for YunoHost
+# uCoin package for YunoHost
 
 * [uCoin project](http://ucoin.io)
 * [YunoHost project](https://yunohost.org/#/)
