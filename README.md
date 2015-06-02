@@ -2,5 +2,5 @@
 
 * [uCoin project](http://ucoin.io)
 * [YunoHost project](https://yunohost.org/#/)
-* For Debian Jessie
-* There is still issue installing uCoin on ARM
+* Only tested on Debian Jessie 64bits
+* There is still an issue installing uCoin on ARM
