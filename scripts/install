@@ -1,13 +1,16 @@
 #!/bin/bash
 
 # Retrieve arguments
+ipv4=ifconfig | grep "inet addr:" | sed '1!d' | cut -d : -f 2 | cut -b -14
 domain=$1
 port=$2
 sync_node=$3
 sync_port=$4
 salt=$5
 pwd=$6
-cpu=$7
+cpu=$(($7/100))
+#cpu=`expr $7 / 100`
+#cpu=calc{$7/100}
 
 # Install dependencies: nodejs, npm
 sudo apt-get -y -qq install nodejs npm nodejs-legacy
@@ -26,8 +29,8 @@ fi
 sudo yunohost firewall allow TCP $port > /dev/null 2>&1
 
 # Configure and sync uCoin node
-ucoind config --noupnp --remoteh $domain --port $port --salt $salt --passwd $pwd --cpu $cpu / 100
+ucoind config --noupnp --ipv4 $ipv4 --remote4 $ipv4 --remoteh $domain --port $port --remotep $port --salt $salt --passwd $pwd --cpu $cpu
 ucoind sync $sync_node $sync_port
 
 # Launch uCoin node with daemon pm2
-pm2 start /usr/bin/ucoind -- start --noupnp
+pm2 start /usr/bin/ucoind -- start
