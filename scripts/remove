@@ -8,7 +8,7 @@ pm2 delete ucoind
 
 # Remove uCoin node
 sudo npm remove ucoin pm2
-sudo apt-get -y remove nodejs npm
+#sudo apt-get -y remove nodejs npm
 
 # Close opened port
 sudo yunohost firewall disallow TCP $port
