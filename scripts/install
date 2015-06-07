@@ -16,7 +16,9 @@ sudo apt-get -y -qq install nodejs npm nodejs-legacy
 sudo npm install -g npm
 
 # Install uCoin node and pm2 daemon manager
-sudo npm install -g ucoin pm2
+git clone https://github.com/ucoin-io/ucoin /tmp/ucoin
+sudo npm install -g /tmp/ucoin
+sudo npm install -g pm2
 
 # Check port availability
 sudo yunohost app checkport $port
