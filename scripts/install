@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # Retrieve arguments
-ipv4=$(ifconfig | grep "inet addr:" | sed '1!d' | cut -d : -f 2 | cut -b -14)
+#ipv4=$(ifconfig | grep "inet addr:" | sed '1!d' | cut -d : -f 2 | cut -b -14)
+#ipv4=$(traceroute -4 maelstro.me | grep ms | cut -d " " -f  4)
 domain=$1
 port=$2
 sync_node=$3
