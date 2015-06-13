@@ -6,7 +6,7 @@
         "fr": "Nœux uCoin qui permet de participer l'écriture de blocs. Système monétaire à Dividende universel, monnaie libre, Thérorie Relative de la Monnaie"
     },
     "url": "http://ucoin.io/",
-    "licence": "MIT",
+    "licence": "GPL3",
     "maintainer": {
         "name": "Moul",
         "email": "moul@moul.re",
