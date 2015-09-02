@@ -34,4 +34,4 @@ ucoind config --noupnp --ipv4 $ipv4 --remote4 $ipv4 --remoteh $domain --port $po
 ucoind sync $sync_node $sync_port
 
 # Launch uCoin node with pm2 daemon
-pm2 start /usr/bin/ucoind -- start
+pm2 start /usr/bin/local/ucoind -- start
