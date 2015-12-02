@@ -1,10 +1,14 @@
 #!/bin/bash
 
+#set -e
+
 # Stop uCoin daemon
-pm2 stop ucoind
+pm2 stop ucoin
 
 # Upgrade ucoin package
-sudo npm install -g ucoin
+cd /home/yunohost.app/ucoin
+git pull
+sudo npm install -g .
 
 # Restart uCoin daemon
-pm2 restart ucoind
+pm2 restart ucoin

@@ -3,10 +3,10 @@
     "id": "ucoin",
     "description": {
         "en": "uCoin node which permits participate chainblocks writing. Monetary system with universal dividende, libre money, Relative Money Theory",
-        "fr": "Nœux uCoin qui permet de participer l'écriture de blocs. Système monétaire à Dividende universel, monnaie libre, Thérorie Relative de la Monnaie"
+        "fr": "Nœud uCoin qui permet de participer l'écriture de blocs. Système monétaire à Dividende universel, monnaie libre, Thérorie Relative de la Monnaie"
     },
     "url": "http://ucoin.io/",
-    "licence": "GPL3",
+    "licence": "free",
     "maintainer": {
         "name": "Moul",
         "email": "moul@moul.re",
@@ -29,8 +29,8 @@
                     "en": "Port of uCoin node",
                     "fr": "Port du nœud uCoin"
                 },
-                "example": "9201",
-                "default": "9201"
+                "example": "8999",
+                "default": "8999"
             },
             {
                 "name": "sync_node",
@@ -58,7 +58,8 @@
                 }
             },
             {   
-                "name": "pwd",
+                "name": "psswd",
+                "type": "password",
                 "ask": {
                     "en": "Password of your account",
                     "fr": "Mot de passe de votre compte"
