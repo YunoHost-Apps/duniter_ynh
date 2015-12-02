@@ -1,14 +1,19 @@
 #!/bin/bash
 
-# Retrieve argument
-port=$2
+#set -e
 
-# Delete uCoin node daemon
-pm2 delete ucoind
+# Remove uCoin node daemon
+pm2 delete ucoin
 
 # Remove uCoin node
-sudo npm remove ucoin pm2
-#sudo apt-get -y remove nodejs npm
+sudo npm remove ucoin
+
+# Remove uCoin service to YunoHost monitoring
+sudo yunohost service remove ucoin
+
+# I can't remove thoses packages which could be used by other apps
+#sudo npm remove pm2
+#sudo apt -y -qq remove nodejs npm
 
 # Close opened port
 sudo yunohost firewall disallow TCP $port

@@ -1,23 +1,31 @@
 #!/bin/bash
 
+#set -e
+
 # Retrieve arguments
-#ipv4=$(ifconfig | grep "inet addr:" | sed '1!d' | cut -d : -f 2 | cut -b -14)
-#ipv4=$(traceroute -4 maelstro.me | grep ms | cut -d " " -f  4)
 domain=$1
 port=$2
 sync_node=$3
 sync_port=$4
 salt=$5
-pwd=$6
+psswd=$6
 #cpu=$(($7/100))
 #cpu=`expr $7 / 100`
+path=/home/yunohost.app/ucoin
+ucoin="node --harmony $path/bin/ucoind"
 
-# Install dependencies: nodejs, npm
-sudo apt-get -y -qq install nodejs npm nodejs-legacy
+# Install dependencies: nodejs 0.12.x, npm
+#sudo apt -y -qq install npm node nodejs-legacy
+sudo apt -y -qq install curl g++ make
+sudo curl --silent --location https://deb.nodesource.com/setup_0.12 | sudo bash -
+sudo apt -y -qq install nodejs
 
 # Install uCoin node and pm2 daemon manager
-git clone https://github.com/ucoin-io/ucoin /tmp/ucoin
-sudo npm install -g /tmp/ucoin pm2
+cd /home/yunohost.app/
+sudo git clone https://github.com/ucoin-io/ucoin
+cd $path
+sudo npm install
+sudo npm install -g pm2
 
 # Check port availability
 sudo yunohost app checkport $port
@@ -29,9 +37,12 @@ fi
 sudo yunohost firewall allow TCP $port > /dev/null 2>&1
 
 # Configure and sync uCoin node
-ucoind config --noupnp --ipv4 $ipv4 --remote4 $ipv4 --remoteh $domain --port $port --remotep $port --salt $salt --passwd $pwd
-# --cpu $cpu
-ucoind sync $sync_node $sync_port
+$ucoin init --autoconf
+$ucoin config --remoteh $domain --port $port --remotep $port --salt $salt --passwd $psswd # --cpu $cpu
+$ucoin sync $sync_node $sync_port # --nocautious
 
 # Launch uCoin node with pm2 daemon
-pm2 start ucoind -- start
+pm2 start $path/bin/ucoind --name ucoin --interpreter=node --node-args="--harmony" --log /var/log/ucoin.log -- start
+
+# Add uCoin service to the YunoHost monitoring
+sudo yunohost service add ucoin --log /var/log/ucoin.log
