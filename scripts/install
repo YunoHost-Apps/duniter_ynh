@@ -3,29 +3,22 @@
 #set -e
 
 # Retrieve arguments
+app=ucoin
 domain=$1
-port=$2
-sync_node=$3
-sync_port=$4
-salt=$5
-psswd=$6
+path=$2
+port=$3
+sync_node=$4
+sync_port=$5
+salt=$6
+password=$7
 #cpu=$(($7/100))
 #cpu=`expr $7 / 100`
-path=/home/yunohost.app/ucoin
-ucoin="node --harmony $path/bin/ucoind"
+data_path=/home/yunohost.app/ucoin
+ucoin="node --harmony $data_path/bin/ucoind"
 
-# Install dependencies: nodejs 0.12.x, npm
-#sudo apt -y -qq install npm node nodejs-legacy
-sudo apt -y -qq install curl g++ make
-sudo curl --silent --location https://deb.nodesource.com/setup_0.12 | sudo bash -
-sudo apt -y -qq install nodejs
-
-# Install uCoin node and pm2 daemon manager
-cd /home/yunohost.app/
-sudo git clone https://github.com/ucoin-io/ucoin
-cd $path
-sudo npm install
-sudo npm install -g pm2
+# Check domain/path availability
+sudo yunohost app checkurl $domain$path -a $app  \
+    || (echo "Path not available: $domain$path" && exit 1)
 
 # Check port availability
 sudo yunohost app checkport $port
@@ -36,13 +29,43 @@ fi
 # Open port on firewall
 sudo yunohost firewall allow TCP $port > /dev/null 2>&1
 
-# Configure and sync uCoin node
+# Store config on YunoHost instance
+sudo yunohost app setting $app port -v $port
+sudo yunohost app setting $app data_path -v $data_path
+
+# Install dependencies: nodejs 0.12.x, npm
+#sudo apt -y -qq install npm node nodejs-legacy
+sudo apt -y -qq install curl g++ make
+sudo curl --silent --location https://deb.nodesource.com/setup_0.12 | sudo bash -
+sudo apt -y -qq install nodejs
+
+# Install uCoin node and pm2 daemon manager
+cd /home/yunohost.app/
+sudo git clone https://github.com/ucoin-io/ucoin
+cd $data_path
+sudo npm install
+sudo npm install -g pm2
+
+# Configure uCoin node
 $ucoin init --autoconf
-$ucoin config --remoteh $domain --port $port --remotep $port --salt $salt --passwd $psswd # --cpu $cpu
-$ucoin sync $sync_node $sync_port # --nocautious
+$ucoin config --remoteh $domain --port $port --remotep $port --salt $salt --passwd $password # --cpu $cpu
+
+# Synchronize uCoin node
+echo "Synchronizing with $sync_node:$sync_port"
+$ucoin sync $sync_node $sync_port --nointeractive > /dev/null 2>&1
 
 # Launch uCoin node with pm2 daemon
-pm2 start $path/bin/ucoind --name ucoin --interpreter=node --node-args="--harmony" --log /var/log/ucoin.log -- start
+sudo pm2 start $data_path/bin/ucoind --name ucoin --interpreter=node --node-args="--harmony" --log /var/log/$app.log -- start
 
 # Add uCoin service to the YunoHost monitoring
-sudo yunohost service add ucoin --log /var/log/ucoin.log
+sudo yunohost service add $app --log /var/log/$app.log
+
+# SSOwat Configuration
+sudo yunohost app setting $app skipped_uris -v "/"
+
+# Add proxy_pass
+sudo sed -i "s@YNH_EXAMPLE_PATH@$path@" ../conf/nginx.conf
+sudo sed -i "s@YNH_EXAMPLE_PORT@$port@" ../conf/nginx.conf
+sudo sed -i "s@YNH_EXEMPLE_DOMAIN@$domain@" ../conf/nginx.conf
+sudo cp ../conf/nginx.conf /etc/nginx/conf.d/$domain.d/$app.conf
+sudo service nginx reload

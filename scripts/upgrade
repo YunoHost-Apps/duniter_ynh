@@ -2,13 +2,13 @@
 
 #set -e
 
-# Stop uCoin daemon
-pm2 stop ucoin
+app=ucoin
+data_path=$(sudo yunohost app setting $app data_path)
 
-# Upgrade ucoin package
-cd /home/yunohost.app/ucoin
+# Upgrade uCoin package
+cd $data_path
 git pull
-sudo npm install -g .
+sudo npm install
 
-# Restart uCoin daemon
-pm2 restart ucoin
+# Update uCoin daemon
+sudo pm2 update ucoin
