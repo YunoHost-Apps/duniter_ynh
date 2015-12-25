@@ -2,26 +2,38 @@
     "name": "uCoin",
     "id": "ucoin",
     "description": {
-        "en": "uCoin node which permits participate chainblocks writing. Monetary system with universal dividende, libre money, Relative Money Theory",
-        "fr": "Nœud uCoin qui permet de participer l'écriture de blocs. Système monétaire à Dividende universel, monnaie libre, Thérorie Relative de la Monnaie"
+        "en": "uCoin node which permits participate to chainblocks writing. Monetary system with universal dividend, libre money, relative theory of money. This package permit join an existing money.",
+        "fr": "Nœud uCoin qui permet de participer à l’écriture de blocs. Système monétaire à dividende universel, monnaie libre, thérorie relative de la monnaie. Ce paquet permet de rejoindre une monnaie déjà existante."
     },
     "url": "http://ucoin.io/",
-    "licence": "free",
+    "license": "free",
     "maintainer": {
         "name": "Moul",
         "email": "moul@moul.re",
         "url": "https://moul.re/"
     },
     "multi_instance": "true",
+    "services": [
+        "nginx"
+    ],
     "arguments": {
         "install" : [
             {
                 "name": "domain",
                 "ask": {
-                    "en": "Domain name on which install uCoin node",
-                    "fr": "Nom de domaine sur lequel installer le nœud uCoin"
+                    "en": "Domain name",
+                    "fr": "Nom de domaine"
                 },
                 "example": "example.com"
+            },
+            {
+                "name": "path",
+                "ask": {
+                    "en": "Path on which install the proxy",
+                    "fr": "Chemin sur lequel ajouter le proxy"
+                },
+                "example": "/ucoin",
+                "default": "/ucoin"
             },
             {
                 "name": "port",
@@ -35,8 +47,8 @@
             {
                 "name": "sync_node",
                 "ask": {
-                    "en": "Node which synchronise with",
-                    "fr": "Nœud avec lequel faire la synchronisation"
+                    "en": "Node's address to synchronise with",
+                    "fr": "Adresse du nœud avec lequel se synchroniser"
                 },
                 "example": "metab.ucoin.io",
                 "default": "metab.ucoin.io"
@@ -58,7 +70,7 @@
                 }
             },
             {   
-                "name": "psswd",
+                "name": "password",
                 "type": "password",
                 "ask": {
                     "en": "Password of your account",
