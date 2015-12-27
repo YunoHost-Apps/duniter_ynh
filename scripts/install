@@ -33,19 +33,6 @@ sudo yunohost firewall allow TCP $port > /dev/null 2>&1
 sudo yunohost app setting $app port -v $port
 sudo yunohost app setting $app data_path -v $data_path
 
-# Install dependencies: nodejs 0.12.x, npm
-#sudo apt -y -qq install npm node nodejs-legacy
-#sudo apt -y -qq install curl g++ make
-#sudo curl --silent --location https://deb.nodesource.com/setup_0.12 | sudo bash -
-#sudo apt -y -qq install nodejs
-
-# Install uCoin node and pm2 daemon manager
-#cd /home/yunohost.app/
-#sudo git clone https://github.com/ucoin-io/ucoin
-#cd $data_path
-#sudo npm install
-#sudo npm install -g pm2
-
 # Install uCoin
 sudo apt -y -qq install wget
 sudo wget -qO- https://raw.githubusercontent.com/ucoin-io/ucoin/master/install.sh | sudo bash
@@ -60,9 +47,6 @@ ucoind sync $sync_node $sync_port --nointeractive > /dev/null 2>&1
 
 # Launch uCoin node
 ucoind start
-
-# Launch uCoin node with pm2 daemon
-#sudo pm2 start $data_path/bin/ucoind --name ucoin --interpreter=node --node-args="--harmony" --log /var/log/$app.log -- start
 
 # Add uCoin service to the YunoHost monitoring
 sudo yunohost service add $app --log /root/.config/ucoin/ucoin_default/ucoin.log
