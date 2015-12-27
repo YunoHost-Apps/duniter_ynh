@@ -13,8 +13,8 @@ salt=$6
 password=$7
 #cpu=$(($7/100))
 #cpu=`expr $7 / 100`
-data_path=/home/yunohost.app/ucoin
-ucoin="node --harmony $data_path/bin/ucoind"
+#data_path=/home/yunohost.app/ucoin
+#ucoin="node --harmony $data_path/bin/ucoind"
 
 # Check domain/path availability
 sudo yunohost app checkurl $domain$path -a $app  \
@@ -35,30 +35,38 @@ sudo yunohost app setting $app data_path -v $data_path
 
 # Install dependencies: nodejs 0.12.x, npm
 #sudo apt -y -qq install npm node nodejs-legacy
-sudo apt -y -qq install curl g++ make
-sudo curl --silent --location https://deb.nodesource.com/setup_0.12 | sudo bash -
-sudo apt -y -qq install nodejs
+#sudo apt -y -qq install curl g++ make
+#sudo curl --silent --location https://deb.nodesource.com/setup_0.12 | sudo bash -
+#sudo apt -y -qq install nodejs
 
 # Install uCoin node and pm2 daemon manager
-cd /home/yunohost.app/
-sudo git clone https://github.com/ucoin-io/ucoin
-cd $data_path
-sudo npm install
-sudo npm install -g pm2
+#cd /home/yunohost.app/
+#sudo git clone https://github.com/ucoin-io/ucoin
+#cd $data_path
+#sudo npm install
+#sudo npm install -g pm2
+
+# Install uCoin
+sudo apt -y -qq install wget
+sudo wget -qO- https://raw.githubusercontent.com/ucoin-io/ucoin/master/install.sh | sudo bash
 
 # Configure uCoin node
-$ucoin init --autoconf
-$ucoin config --remoteh $domain --port $port --remotep $port --salt $salt --passwd $password # --cpu $cpu
+ucoind init --autoconf
+ucoind config --remoteh $domain --port $port --remotep $port --salt $salt --passwd $password # --cpu $cpu
 
 # Synchronize uCoin node
 echo "Synchronizing with $sync_node:$sync_port"
-$ucoin sync $sync_node $sync_port --nointeractive > /dev/null 2>&1
+ucoind sync $sync_node $sync_port --nointeractive > /dev/null 2>&1
+
+# Launch uCoin node
+ucoind start
 
 # Launch uCoin node with pm2 daemon
-sudo pm2 start $data_path/bin/ucoind --name ucoin --interpreter=node --node-args="--harmony" --log /var/log/$app.log -- start
+#sudo pm2 start $data_path/bin/ucoind --name ucoin --interpreter=node --node-args="--harmony" --log /var/log/$app.log -- start
 
 # Add uCoin service to the YunoHost monitoring
-sudo yunohost service add $app --log /var/log/$app.log
+sudo yunohost service add $app --log /root/.config/ucoin/ucoin_default/ucoin.log
+#/var/log/$app.log
 
 # SSOwat Configuration
 sudo yunohost app setting $app skipped_uris -v "/"
