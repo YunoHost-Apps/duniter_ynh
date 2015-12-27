@@ -13,8 +13,6 @@ salt=$6
 password=$7
 #cpu=$(($7/100))
 #cpu=`expr $7 / 100`
-#data_path=/home/yunohost.app/ucoin
-#ucoin="node --harmony $data_path/bin/ucoind"
 
 # Check domain/path availability
 sudo yunohost app checkurl $domain$path -a $app  \
@@ -31,11 +29,11 @@ sudo yunohost firewall allow TCP $port > /dev/null 2>&1
 
 # Store config on YunoHost instance
 sudo yunohost app setting $app port -v $port
-sudo yunohost app setting $app data_path -v $data_path
 
 # Install uCoin
-sudo apt -y -qq install wget
-sudo wget -qO- https://raw.githubusercontent.com/ucoin-io/ucoin/master/install.sh | sudo bash
+sudo bash
+sudo bash ../sources/install.sh
+exit
 
 # Configure uCoin node
 ucoind init --autoconf
