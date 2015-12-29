@@ -11,8 +11,7 @@ sync_node=$4
 sync_port=$5
 salt=$6
 password=$7
-#cpu=$(($7/100))
-#cpu=`expr $7 / 100`
+cpu=`bc -l <<< "scale=2; $8/100"`
 
 # Check domain/path availability
 sudo yunohost app checkurl $domain$path -a $app
@@ -47,7 +46,7 @@ UCOIN_DIR="/home/admin/.ucoin"
 
 # Configure uCoin node
 ucoind init --autoconf
-ucoind config --remoteh $domain --port $port --remotep $port --salt $salt --passwd $password # --cpu $cpu
+ucoind config --remoteh $domain --port $port --remotep $port --salt $salt --passwd $password --cpu $cpu
 
 # Synchronize uCoin node
 echo "Synchronizing with $sync_node:$sync_port. It may take a while. More than ten minutes"

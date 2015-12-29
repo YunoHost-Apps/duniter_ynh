@@ -76,6 +76,13 @@
                     "en": "Password of your account",
                     "fr": "Mot de passe de votre compte"
                 }
+            },
+            {
+                "name": "cpu",
+		"ask": {
+		    "en": "Which CPU load limit would you like your uCoin node don't exceed?",
+	            "fr": "Quel pourcentage de charge processeur ne souhaitez-vous pas que le nœud uCoin dépasse ?"
+		}
             }
         ]
     }
