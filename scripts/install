@@ -24,6 +24,14 @@ if [[ ! $? -eq 0 ]]; then
   exit 1
 fi
 
+# Check node availability
+if curl --output /dev/null --silent --head --fail "$sync_node:$sync_port/node/summary"; then
+  echo "Node available."
+else
+  echo "Node $sync_node:$sync_port not available"
+  exit 1
+fi
+
 # Open port on firewall
 sudo yunohost firewall allow TCP $port > /dev/null 2>&1
 
