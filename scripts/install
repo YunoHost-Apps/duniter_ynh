@@ -32,9 +32,16 @@ sudo yunohost app setting $app port -v $port
 
 # Install uCoin
 sudo bash ../sources/install.sh
-exec bash -l
+UCOIN_DIR="/root/.ucoin"
+[ -s "$UCOIN_DIR/ucoin.sh" ] && . "$UCOIN_DIR/ucoin.sh"
+printf "\nexport UCOIN_DIR=\"$UCOIN_DIR\"\n[ -s \"\$UCOIN_DIR/ucoin.sh\" ] && . \"\$UCOIN_DIR/ucoin.sh\"  # This loads ucoin.sh\n" >> /home/admin/.bashrc
+#source /home/admin/.bashrc
+#exec bash -l
+#sudo bash
+env
 
 # Configure uCoin node
+sudo bash /root/.ucoin/ucoin.sh init --autoconf
 ucoind init --autoconf
 ucoind config --remoteh $domain --port $port --remotep $port --salt $salt --passwd $password # --cpu $cpu
 
@@ -53,7 +60,7 @@ sudo yunohost service add $app --log /root/.config/ucoin/ucoin_default/ucoin.log
 sudo yunohost app setting $app skipped_uris -v "/"
 
 # Add proxy_pass
-sudo sed -i "s@YNH_EXAMPLE_PATH@$path@" ../conf/nginx.conf
+sudo sed -i "s@YNH_EXAMPLE_PATH@$path@g" ../conf/nginx.conf
 sudo sed -i "s@YNH_EXAMPLE_PORT@$port@" ../conf/nginx.conf
 sudo sed -i "s@YNH_EXEMPLE_DOMAIN@$domain@" ../conf/nginx.conf
 sudo cp ../conf/nginx.conf /etc/nginx/conf.d/$domain.d/$app.conf
