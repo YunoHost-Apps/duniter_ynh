@@ -31,17 +31,16 @@ sudo yunohost firewall allow TCP $port > /dev/null 2>&1
 sudo yunohost app setting $app port -v $port
 
 # Install uCoin
-sudo bash ../sources/install.sh
-UCOIN_DIR="/root/.ucoin"
+bash ../sources/install.sh
+UCOIN_DIR="/home/admin/.ucoin"
 [ -s "$UCOIN_DIR/ucoin.sh" ] && . "$UCOIN_DIR/ucoin.sh"
 printf "\nexport UCOIN_DIR=\"$UCOIN_DIR\"\n[ -s \"\$UCOIN_DIR/ucoin.sh\" ] && . \"\$UCOIN_DIR/ucoin.sh\"  # This loads ucoin.sh\n" >> /home/admin/.bashrc
 #source /home/admin/.bashrc
 #exec bash -l
 #sudo bash
-env
+#env
 
 # Configure uCoin node
-sudo bash /root/.ucoin/ucoin.sh init --autoconf
 ucoind init --autoconf
 ucoind config --remoteh $domain --port $port --remotep $port --salt $salt --passwd $password # --cpu $cpu
 
