@@ -35,25 +35,20 @@ bash ../sources/install.sh
 UCOIN_DIR="/home/admin/.ucoin"
 [ -s "$UCOIN_DIR/ucoin.sh" ] && . "$UCOIN_DIR/ucoin.sh"
 printf "\nexport UCOIN_DIR=\"$UCOIN_DIR\"\n[ -s \"\$UCOIN_DIR/ucoin.sh\" ] && . \"\$UCOIN_DIR/ucoin.sh\"  # This loads ucoin.sh\n" >> /home/admin/.bashrc
-#source /home/admin/.bashrc
-#exec bash -l
-#sudo bash
-#env
 
 # Configure uCoin node
 ucoind init --autoconf
 ucoind config --remoteh $domain --port $port --remotep $port --salt $salt --passwd $password # --cpu $cpu
 
 # Synchronize uCoin node
-echo "Synchronizing with $sync_node:$sync_port"
+echo "Synchronizing with $sync_node:$sync_port. It may take a while. More than ten minutes"
 ucoind sync $sync_node $sync_port --nointeractive > /dev/null 2>&1
 
 # Launch uCoin node
 ucoind start
 
 # Add uCoin service to the YunoHost monitoring
-sudo yunohost service add $app --log /root/.config/ucoin/ucoin_default/ucoin.log
-#/var/log/$app.log
+sudo yunohost service add $app --log /home/admin/.config/ucoin/ucoin_default/ucoin.log
 
 # SSOwat Configuration
 sudo yunohost app setting $app skipped_uris -v "/"
