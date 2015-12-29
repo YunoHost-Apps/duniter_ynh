@@ -6,12 +6,9 @@ app=ucoin
 domain=$(sudo yunohost app setting $app domain)
 port=$(sudo yunohost app setting $app port)
 
-# Remove uCoin node daemon
-sudo pm2 delete ucoin
-
-# Remove uCoin node
-#sudo npm remove ucoin
-sudo rm -rf /home/yunohost.app/ucoin
+# Remove uCoin
+rm -Rf /home/admin/.ucoin
+rm -Rf /home/admin/.config/ucoin/
 
 # Remove uCoin service to YunoHost monitoring
 sudo yunohost service remove ucoin
@@ -19,10 +16,6 @@ sudo yunohost service remove ucoin
 # Remove proxy_pass
 sudo rm -f /etc/nginx/conf.d/$domain.d/$app.conf
 sudo service nginx reload
-
-# I can't remove thoses packages which could be used by other apps
-#sudo npm remove pm2
-#sudo apt -y -qq remove nodejs npm
 
 # Close opened port
 sudo yunohost firewall disallow TCP $port

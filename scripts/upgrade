@@ -3,12 +3,8 @@
 #set -e
 
 app=ucoin
-data_path=$(sudo yunohost app setting $app data_path)
 
 # Upgrade uCoin package
-cd $data_path
-git pull
-sudo npm install
-
-# Update uCoin daemon
-sudo pm2 update ucoin
+# get new install script
+#curl -kL https://raw.githubusercontent.com/ucoin-io/ucoin/master/install.sh | bash
+ucoind restart
