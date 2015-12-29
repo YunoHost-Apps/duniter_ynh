@@ -6,16 +6,13 @@
 
 
 ## Package state
-The package is **not working**.
+The package is **in progress**.
 Currently, it:
 
-* Install dependencies: node, npm
-* Install uCoin, but it fail cause to this [bug](https://github.com/ucoin-io/ucoin/issues/212).
-* Synchronize with node
-* Configure the node
-* Daemonized the node and launch it
-
-* Remove and uprade scripts should works
+* Install uCoin and it's dependencies: node, npm
+* Synchronize
+* Configure
+* Start
 
 Extra features:
 
@@ -25,7 +22,7 @@ Extra features:
 ## Install
 
 ```bash
-sudo yunohost app install https://moul.re/repo/moul/ucoin_ynh/
+sudo yunohost app install https://github.com/ucoin-io/ucoin_ynh
 ```
 
 ## License
