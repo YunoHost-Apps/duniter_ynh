@@ -42,7 +42,6 @@ sudo yunohost app setting $app port -v $port
 bash ../sources/install.sh
 UCOIN_DIR="/home/admin/.ucoin"
 [ -s "$UCOIN_DIR/ucoin.sh" ] && . "$UCOIN_DIR/ucoin.sh"
-printf "\nexport UCOIN_DIR=\"$UCOIN_DIR\"\n[ -s \"\$UCOIN_DIR/ucoin.sh\" ] && . \"\$UCOIN_DIR/ucoin.sh\"  # This loads ucoin.sh\n" >> /home/admin/.bashrc
 
 # Configure uCoin node
 ucoind init --autoconf
