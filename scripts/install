@@ -15,8 +15,10 @@ password=$7
 #cpu=`expr $7 / 100`
 
 # Check domain/path availability
-sudo yunohost app checkurl $domain$path -a $app  \
-    || (echo "Path not available: $domain$path" && exit 1)
+sudo yunohost app checkurl $domain$path -a $app
+if [[ ! $? -eq 0 ]]; then
+    exit 1
+fi
 
 # Check port availability
 sudo yunohost app checkport $port
