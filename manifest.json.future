@@ -1,7 +1,0 @@
-	{
-	"name": "cpu",
-		"ask": {
-		"en": "Which CPU load limit would you like your uCoin node don't exceed?",
-		"fr": "Quel pourcentage de charge processeur ne souhaitez-vous pas que le nÅ<93>ud uCoin dÃpasseÂ ?"
-		}
-	}
