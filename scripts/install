@@ -27,9 +27,9 @@ fi
 
 # Check node availability
 if curl --output /dev/null --silent --head --fail "$sync_node:$sync_port/node/summary"; then
-  echo "Node available."
+  echo "Node $sync_node:$sync_port is available"
 else
-  echo "Node $sync_node:$sync_port not available"
+  echo "Node $sync_node:$sync_port is not available"
   exit 1
 fi
 
@@ -49,7 +49,7 @@ ucoind init --autoconf
 ucoind config --remoteh $domain --port $port --remotep $port --salt $salt --passwd $password --cpu $cpu
 
 # Synchronize uCoin node
-echo "Synchronizing with $sync_node:$sync_port. It may take a while. More than ten minutes"
+echo "Synchronizing with $sync_node:$sync_port. It may take a while."
 ucoind sync $sync_node $sync_port --nointeractive > /dev/null 2>&1
 
 # Launch uCoin node
