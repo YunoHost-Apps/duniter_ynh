@@ -82,7 +82,7 @@
 		"ask": {
 		    "en": "Which CPU load limit percentage would you like your uCoin node don't exceed?",
 	            "fr": "Quel pourcentage de charge processeur ne souhaitez-vous pas que le nœud uCoin dépasse ?"
-		}
+		},
                 "example": "50",
                 "default": "50"
             }
