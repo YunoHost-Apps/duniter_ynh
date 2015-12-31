@@ -53,6 +53,10 @@ echo "Synchronizing with $sync_node:$sync_port. It may take a while."
 ucoind sync $sync_node $sync_port --nointeractive
 # > /dev/null 2>&1
 
+# Fix uCoin launching
+$UCOIN_DIR/node/bin/npm cache clean -f
+$UCOIN_DIR/node/bin/npm install -g n
+
 # Launch uCoin node
 ucoind start
 

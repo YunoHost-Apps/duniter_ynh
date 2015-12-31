@@ -7,6 +7,7 @@ domain=$(sudo yunohost app setting $app domain)
 port=$(sudo yunohost app setting $app port)
 
 # Remove uCoin
+ucoind delete
 rm -Rf /home/admin/.ucoin
 rm -Rf /home/admin/.config/ucoin/
 
