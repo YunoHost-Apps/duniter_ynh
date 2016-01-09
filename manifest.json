@@ -2,7 +2,7 @@
     "name": "uCoin",
     "id": "ucoin",
     "description": {
-        "en": "uCoin node which permits participate to chainblocks writing. Monetary system with universal dividend, libre money, relative theory of money. This package permit join an existing money.",
+        "en": "uCoin node which permits participate to blockchain writing. Monetary system with universal dividend, libre money, relative theory of money. This package permit join an existing money.",
         "fr": "Nœud uCoin qui permet de participer à l’écriture de blocs. Système monétaire à dividende universel, monnaie libre, thérorie relative de la monnaie. Ce paquet permet de rejoindre une monnaie déjà existante."
     },
     "url": "http://ucoin.io/",
@@ -12,7 +12,7 @@
         "email": "moul@moul.re",
         "url": "https://moul.re/"
     },
-    "multi_instance": "true",
+    "multi_instance": "false",
     "services": [
         "nginx"
     ],

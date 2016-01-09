@@ -9,8 +9,8 @@ port=$(sudo yunohost app setting $app port)
 # Remove uCoin
 UCOIN_DIR="/home/admin/.ucoin"
 [ -s "$UCOIN_DIR/ucoin.sh" ] && . "$UCOIN_DIR/ucoin.sh"
-ucoind delete
-rm -Rf /home/admin/.ucoin
+ucoind stop
+rm -Rf $UCOIN_DIR
 rm -Rf /home/admin/.config/ucoin/
 
 # Remove uCoin service to YunoHost monitoring

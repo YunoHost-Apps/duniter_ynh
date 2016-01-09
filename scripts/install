@@ -51,19 +51,12 @@ ucoind config --remoteh $domain --port $port --remotep $port --salt $salt --pass
 # Synchronize uCoin node
 echo "Synchronizing with $sync_node:$sync_port. It may take a while."
 ucoind sync $sync_node $sync_port --nointeractive
-# > /dev/null 2>&1
 
 # Launch uCoin node
 ucoind start
 
-# Fix uCoin launching
-$UCOIN_DIR/node/bin/npm cache clean -f
-$UCOIN_DIR/node/bin/npm install -g n
-ucoind delete
-ucoind start
-
 # Add uCoin service to the YunoHost monitoring
-sudo yunohost service add $app --log /home/admin/.config/ucoin/ucoin_default/ucoin.log
+sudo yunohost service add $app --log $UCOIN_DIR/ucoin/ucoin_default/ucoin.log
 
 # SSOwat Configuration
 sudo yunohost app setting $app skipped_uris -v "/"

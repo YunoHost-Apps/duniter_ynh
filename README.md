@@ -9,14 +9,14 @@
 The package is **in progress**.
 Currently, it:
 
-* Install uCoin and it's dependencies: node, npm
+* Install uCoin 0.13.0 and it's dependencies: node, npm
 * Synchronize
 * Configure
 * Start
 
 Extra features:
 
-* Proxy_pass to access to request though the path instead through the port cause it failed.
+* Path access through a proxy_pass instead through the port cause it failed.
 * uCoin logs are displayed on the YunoHost admin interface
 
 ## Install
