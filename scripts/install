@@ -56,7 +56,7 @@ ucoind sync $sync_node $sync_port --nointeractive
 ucoind start
 
 # Add uCoin service to the YunoHost monitoring
-sudo yunohost service add $app --log $UCOIN_DIR/ucoin/ucoin_default/ucoin.log
+sudo yunohost service add $app --log /home/admin/.config/ucoin/ucoin_default/ucoin.log
 
 # SSOwat Configuration
 sudo yunohost app setting $app skipped_uris -v "/"
