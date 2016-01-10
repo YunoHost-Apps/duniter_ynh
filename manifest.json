@@ -2,7 +2,7 @@
     "name": "uCoin",
     "id": "ucoin",
     "description": {
-        "en": "uCoin node which permits participate to blockchain writing. Monetary system with universal dividend, libre money, relative theory of money. This package permit join an existing money.",
+        "en": "uCoin node which permits participate to blockchain writing. Monetary system with universal dividend, libre money, relative theory of the money. This package permit to join an existing money.",
         "fr": "Nœud uCoin qui permet de participer à l’écriture de blocs. Système monétaire à dividende universel, monnaie libre, thérorie relative de la monnaie. Ce paquet permet de rejoindre une monnaie déjà existante."
     },
     "url": "http://ucoin.io/",
@@ -20,6 +20,7 @@
         "install" : [
             {
                 "name": "domain",
+                "type": "domain",
                 "ask": {
                     "en": "Domain name",
                     "fr": "Nom de domaine"
@@ -28,6 +29,7 @@
             },
             {
                 "name": "path",
+                "type": "path",
                 "ask": {
                     "en": "Path on which install the proxy",
                     "fr": "Chemin sur lequel ajouter le proxy"
@@ -37,6 +39,7 @@
             },
             {
                 "name": "port",
+                "type": "port",
                 "ask": {
                     "en": "Port of uCoin node",
                     "fr": "Port du nœud uCoin"
@@ -47,8 +50,8 @@
             {
                 "name": "sync_node",
                 "ask": {
-                    "en": "Node's address to synchronise with",
-                    "fr": "Adresse du nœud avec lequel se synchroniser"
+                    "en": "Node's address (domain name or IP address) to synchronise with",
+                    "fr": "Adresse du nœud (nom de domaine ou adresse IP) avec lequel se synchroniser"
                 },
                 "example": "metab.ucoin.io",
                 "default": "metab.ucoin.io"

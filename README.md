@@ -9,7 +9,7 @@
 The package is **in progress**.
 Currently, it:
 
-* Install uCoin 0.13.0 and it's dependencies: node, npm
+* Install uCoin 0.13.x and it's dependencies: node, npm
 * Synchronize
 * Configure
 * Start
