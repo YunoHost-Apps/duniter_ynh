@@ -15,7 +15,7 @@ sudo yunohost app install https://github.com/ucoin-io/ucoin_ynh
 The package is **in progress**.
 Currently, it:
 
-* Install uCoin 0.13.x and it's dependencies: node, npm
+* Install uCoin 0.14.2 and it's dependencies: node, npm
 * Configure
 * Synchronize
 * Start
