@@ -1,21 +1,21 @@
-# uCoin package for YunoHost
+# Duniter package for YunoHost
 
-* [uCoin project](http://ucoin.io)
-* [YunoHost project](https://yunohost.org/#/)
-* Works on Debian Jessie 64 bits, 32 bits (and ARM)
+* [Duniter project](https://duniter.org)
+* [YunoHost project](https://yunohost.org)
+* Works on Debian Jessie 64 bits, 32 bits (and ARM will comming soon)
 * 200Mo free RAM is necessary
 
 ## Install
 
 ```bash
-sudo yunohost app install https://github.com/ucoin-io/ucoin_ynh
+sudo yunohost app install https://github.com/duniter/duniter_ynh
 ```
 
 ## Package state
 The package is **in progress**.
 Currently, it:
 
-* Install uCoin 0.14.2 and it's dependencies: node, npm
+* Install Duniter 0.14.2 and it's dependencies: node, npm
 * Configure
 * Synchronize
 * Start
@@ -23,7 +23,7 @@ Currently, it:
 Extra features:
 
 * Path access through a proxy_pass instead through the port cause it failed.
-* uCoin logs are displayed on the YunoHost admin interface
+* Duniter logs are displayed on the YunoHost admin interface
 
 ## License
-This package and the uCoin software are under GNU GPL v.3.
+This package and the Duniter software are under GNU GPL v.3.
