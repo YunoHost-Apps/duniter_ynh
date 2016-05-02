@@ -9,6 +9,7 @@ port=$(sudo yunohost app setting $app port)
 # Remove Duniter
 source ~/.bashrc
 $app stop
+sudo dpkg -r $app
 #rm -Rf $DUNITER_DIR
 #rm -Rf /home/admin/.config/$app/
 
