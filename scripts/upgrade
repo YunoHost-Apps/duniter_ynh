@@ -2,9 +2,7 @@
 
 #set -e
 
-app=ucoin
+app=duniter
 
-# Upgrade uCoin package
-# get new install script
-#curl -kL https://raw.githubusercontent.com/ucoin-io/ucoin/master/install.sh | bash
-ucoind restart
+# Upgrade Duniter package
+$app restart
