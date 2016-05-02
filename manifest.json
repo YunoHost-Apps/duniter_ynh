@@ -1,16 +1,16 @@
 {
-    "name": "uCoin",
-    "id": "ucoin",
+    "name": "Duniter",
+    "id": "duniter",
     "description": {
-        "en": "uCoin node which permits participate to blockchain writing. Monetary system with universal dividend, libre money, relative theory of the money. This package permit to join an existing money.",
-        "fr": "Nœud uCoin qui permet de participer à l’écriture de blocs. Système monétaire à dividende universel, monnaie libre, thérorie relative de la monnaie. Ce paquet permet de rejoindre une monnaie déjà existante."
+        "en": "Duniter node which permits participate to blockchain writing. Monetary system with universal dividend, libre money, relative theory of the money. This package permit to join an existing money.",
+        "fr": "Nœud Duniter qui permet de participer à l’écriture de blocs. Système monétaire à dividende universel, monnaie libre, thérorie relative de la monnaie. Ce paquet permet de rejoindre une monnaie déjà existante."
     },
-    "url": "http://ucoin.io/",
+    "url": "https://duniter.org",
     "license": "free",
     "maintainer": {
         "name": "Moul",
         "email": "moul@moul.re",
-        "url": "https://moul.re/"
+        "url": "https://moul.re"
     },
     "multi_instance": "false",
     "services": [
@@ -34,15 +34,15 @@
                     "en": "Path on which install the proxy",
                     "fr": "Chemin sur lequel ajouter le proxy"
                 },
-                "example": "/ucoin",
-                "default": "/ucoin"
+                "example": "/duniter",
+                "default": "/duniter"
             },
             {
                 "name": "port",
                 "type": "port",
                 "ask": {
-                    "en": "Port of uCoin node",
-                    "fr": "Port du nœud uCoin"
+                    "en": "Port of Duniter node",
+                    "fr": "Port du nœud Duniter"
                 },
                 "example": "8999",
                 "default": "8999"
@@ -53,8 +53,8 @@
                     "en": "Node's address (domain name or IP address) to synchronise with",
                     "fr": "Adresse du nœud (nom de domaine ou adresse IP) avec lequel se synchroniser"
                 },
-                "example": "metab.ucoin.io",
-                "default": "metab.ucoin.io"
+                "example": "cgeek.fr",
+                "default": "cgeek.fr"
             },
             {
                 "name": "sync_port",
@@ -62,8 +62,8 @@
                     "en": "Port of synchronization",
                     "fr": "Port de synchronisation"
                 },
-                "example": "9201",
-                "default": "9201"
+                "example": "9330",
+                "default": "9330"
             },
             {   
                 "name": "salt",
@@ -83,8 +83,8 @@
             {
                 "name": "cpu",
 		"ask": {
-		    "en": "Which CPU load limit percentage would you like your uCoin node don't exceed?",
-	            "fr": "Quel pourcentage de charge processeur ne souhaitez-vous pas que le nœud uCoin dépasse ?"
+		    "en": "Which CPU load limit percentage would you like your Duniter node don't exceed?",
+	            "fr": "Quel pourcentage de charge processeur ne souhaitez-vous pas que le nœud Duniter dépasse ?"
 		},
                 "example": "50",
                 "default": "50"
