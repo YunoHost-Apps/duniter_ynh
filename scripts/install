@@ -3,7 +3,7 @@
 #set -e
 
 # Retrieve arguments
-app=ucoin
+app=duniter
 domain=$1
 path=$2
 port=$3
@@ -39,24 +39,23 @@ sudo yunohost firewall allow TCP $port > /dev/null 2>&1
 # Store config on YunoHost instance
 sudo yunohost app setting $app port -v $port
 
-# Install uCoin
+# Install Duniter
 bash ../sources/install.sh
-UCOIN_DIR="/home/admin/.ucoin"
-[ -s "$UCOIN_DIR/ucoin.sh" ] && . "$UCOIN_DIR/ucoin.sh"
+source ~/.bashrc
 
-# Configure uCoin node
-ucoind init --autoconf
-ucoind config --remoteh $domain --port $port --remotep $port --salt $salt --passwd $password --cpu $cpu
+# Configure Duniter node
+$app init --autoconf
+$app config --remoteh $domain --port $port --remotep $port --salt $salt --passwd $password --cpu $cpu
 
-# Synchronize uCoin node
+# Synchronize Duniter node
 echo "Synchronizing with $sync_node:$sync_port. It may take a while."
-ucoind sync $sync_node $sync_port --nointeractive
+$app sync $sync_node $sync_port --nointeractive
 
-# Launch uCoin node
-ucoind start
+# Launch Duniter node
+$app start
 
-# Add uCoin service to the YunoHost monitoring
-sudo yunohost service add $app --log /home/admin/.config/ucoin/ucoin_default/ucoin.log
+# Add Duniter service to the YunoHost monitoring
+sudo yunohost service add $app --log /home/admin/.config/$app/"$app"_default/"$app".log
 
 # SSOwat Configuration
 sudo yunohost app setting $app skipped_uris -v "/"
