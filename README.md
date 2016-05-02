@@ -15,7 +15,7 @@ sudo yunohost app install https://github.com/duniter/duniter_ynh
 The package is **in progress**.
 Currently, it:
 
-* Install Duniter 0.14.2 and it's dependencies: node, npm
+* Install Duniter 0.20.0aXX and it's dependencies: node, npm
 * Configure
 * Synchronize
 * Start
