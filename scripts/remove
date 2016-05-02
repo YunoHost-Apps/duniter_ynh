@@ -2,19 +2,18 @@
 
 #set -e
 
-app=ucoin
+app=duniter
 domain=$(sudo yunohost app setting $app domain)
 port=$(sudo yunohost app setting $app port)
 
-# Remove uCoin
-UCOIN_DIR="/home/admin/.ucoin"
-[ -s "$UCOIN_DIR/ucoin.sh" ] && . "$UCOIN_DIR/ucoin.sh"
-ucoind stop
-rm -Rf $UCOIN_DIR
-rm -Rf /home/admin/.config/ucoin/
+# Remove Duniter
+source ~/.bashrc
+$app stop
+#rm -Rf $DUNITER_DIR
+#rm -Rf /home/admin/.config/$app/
 
-# Remove uCoin service to YunoHost monitoring
-sudo yunohost service remove ucoin
+# Remove Duniter service to YunoHost monitoring
+sudo yunohost service remove $app
 
 # Remove proxy_pass
 sudo rm -f /etc/nginx/conf.d/$domain.d/$app.conf
