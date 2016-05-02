@@ -40,8 +40,18 @@ sudo yunohost firewall allow TCP $port > /dev/null 2>&1
 sudo yunohost app setting $app port -v $port
 
 # Install Duniter
-bash ../sources/install.sh
-source ~/.bashrc
+cd /tmp
+arch=$(uname -m)
+if [ $arch == "x86_64" ]; then
+	wget https://github.com/duniter/duniter/releases/download/v0.20.0a52/duniter-v0.20.0a52-linux-x64.deb
+elif [ $arch == "armv7l" ]; then
+	wget https://github.com/duniter/duniter/releases/download/v0.20.0a45/duniter-v0.20.0a45-linux-armv7l.deb
+else
+	echo "$arch is not currently supported."
+	exit;
+fi
+sudo dpkg -i duniter-v0.20.0a*-linux-*.deb
+#source ~/.bashrc
 
 # Configure Duniter node
 $app init --autoconf
