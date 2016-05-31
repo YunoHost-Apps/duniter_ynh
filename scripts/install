@@ -47,9 +47,9 @@ cd /tmp
 arch=$(uname -m)
 if [ $arch == "x86_64" ]; then
 	arch="x64"
-	wget https://github.com/duniter/duniter/releases/download/$version/duniter-$version-linux-$arch.deb
+	wget -nc https://github.com/duniter/duniter/releases/download/$version/duniter-$version-linux-$arch.deb
 #elif [ $arch == "armv7l" ]; then
-#	wget https://github.com/duniter/duniter/releases/download/$version/duniter-$version-linux-$arch.deb
+#	wget -nc https://github.com/duniter/duniter/releases/download/$version/duniter-$version-linux-$arch.deb
 else
 	ynh_die "$arch is not currently supported." 2
 fi
@@ -58,15 +58,15 @@ sudo dpkg -i duniter-$version-linux-$arch.deb
 #source ~/.bashrc
 
 # Configure Duniter node
-$app init --autoconf
-$app config --remoteh $domain --port $port --remotep $port --salt $salt --passwd $password --cpu $cpu
+sudo $app init --autoconf
+sudo $app config --remoteh $domain --port $port --remotep $port --salt $salt --passwd $password --cpu $cpu
 
 # Synchronize Duniter node
 echo "Synchronizing with $sync_node:$sync_port. It may take a while."
-$app sync $sync_node $sync_port --nointeractive
+sudo $app sync $sync_node $sync_port --nointeractive
 
 # Launch Duniter node
-$app start
+sudo $app start
 
 # Add Duniter service to the YunoHost monitoring
 sudo yunohost service add $app --log /home/admin/.config/$app/"$app"_default/"$app".log
