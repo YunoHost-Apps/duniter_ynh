@@ -13,6 +13,9 @@ salt=$6
 password=$7
 cpu=`bc -l <<< "scale=2; $8/100"`
 
+# Source app helpers
+source /usr/share/yunohost/helpers
+
 # Check domain/path availability
 sudo yunohost app checkurl $domain$path -a $app
 if [[ ! $? -eq 0 ]]; then
@@ -29,15 +32,14 @@ fi
 if curl --output /dev/null --silent --head --fail "$sync_node:$sync_port/node/summary"; then
   echo "Node $sync_node:$sync_port is available"
 else
-  echo "Node $sync_node:$sync_port is not available"
-  exit 1
+  ynh_die "Node $sync_node:$sync_port is not available" 2
 fi
 
 # Open port on firewall
 sudo yunohost firewall allow TCP $port > /dev/null 2>&1
 
 # Store config on YunoHost instance
-sudo yunohost app setting $app port -v $port
+ynh_app_setting_set $app port $port
 
 # Install Duniter
 cd /tmp

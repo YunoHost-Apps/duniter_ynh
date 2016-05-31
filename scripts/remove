@@ -2,9 +2,12 @@
 
 #set -e
 
+# Source app helpers
+source /usr/share/yunohost/helpers
+
 app=duniter
-domain=$(sudo yunohost app setting $app domain)
-port=$(sudo yunohost app setting $app port)
+domain=$(ynh_app_setting_get $app domain)
+port=$(ynh_app_setting_get $app port)
 
 # Remove Duniter
 source ~/.bashrc
