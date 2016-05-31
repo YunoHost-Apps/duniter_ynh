@@ -1,8 +1,16 @@
 #!/bin/bash
 
-#set -e
+# Exit on command errors and treat unset variables as an error
+set -eu
 
 app=duniter
 
+# Stop duniter daemon
+sudo $app stop
+
 # Upgrade Duniter package
-$app restart
+#dpkg -r
+#dpkg -i
+
+# Start duniter daemon
+sudo $app start

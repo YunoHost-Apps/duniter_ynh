@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#set -e
-
 # Source app helpers
 source /usr/share/yunohost/helpers
 
