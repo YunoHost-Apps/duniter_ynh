@@ -53,8 +53,8 @@
                     "en": "Node's address (domain name or IP address) to synchronise with",
                     "fr": "Adresse du nœud (nom de domaine ou adresse IP) avec lequel se synchroniser"
                 },
-                "example": "cgeek.fr",
-                "default": "cgeek.fr"
+                "example": "duniter.org",
+                "default": "duniter.org"
             },
             {
                 "name": "sync_port",
@@ -62,8 +62,8 @@
                     "en": "Port of synchronization",
                     "fr": "Port de synchronisation"
                 },
-                "example": "9330",
-                "default": "9330"
+                "example": "8999",
+                "default": "8999"
             },
             {   
                 "name": "salt",
