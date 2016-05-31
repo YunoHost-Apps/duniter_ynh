@@ -77,6 +77,6 @@ sudo yunohost app setting $app skipped_uris -v "/"
 # Add proxy_pass
 sudo sed -i "s@YNH_EXAMPLE_PATH@$path@g" ../conf/nginx.conf
 sudo sed -i "s@YNH_EXAMPLE_PORT@$port@" ../conf/nginx.conf
-sudo sed -i "s@YNH_EXEMPLE_DOMAIN@$domain@" ../conf/nginx.conf
+sudo sed -i "s@YNH_EXAMPLE_DOMAIN@$domain@" ../conf/nginx.conf
 sudo cp ../conf/nginx.conf /etc/nginx/conf.d/$domain.d/$app.conf
 sudo service nginx reload
