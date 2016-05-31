@@ -1,6 +1,7 @@
 {
     "name": "Duniter",
     "id": "duniter",
+    "packaging_format": 1,
     "description": {
         "en": "Duniter node which permits participate to blockchain writing. Monetary system with universal dividend, libre money, relative theory of the money. This package permit to join an existing money.",
         "fr": "Nœud Duniter qui permet de participer à l’écriture de blocs. Système monétaire à dividende universel, monnaie libre, thérorie relative de la monnaie. Ce paquet permet de rejoindre une monnaie déjà existante."
@@ -12,7 +13,7 @@
         "email": "moul@moul.re",
         "url": "https://moul.re"
     },
-    "multi_instance": "false",
+    "multi_instance": false,
     "services": [
         "nginx"
     ],
