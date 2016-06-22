@@ -4,13 +4,25 @@
 set -eu
 
 app=duniter
+version=$(cat ../conf/upstream_version)
 
 # Stop duniter daemon
 sudo $app stop
 
-# Upgrade Duniter package
-#dpkg -r
-#dpkg -i
+# Remove Duniter package
+sudo dpkg -r duniter
+
+# Retrive Duniter package and install it
+arch=$(uname -m)
+if [ $arch == "x86_64" ]; then
+	arch="x64"
+fi
+if [ $arch == "x64" ]; then #|| $arch == "armv7l" ]
+	wget -nc --quiet https://github.com/duniter/duniter/releases/download/$version/duniter-$version-linux-$arch.deb -P /tmp
+else
+	ynh_die "$arch is not currently supported." 2
+fi
+sudo dpkg -i /tmp/duniter-$version-linux-$arch.deb
 
 # Start duniter daemon
 sudo $app start
