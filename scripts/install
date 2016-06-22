@@ -13,7 +13,7 @@ sync_port=$5
 salt=$6
 password=$7
 cpu=`bc -l <<< "scale=2; $8/100"`
-version="v0.20.0a84"
+version=$(cat ../conf/upstream_version)
 
 # Source app helpers
 source /usr/share/yunohost/helpers
