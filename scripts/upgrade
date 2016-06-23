@@ -1,13 +1,16 @@
 #!/bin/bash
 
 # Exit on command errors and treat unset variables as an error
-set -eu
+set -e
+#u
 
 # Source app helpers
 source /usr/share/yunohost/helpers
 
 # Retrive arguments
 app=$YNH_APP_INSTANCE_NAME
+domain=$(ynh_app_setting_get "$app" domain)
+path=$(ynh_app_setting_get "$app" path)
 arch=$(ynh_app_setting_get "$app" arch)
 version=$(cat ../conf/upstream_version)
 
@@ -28,6 +31,12 @@ sudo dpkg -i /tmp/duniter-$version-linux-$arch.deb
 
 # Start duniter daemon
 sudo $app webstart
+
+# Remove trailing "/" for next command
+path=${path%/}
+
+# SSOwat Configuration
+ynh_app_setting_set "$app" unprotected_uris "/"
 
 # Upgrade Nginx configuration
 nginx_conf="../conf/nginx.conf"
