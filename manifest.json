@@ -13,6 +13,9 @@
         "email": "moul@moul.re",
         "url": "https://moul.re"
     },
+    "requirements": {
+        "yunohost": ">> 2.4.0"
+    },
     "multi_instance": false,
     "services": [
         "nginx"
