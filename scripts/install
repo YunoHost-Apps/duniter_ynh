@@ -76,9 +76,10 @@ sudo yunohost service add $app --log /home/admin/.config/$app/"$app"_default/"$a
 # SSOwat Configuration
 sudo yunohost app setting $app skipped_uris -v "/"
 
-# Add proxy_pass
-sudo sed -i "s@YNH_EXAMPLE_PATH@$path@g" ../conf/nginx.conf
-sudo sed -i "s@YNH_EXAMPLE_PORT@$port@" ../conf/nginx.conf
-sudo sed -i "s@YNH_EXAMPLE_DOMAIN@$domain@" ../conf/nginx.conf
-sudo cp ../conf/nginx.conf /etc/nginx/conf.d/$domain.d/$app.conf
+# Configure Nginx
+nginx_conf="../conf/nginx.conf"
+sudo sed -i "s@YNH_EXAMPLE_PATH@$path@g" $nginx_conf
+sudo sed -i "s@YNH_EXAMPLE_PORT@$port@" $nginx_conf
+sudo sed -i "s@YNH_EXAMPLE_DOMAIN@$domain@" $nginx_conf
+sudo cp $nginx_conf /etc/nginx/conf.d/$domain.d/$app.conf
 sudo service nginx reload
