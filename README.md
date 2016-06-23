@@ -2,7 +2,7 @@
 
 - [Duniter project](https://duniter.org)
 - [YunoHost project](https://yunohost.org)
-- Works on Debian Jessie 64 bits (will comming soon on ARM)
+- Works on Debian Jessie 64 bits (will come soon on ARM)
 - 200Mo free RAM is necessary
 
 ## Install
@@ -15,7 +15,7 @@ sudo yunohost app install https://github.com/duniter/duniter_ynh
 The package is **in progress**.
 Currently, it:
 
-- Install Duniter ≥0.20.0a86
+- Install Duniter ≥0.20.0a87
 - Configure
 - Synchronize
 - Start
