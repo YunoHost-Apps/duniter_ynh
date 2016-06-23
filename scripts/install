@@ -55,7 +55,6 @@ else
 fi
 sudo dpkg -i /tmp/duniter-$version-linux-$arch.deb
 #sudo rm -f /tmp/duniter-$version-linux-$arch.deb
-#source ~/.bashrc
 
 # Configure Duniter node
 sudo $app init --autoconf

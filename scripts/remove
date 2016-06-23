@@ -10,8 +10,6 @@ port=$(ynh_app_setting_get $app port)
 # Remove Duniter
 sudo $app stop
 sudo dpkg -r $app
-#rm -Rf $DUNITER_DIR
-#rm -Rf /root/.config/$app/
 
 # Remove Duniter service to YunoHost monitoring
 sudo yunohost service remove $app
