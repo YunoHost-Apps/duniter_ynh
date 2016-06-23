@@ -4,15 +4,15 @@
 set -eu
 
 # Retrieve arguments
-app=duniter
-domain=$1
-path=$2
-port=$3
-sync_node=$4
-sync_port=$5
-salt=$6
-password=$7
-cpu=`bc -l <<< "scale=2; $8/100"`
+app=$YNH_APP_INSTANCE_NAME
+domain=$YNH_APP_ARG_DOMAIN
+path=$YNH_APP_ARG_PATH
+port=$YNH_APP_ARG_PORT
+sync_node=$YNH_APP_ARG_SYNC_NODE
+sync_port=$YNH_APP_ARG_SYNC_PORT
+salt=$YNH_APP_ARG_SALT
+password=$YNH_APP_ARG_PASSWORD
+cpu=`bc -l <<< "scale=2; $YNH_APP_ARG_CPU/100"`
 version=$(cat ../conf/upstream_version)
 
 # Source app helpers

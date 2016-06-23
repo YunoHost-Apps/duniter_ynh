@@ -6,8 +6,8 @@ set -eu
 # Source app helpers
 source /usr/share/yunohost/helpers
 
-# Retrive CPU architecure
-app=duniter
+# Retrive arguments
+app=$YNH_APP_INSTANCE_NAME
 arch=$(ynh_app_setting_get "$app" arch)
 version=$(cat ../conf/upstream_version)
 
