@@ -19,10 +19,8 @@ version=$(cat ../conf/upstream_version)
 source /usr/share/yunohost/helpers
 
 # Check domain/path availability
-sudo yunohost app checkurl $domain$path -a $app
-if [[ ! $? -eq 0 ]]; then
-    exit 1
-fi
+sudo yunohost app checkurl "${domain}${path}" -a "$app" \
+    || ynh_die "Path not available: ${domain}${path}"
 
 # Check port availability
 sudo yunohost app checkport $port
@@ -74,7 +72,7 @@ sudo $app start
 sudo yunohost service add $app --log /home/admin/.config/$app/"$app"_default/"$app".log
 
 # SSOwat Configuration
-sudo yunohost app setting $app skipped_uris -v "/"
+ynh_app_setting_set "$app" unprotected_uris "/"
 
 # Configure Nginx
 nginx_conf="../conf/nginx.conf"
