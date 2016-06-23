@@ -28,3 +28,11 @@ sudo dpkg -i /tmp/duniter-$version-linux-$arch.deb
 
 # Start duniter daemon
 sudo $app start
+
+# Upgrade Nginx configuration
+nginx_conf="../conf/nginx.conf"
+sudo sed -i "s@YNH_EXAMPLE_PATH@$path@g" $nginx_conf
+sudo sed -i "s@YNH_EXAMPLE_PORT@$port@" $nginx_conf
+sudo sed -i "s@YNH_EXAMPLE_DOMAIN@$domain@" $nginx_conf
+sudo cp $nginx_conf /etc/nginx/conf.d/$domain.d/$app.conf
+sudo service nginx reload
