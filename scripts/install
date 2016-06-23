@@ -66,7 +66,7 @@ echo "Synchronizing with $sync_node:$sync_port. It may take a while."
 sudo $app sync $sync_node $sync_port --nointeractive
 
 # Launch Duniter node
-sudo $app start
+sudo $app webstart
 
 # Add Duniter service to the YunoHost monitoring
 sudo yunohost service add $app --log /home/admin/.config/$app/"$app"_default/"$app".log

@@ -27,7 +27,7 @@ sudo dpkg -i /tmp/duniter-$version-linux-$arch.deb
 #sudo rm -f /tmp/duniter-$version-linux-$arch.deb
 
 # Start duniter daemon
-sudo $app start
+sudo $app webstart
 
 # Upgrade Nginx configuration
 nginx_conf="../conf/nginx.conf"
