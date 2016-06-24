@@ -38,8 +38,14 @@ sudo $app webstart
 # Remove trailing "/" for next command
 path=${path%/}
 
+# Add admin to the allowed users
+#sudo yunohost app addaccess $app -u $admin
+
+# Allow only allowed users to access admin panel
+#ynh_app_setting_set "$app" protected_uris "/"
+
 # SSOwat Configuration
-ynh_app_setting_set "$app" unprotected_uris "/"
+ynh_app_setting_set "$app" unprotected_uris "/" # "api/"
 
 # Upgrade Nginx configuration
 nginx_conf="../conf/nginx.conf"
