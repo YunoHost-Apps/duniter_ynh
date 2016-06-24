@@ -92,7 +92,16 @@
 		},
                 "example": "50",
                 "default": "50"
-            }
+            },
+            {
+                "name": "admin",
+                "type": "user",
+		"ask": {
+		    "en": "Administrator. Must a YunoHost user.",
+	            "fr": "Administrateur. Ce doit être un utilisateur YunoHost"
+		},
+                "example": "jon doe"
+	    }
         ]
     }
 }

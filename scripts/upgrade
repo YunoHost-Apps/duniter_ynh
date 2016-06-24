@@ -13,6 +13,7 @@ domain=$(ynh_app_setting_get "$app" domain)
 path=$(ynh_app_setting_get "$app" path)
 port=$(ynh_app_setting_get "$app" port)
 arch=$(ynh_app_setting_get "$app" arch)
+admin=$(ynh_app_setting_get "$app" admin)
 version=$(cat ../conf/upstream_version)
 
 # Check CPU arch
