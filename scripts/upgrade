@@ -15,6 +15,11 @@ port=$(ynh_app_setting_get "$app" port)
 arch=$(ynh_app_setting_get "$app" arch)
 version=$(cat ../conf/upstream_version)
 
+# Check CPU arch
+if [ $arch != "x64" ]; then #&& $arch != "armv7l" ], then
+	ynh_die "$arch is not currently supported." 2
+fi
+
 # Stop duniter daemon
 sudo $app stop
 
@@ -22,11 +27,7 @@ sudo $app stop
 sudo dpkg -r duniter
 
 # Retrive Duniter package and install it
-if [ $arch == "x64" ]; then #|| $arch == "armv7l" ]
-	wget -nc --quiet https://github.com/duniter/duniter/releases/download/$version/duniter-$version-linux-$arch.deb -P /tmp
-else
-	ynh_die "$arch is not currently supported." 2
-fi
+wget -nc --quiet https://github.com/duniter/duniter/releases/download/$version/duniter-$version-linux-$arch.deb -P /tmp
 sudo dpkg -i /tmp/duniter-$version-linux-$arch.deb
 #sudo rm -f /tmp/duniter-$version-linux-$arch.deb
 
