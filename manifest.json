@@ -74,7 +74,9 @@
                 "ask": {
                     "en": "Salt of your account",
                     "fr": "Salt de votre compte"
-                }
+                },
+                "example": "joe@example.tld",
+                "default": "joe@example.tld"
             },
             {   
                 "name": "password",
@@ -82,7 +84,9 @@
                 "ask": {
                     "en": "Password of your account",
                     "fr": "Mot de passe de votre compte"
-                }
+                },
+                "example": "supersecretpassword",
+                "default": "supersecretpassword"
             },
             {
                 "name": "cpu",
