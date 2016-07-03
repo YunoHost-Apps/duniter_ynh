@@ -44,7 +44,7 @@ arch=$(uname -m)
 if [ $arch == "x86_64" ]; then
 	arch="x64"
 fi
-if [ $arch != "x64" ]; then #&& $arch != "armv7l" ]; then
+if [[ $arch != "x64" && $arch != "armv7l" ]]; then
 	ynh_die "$arch is not currently supported." 2
 fi
 
