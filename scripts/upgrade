@@ -17,7 +17,7 @@ admin=$(ynh_app_setting_get "$app" admin)
 version=$(cat ../conf/upstream_version)
 
 # Check CPU arch
-if [[ $arch != "x64" && $arch != "armv7l" ]], then
+if [[ $arch != "x64" && $arch != "armv7l" ]]; then
 	ynh_die "$arch is not currently supported." 2
 fi
 
