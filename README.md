@@ -15,15 +15,15 @@ sudo yunohost app install https://github.com/duniter/duniter_ynh
 The package is **in progress**.
 Currently, it:
 
-- Install Duniter ≥ 0.20.0
+- Install Duniter ≥ 0.22.0a7
 - Configure
 - Synchronize
 - Start
 
 Extra features:
 
-- Will come soon: graphical interface to manage the node.
-- Path access through a proxy_pass instead through the port cause it failed.
+- Graphical interface to manage the node.
+- Path access on `https://duniter.domain.tld/api` to the node API and not through the port because it fail.
 - Duniter logs are displayed on the YunoHost admin interface
 
 ## License

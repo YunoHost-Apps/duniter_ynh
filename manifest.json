@@ -35,11 +35,11 @@
                 "name": "path",
                 "type": "path",
                 "ask": {
-                    "en": "Path on which install the proxy",
-                    "fr": "Chemin sur lequel ajouter le proxy"
+                    "en": "Path on which install the web admin (installable only on root path)",
+                    "fr": "Chemin sur lequel ajouter l’administration web (installable uniquement sur la racine)"
                 },
-                "example": "/duniter",
-                "default": "/duniter"
+                "example": "/",
+                "default": "/"
             },
             {
                 "name": "port",
