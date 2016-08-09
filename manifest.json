@@ -89,15 +89,6 @@
                 "default": "supersecretpassword"
             },
             {
-                "name": "cpu",
-		"ask": {
-		    "en": "Which CPU load limit percentage would you like your Duniter node don't exceed?",
-	            "fr": "Quel pourcentage de charge processeur ne souhaitez-vous pas que le nœud Duniter dépasse ?"
-		},
-                "example": "50",
-                "default": "50"
-            },
-            {
                 "name": "admin",
                 "type": "user",
 		"ask": {

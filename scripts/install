@@ -13,7 +13,6 @@ sync_port=$YNH_APP_ARG_SYNC_PORT
 salt=$YNH_APP_ARG_SALT
 password=$YNH_APP_ARG_PASSWORD
 admin=$YNH_APP_ARG_ADMIN
-cpu=`bc -l <<< "scale=2; $YNH_APP_ARG_CPU/100"`
 version=$(cat ../conf/upstream_version)
 
 # Source app helpers
@@ -68,7 +67,7 @@ sudo dpkg -i /tmp/duniter-$version-linux-$arch.deb
 
 # Configure Duniter node
 sudo $app init --autoconf
-sudo $app config --remoteh $domain --port $port --remotep $port --salt $salt --passwd $password --cpu $cpu
+sudo $app config --remoteh $domain --port $port --remotep $port --salt $salt --passwd $password
 
 # Synchronize Duniter node
 echo "Synchronizing with $sync_node:$sync_port. It may take a while."
