@@ -39,17 +39,17 @@ sudo $app webstart
 path=${path%/}
 
 # Add admin to the allowed users
-#sudo yunohost app addaccess $app -u $admin
+sudo yunohost app addaccess $app -u $admin
 
 # Allow only allowed users to access admin panel
-#ynh_app_setting_set "$app" protected_uris "/"
+ynh_app_setting_set "$app" protected_uris "/"
 
 # SSOwat Configuration
-ynh_app_setting_set "$app" unprotected_uris "/" # "api/"
+#ynh_app_setting_set "$app" unprotected_uris "/api/"
 
 # Upgrade Nginx configuration
 nginx_conf="../conf/nginx.conf"
-sudo sed -i "s@YNH_EXAMPLE_PATH@$path@g" $nginx_conf
+#sudo sed -i "s@YNH_EXAMPLE_PATH@$path@g" $nginx_conf
 sudo sed -i "s@YNH_EXAMPLE_PORT@$port@" $nginx_conf
 sudo sed -i "s@YNH_EXAMPLE_DOMAIN@$domain@" $nginx_conf
 sudo cp $nginx_conf /etc/nginx/conf.d/$domain.d/$app.conf

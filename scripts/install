@@ -81,13 +81,13 @@ sudo $app webstart
 sudo yunohost service add $app --log /home/admin/.config/$app/"$app"_default/"$app".log
 
 # Add admin to the allowed users
-#sudo yunohost app addaccess $app -u $admin
+sudo yunohost app addaccess $app -u $admin
 
 # Allow only allowed users to access admin panel
-#ynh_app_setting_set "$app" protected_uris "/"
+ynh_app_setting_set "$app" protected_uris "/"
 
 # SSOwat Configuration
-ynh_app_setting_set "$app" unprotected_uris "/" # "api/"
+#ynh_app_setting_set "$app" unprotected_uris "/api/"
 
 # Configure Nginx
 nginx_conf="../conf/nginx.conf"

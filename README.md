@@ -7,6 +7,10 @@
 
 ## Install
 
+- Web admin can only be installed on root path for now.
+Use a domain name like `duniter.domain.tld` for instance.
+See [#18](https://github.com/duniter/duniter_ynh/issues/18) for more details.
+
 ```bash
 sudo yunohost app install https://github.com/duniter/duniter_ynh
 ```
