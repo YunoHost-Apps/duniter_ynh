@@ -26,17 +26,17 @@
                 "name": "domain",
                 "type": "domain",
                 "ask": {
-                    "en": "Domain name",
-                    "fr": "Nom de domaine"
+                    "en": "Dedicated domain name on which no application must be installed. The install will on the root path.",
+                    "fr": "Nom de domaine dédié sur lequel aucune application ne doit être installée. L’installation sera faite à la racine."
                 },
-                "example": "example.com"
+                "example": "duniter.domain.tld"
             },
             {
                 "name": "path",
                 "type": "path",
                 "ask": {
                     "en": "Path on which install the web admin (installable only on root path)",
-                    "fr": "Chemin sur lequel ajouter l’administration web (installable uniquement sur la racine)"
+                    "fr": "Chemin sur lequel ajouter l’administration web (installable uniquement à la racine)"
                 },
                 "example": "/",
                 "default": "/"
