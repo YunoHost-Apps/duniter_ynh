@@ -72,8 +72,8 @@
             {   
                 "name": "salt",
                 "ask": {
-                    "en": "Salt of your account",
-                    "fr": "Salt de votre compte"
+                    "en": "Salt of your account. Let credentials as default if you don't have a Duniter account. It is editable on the web admin.",
+                    "fr": "Salt de votre compte. Si vous n’avez pas de compte Duniter, laisser les identifiants par défaut. C’est éditable dans l’interface web."
                 },
                 "example": "joe@example.tld",
                 "default": "joe@example.tld"
