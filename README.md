@@ -19,7 +19,7 @@ sudo yunohost app install https://github.com/duniter/duniter_ynh
 The package is **in progress**.
 Currently, it:
 
-- Install Duniter ≥ 0.22.0
+- Install Duniter ≥ 0.30.0
 - Configure
 - Synchronize
 - Start
