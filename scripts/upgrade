@@ -1,8 +1,7 @@
 #!/bin/bash
 
 # Exit on command errors and treat unset variables as an error
-set -e
-#u
+set -eu
 
 # Source app helpers
 source /usr/share/yunohost/helpers
@@ -14,7 +13,6 @@ path=$(ynh_app_setting_get "$app" path)
 port=$(ynh_app_setting_get "$app" port)
 arch=$(ynh_app_setting_get "$app" arch)
 admin=$(ynh_app_setting_get "$app" admin)
-version=$(cat ../conf/upstream_version)
 
 # Check CPU arch
 if [[ $arch != "x64" && $arch != "armv7l" ]]; then
@@ -27,10 +25,14 @@ sudo $app stop
 # Remove Duniter package
 sudo dpkg -r duniter
 
-# Retrive Duniter package and install it
-wget -nc --quiet https://github.com/duniter/duniter/releases/download/$version/duniter-$version-linux-$arch.deb -P /tmp
+# Retrieve url of latest version and number
+url=$(curl -s https://api.github.com/repos/duniter/duniter/releases | grep "browser_" | grep $arch | head -1 | cut -d\" -f4)
+version=$(curl -s https://api.github.com/repos/duniter/duniter/releases | grep "browser_" | grep $arch | head -1 | cut -d/ -f8)
+
+# Retrieve Debian package and install it
+wget -nc --quiet $url -P /tmp
 sudo dpkg -i /tmp/duniter-$version-linux-$arch.deb
-#sudo rm -f /tmp/duniter-$version-linux-$arch.deb
+sudo rm -f /tmp/duniter-$version-linux-$arch.deb
 
 # Start duniter daemon
 sudo $app webstart
