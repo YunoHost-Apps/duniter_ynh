@@ -3,8 +3,9 @@
 # Exit on command errors and treat unset variables as an error
 set -eu
 
-# Source app helpers
+# Source app helpers and functions
 source /usr/share/yunohost/helpers
+source functions.sh
 
 # Retrive arguments
 app=$YNH_APP_INSTANCE_NAME
@@ -16,7 +17,7 @@ admin=$(ynh_app_setting_get "$app" admin)
 
 # Check CPU arch
 if [[ $arch != "x64" && $arch != "armv7l" ]]; then
-	ynh_die "$arch is not currently supported." 2
+	ynh_die "$arch is not supported." 2
 fi
 
 # Stop duniter daemon
@@ -25,14 +26,7 @@ sudo $app stop
 # Remove Duniter package
 sudo dpkg -r duniter
 
-# Retrieve url of latest version and number
-url=$(curl -s https://api.github.com/repos/duniter/duniter/releases | grep "browser_" | grep $arch | head -1 | cut -d\" -f4)
-version=$(curl -s https://api.github.com/repos/duniter/duniter/releases | grep "browser_" | grep $arch | head -1 | cut -d/ -f8)
-
-# Retrieve Debian package and install it
-wget -nc --quiet $url -P /tmp
-sudo dpkg -i /tmp/duniter-$version-linux-$arch.deb
-sudo rm -f /tmp/duniter-$version-linux-$arch.deb
+INSTALL_DUNITER_DEBIAN_PACKAGE
 
 # Start duniter daemon
 sudo $app webstart
@@ -40,19 +34,5 @@ sudo $app webstart
 # Remove trailing "/" for next command
 path=${path%/}
 
-# Add admin to the allowed users
-sudo yunohost app addaccess $app -u $admin
-
-# Allow only allowed users to access admin panel
-ynh_app_setting_set "$app" protected_uris "/"
-
-# SSOwat Configuration
-#ynh_app_setting_set "$app" unprotected_uris "/api/"
-
-# Upgrade Nginx configuration
-nginx_conf="../conf/nginx.conf"
-#sudo sed -i "s@YNH_EXAMPLE_PATH@$path@g" $nginx_conf
-sudo sed -i "s@YNH_EXAMPLE_PORT@$port@" $nginx_conf
-sudo sed -i "s@YNH_EXAMPLE_DOMAIN@$domain@" $nginx_conf
-sudo cp $nginx_conf /etc/nginx/conf.d/$domain.d/$app.conf
-sudo nginx -t && sudo service nginx reload
+CONFIG_SSOWAT_FOR_RESTRICTED_ACCESS
+CONFIG_NGINX_FOR_WEB_ADMIN

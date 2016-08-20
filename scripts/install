@@ -14,8 +14,9 @@ salt=$YNH_APP_ARG_SALT
 password=$YNH_APP_ARG_PASSWORD
 admin=$YNH_APP_ARG_ADMIN
 
-# Source app helpers
+# Source app helpers and functions
 source /usr/share/yunohost/helpers
+source functions.sh
 
 # Check domain/path availability
 sudo yunohost app checkurl "${domain}${path}" -a "$app" \
@@ -48,7 +49,7 @@ if [ $arch == "x86_64" ]; then
 	arch="x64"
 fi
 if [[ $arch != "x64" && $arch != "armv7l" ]]; then
-	ynh_die "$arch is not currently supported." 2
+	ynh_die "$arch is not supported." 2
 fi
 
 # Open port on firewall
@@ -59,14 +60,7 @@ ynh_app_setting_set $app port $port
 ynh_app_setting_set $app arch $arch
 ynh_app_setting_set "$app" admin "$admin"
 
-# Retrieve url of last version and version number
-url=$(curl -s https://api.github.com/repos/duniter/duniter/releases | grep "browser_" | grep $arch | head -1 | cut -d\" -f4)
-version=$(curl -s https://api.github.com/repos/duniter/duniter/releases | grep "browser_" | grep $arch | head -1 | cut -d/ -f8)
-
-# Retrieve debian package and install it
-wget -nc --quiet $url -P /tmp
-sudo dpkg -i /tmp/duniter-$version-linux-$arch.deb
-#sudo rm -f /tmp/duniter-$version-linux-$arch.deb
+INSTALL_DUNITER_DEBIAN_PACKAGE
 
 # Configure Duniter node
 sudo $app init --autoconf
@@ -82,19 +76,5 @@ sudo $app webstart
 # Add Duniter service to the YunoHost monitoring
 sudo yunohost service add $app --log /home/admin/.config/$app/"$app"_default/"$app".log
 
-# Add admin to the allowed users
-sudo yunohost app addaccess $app -u $admin
-
-# Allow only allowed users to access admin panel
-ynh_app_setting_set "$app" protected_uris "/"
-
-# SSOwat Configuration
-#ynh_app_setting_set "$app" unprotected_uris "/api/"
-
-# Configure Nginx
-nginx_conf="../conf/nginx.conf"
-#sudo sed -i "s@YNH_EXAMPLE_PATH@$path@g" $nginx_conf
-sudo sed -i "s@YNH_EXAMPLE_PORT@$port@" $nginx_conf
-sudo sed -i "s@YNH_EXAMPLE_DOMAIN@$domain@" $nginx_conf
-sudo cp $nginx_conf /etc/nginx/conf.d/$domain.d/$app.conf
-sudo nginx -t && sudo service nginx reload
+CONFIG_SSOWAT_FOR_RESTRICTED_ACCESS
+CONFIG_NGINX_FOR_WEB_ADMIN
