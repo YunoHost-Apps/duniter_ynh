@@ -26,7 +26,7 @@
                 "name": "domain",
                 "type": "domain",
                 "ask": {
-                    "en": "Dedicated domain name on which no application must be installed. The install will on the root path.",
+                    "en": "Dedicated domain name on which no application must be installed. Install will be done on root path.",
                     "fr": "Nom de domaine dédié sur lequel aucune application ne doit être installée. L’installation sera faite à la racine."
                 },
                 "example": "duniter.domain.tld"
