@@ -2,13 +2,14 @@
 
 INSTALL_DUNITER_DEBIAN_PACKAGE () {
 # Retrieve url of last version and version number
-url=$(curl -s https://api.github.com/repos/duniter/duniter/releases | grep "browser_" | grep $arch | head -1 | cut -d\" -f4)
-version=$(curl -s https://api.github.com/repos/duniter/duniter/releases | grep "browser_" | grep $arch | head -1 | cut -d/ -f8)
+url=$(curl -s https://api.github.com/repos/duniter/duniter/releases | grep "browser_" | grep $arch | grep "linux" | grep "server" | head -1 | cut -d\" -f4)
+version=$(echo $url | cut -d/ -f8)
 
 # Retrieve debian package and install it
 wget -nc --quiet $url -P /tmp
-sudo dpkg -i /tmp/duniter-$version-linux-$arch.deb
-sudo rm -f /tmp/duniter-$version-linux-$arch.deb
+deb="/tmp/duniter-server-$version-linux-$arch.deb"
+sudo dpkg -i $deb
+sudo rm -f $deb
 }
 
 CONFIG_SSOWAT_FOR_RESTRICTED_ACCESS () {
