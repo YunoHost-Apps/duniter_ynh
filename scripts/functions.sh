@@ -8,7 +8,7 @@ version=$(echo $url | cut -d/ -f8)
 # Retrieve debian package and install it
 wget -nc --quiet $url -P /tmp
 deb="/tmp/duniter-server-$version-linux-$arch.deb"
-sudo dpkg -i $deb
+sudo dpkg -i $deb > /dev/null
 sudo rm -f $deb
 }
 

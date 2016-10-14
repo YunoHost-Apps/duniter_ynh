@@ -68,7 +68,7 @@ sudo $app config --remoteh $domain --port $port --remotep $port --salt $salt --p
 
 # Synchronize Duniter node
 echo "Synchronizing with $sync_node:$sync_port. It may take a while."
-sudo $app sync $sync_node $sync_port --nointeractive
+sudo $app sync $sync_node $sync_port --nointeractive > /dev/null
 
 # Launch Duniter node
 sudo $app webstart
