@@ -63,8 +63,7 @@ ynh_app_setting_set "$app" admin "$admin"
 INSTALL_DUNITER_DEBIAN_PACKAGE
 
 # Configure Duniter node
-sudo $app init --autoconf
-sudo $app config --remoteh $domain --port $port --remotep $port --salt $salt --passwd $password
+sudo $app config --autoconf --remoteh $domain --port $port --remotep $port --salt $salt --passwd $password
 
 # Synchronize Duniter node
 echo "Synchronizing with $sync_node:$sync_port. It may take a while."
