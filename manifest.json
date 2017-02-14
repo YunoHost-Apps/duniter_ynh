@@ -35,7 +35,7 @@
                 "name": "path",
                 "type": "path",
                 "ask": {
-                    "en": "Path on which install the web admin (installable only on root path)",
+                    "en": "Path on which install the web admin (installable only on root path for now)",
                     "fr": "Chemin sur lequel ajouter l’administration web (installable uniquement à la racine)"
                 },
                 "example": "/",
@@ -66,8 +66,8 @@
                     "en": "Port of synchronization",
                     "fr": "Port de synchronisation"
                 },
-                "example": "8999",
-                "default": "8999"
+                "example": "10900",
+                "default": "10900"
             },
             {   
                 "name": "salt",

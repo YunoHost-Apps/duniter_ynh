@@ -10,6 +10,14 @@ wget -nc --quiet $url -P /tmp
 deb="/tmp/duniter-server-$version-linux-$arch.deb"
 sudo dpkg -i $deb > /dev/null
 sudo rm -f $deb
+
+# Fix https://github.com/duniter/cesium/issues/330
+sudo sed -i "s@443===@443==@g" /opt/duniter/sources/node_modules/duniter-ui/public/cesium/dist_js/cesium*
+sudo sed -i "s@port === 443@port == 443@g" /opt/duniter/sources/node_modules/duniter-ui/public/cesium/dist_js/cesium*
+
+# Force Cesium to use local instance
+sudo sed -i "s@\"host\".*@\"host\": \"$domain\",@" /opt/duniter/sources/node_modules/duniter-ui/public/cesium/config.js
+sudo sed -i "s@\"port\".*@\"port\": \"443\"@" /opt/duniter/sources/node_modules/duniter-ui/public/cesium/config.js
 }
 
 CONFIG_SSOWAT_FOR_RESTRICTED_ACCESS () {
@@ -17,10 +25,10 @@ CONFIG_SSOWAT_FOR_RESTRICTED_ACCESS () {
 sudo yunohost app addaccess $app -u $admin
 
 # Allow only allowed users to access admin panel
-ynh_app_setting_set "$app" protected_uris "/" 
+ynh_app_setting_set "$app" protected_uris "/webui","/webmin","/cesium"
 
-# SSOwat Configuration
-#ynh_app_setting_set "$app" unprotected_uris "/api/"
+# Duniter is public app, with only some parts restricted in nginx.conf
+sudo yunohost app setting $app unprotected_uris -v "/"
 }
 
 CONFIG_NGINX_FOR_WEB_ADMIN () {

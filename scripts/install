@@ -24,7 +24,7 @@ sudo yunohost app checkurl "${domain}${path}" -a "$app" \
 
 # Check path is root
 if [[ $path != '/' ]]; then
-  ynh_die "Web admin can only be installed on root path for now"
+  ynh_die "Duniter can only be installed on root path for now"
 fi
 
 # Check port availability
@@ -52,18 +52,21 @@ if [[ $arch != "x64" && $arch != "armv7l" ]]; then
 	ynh_die "$arch is not supported." 2
 fi
 
-# Open port on firewall
-sudo yunohost firewall allow TCP $port > /dev/null 2>&1
-
 # Store config on YunoHost instance
 ynh_app_setting_set $app port $port
 ynh_app_setting_set $app arch $arch
 ynh_app_setting_set "$app" admin "$admin"
 
+# Open port on firewall
+sudo yunohost firewall allow TCP $port > /dev/null 2>&1
+
 INSTALL_DUNITER_DEBIAN_PACKAGE
 
 # Configure Duniter node
-sudo $app config --autoconf --remoteh $domain --port $port --remotep $port --salt $salt --passwd $password
+sudo $app config --ipv4 127.0.0.1 --port $port --remoteh $domain --remotep 443 --noupnp --salt $salt --passwd $password
+
+# Reset Duniter node's existing data (blockchain, not conf)
+sudo $app reset data > /dev/null
 
 # Synchronize Duniter node
 echo "Synchronizing with $sync_node:$sync_port. It may take a while."
