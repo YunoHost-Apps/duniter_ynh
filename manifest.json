@@ -96,7 +96,16 @@
 	            "fr": "Administrateur. Ce doit être un utilisateur YunoHost"
 		},
                 "example": "jon doe"
-	    }
+	    },
+            {
+                "name": "is_cesium_public",
+                "ask": {
+                    "en": "Make Cesium available publicly?",
+                    "fr": "Permettre à Cesium d'être consulté publiquement ?"
+                },
+                "choices": ["Yes", "No"],
+                "default": "Yes"
+            }
         ]
     }
 }

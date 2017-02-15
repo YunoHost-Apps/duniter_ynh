@@ -13,6 +13,7 @@ sync_port=$YNH_APP_ARG_SYNC_PORT
 salt=$YNH_APP_ARG_SALT
 password=$YNH_APP_ARG_PASSWORD
 admin=$YNH_APP_ARG_ADMIN
+is_cesium_public=YNH_APP_ARG_IS_CESIUM_PUBLIC
 
 # Source app helpers and functions
 source /usr/share/yunohost/helpers
@@ -56,6 +57,7 @@ fi
 ynh_app_setting_set $app port $port
 ynh_app_setting_set $app arch $arch
 ynh_app_setting_set "$app" admin "$admin"
+ynh_app_setting_set "$app" is_cesium_public "$is_cesium_public"
 
 # Open port on firewall
 sudo yunohost firewall allow TCP $port > /dev/null 2>&1
