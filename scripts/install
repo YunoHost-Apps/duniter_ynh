@@ -13,7 +13,7 @@ sync_port=$YNH_APP_ARG_SYNC_PORT
 salt=$YNH_APP_ARG_SALT
 password=$YNH_APP_ARG_PASSWORD
 admin=$YNH_APP_ARG_ADMIN
-is_cesium_public=YNH_APP_ARG_IS_CESIUM_PUBLIC
+is_cesium_public=$YNH_APP_ARG_IS_CESIUM_PUBLIC
 
 # Source app helpers and functions
 source /usr/share/yunohost/helpers

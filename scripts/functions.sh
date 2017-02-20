@@ -11,11 +11,7 @@ deb="/tmp/duniter-server-$version-linux-$arch.deb"
 sudo dpkg -i $deb > /dev/null
 sudo rm -f $deb
 
-# Fix https://github.com/duniter/cesium/issues/330
-sudo sed -i "s@443===@443==@g" /opt/duniter/sources/node_modules/duniter-ui/public/cesium/dist_js/cesium*
-sudo sed -i "s@port === 443@port == 443@g" /opt/duniter/sources/node_modules/duniter-ui/public/cesium/dist_js/cesium*
-
-# Force Cesium to use local instance
+# Patch Cesium to access local instance
 sudo sed -i "s@\"host\".*@\"host\": \"$domain\",@" /opt/duniter/sources/node_modules/duniter-ui/public/cesium/config.js
 sudo sed -i "s@\"port\".*@\"port\": \"443\"@" /opt/duniter/sources/node_modules/duniter-ui/public/cesium/config.js
 }
@@ -35,7 +31,7 @@ else
 fi
 
 # Duniter is public app, with only some parts restricted in nginx.conf
-sudo yunohost app setting $app unprotected_uris -v "/"
+ynh_app_setting_set "$app" unprotected_uris "/"
 }
 
 CONFIG_NGINX_FOR_WEB_ADMIN () {
