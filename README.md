@@ -4,30 +4,36 @@
 - [YunoHost project](https://yunohost.org)
 - Works on Debian Jessie 64 bits and ARM
 - 200Mo free RAM is necessary
+- The package state is **working**.
 
 ## Install
-
-- Web admin can only be installed on root path for now.
-Use a domain name like `duniter.domain.tld` for instance.
-See [#18](https://github.com/duniter/duniter_ynh/issues/18) for more details.
+- You will need to use a dedicated domain name as the app is installed on root path. For instance, use `duniter.domain.tld`.
+- An admin user will be asked to access the web admin.
+- Cesium wallet webapp could be set as public. It is accessible at `duniter.domain.tld/cesium`.
+- Web interface is accessible at `duniter.domain.tld/webui`.
+- The API is accessible at `duniter.domain.tld/`.
 
 ```bash
 sudo yunohost app install https://github.com/duniter/duniter_ynh
 ```
 
-## Package state
-The package is **in progress**.
-Currently, it:
+## Upgrade
+The app is not on the list of official apps of YunoHost repository.
+You will have to upgrade manually with following command:
 
-- Install Duniter ≥ 0.30.0
+```bash
+sudo yunohost app upgrade duniter -u https://github.com/duniter/duniter_ynh
+```
+
+## What the package do?
+Currently, it:
+- Install Duniter
 - Configure
 - Synchronize
 - Start
 
-## Usage
-
-- Graphical interface to manage the node is accessible at `https://duniter.domain.tld/webui`.
-- The API is accessible at `https://duniter.domain.tld/`.
+## Tutorial
+- [(fr) “Installation d’un nœud Duniter à l’aide de YunoHost”](https://forum.duniter.org/t/installation-d-un-noeud-duniter-a-l-aide-de-yunohost/1420)
 
 ## License
 This package and the Duniter software are under GNU GPL v.3.
