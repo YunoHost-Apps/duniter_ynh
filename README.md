@@ -24,11 +24,10 @@ Currently, it:
 - Synchronize
 - Start
 
-Extra features:
+## Usage
 
-- Graphical interface to manage the node.
-- Path access on `https://duniter.domain.tld/api` to the node API and not through the port because it fail.
-- Duniter logs are displayed on the YunoHost admin interface
+- Graphical interface to manage the node is accessible at `https://duniter.domain.tld/webui`.
+- The API is accessible at `https://duniter.domain.tld/`.
 
 ## License
 This package and the Duniter software are under GNU GPL v.3.
