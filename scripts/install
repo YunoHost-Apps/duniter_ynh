@@ -10,8 +10,6 @@ path="/"
 port=$YNH_APP_ARG_PORT
 sync_node=$YNH_APP_ARG_SYNC_NODE
 sync_port=$YNH_APP_ARG_SYNC_PORT
-salt=$YNH_APP_ARG_SALT
-password=$YNH_APP_ARG_PASSWORD
 admin=$YNH_APP_ARG_ADMIN
 is_cesium_public=$YNH_APP_ARG_IS_CESIUM_PUBLIC
 
@@ -60,7 +58,7 @@ sudo yunohost firewall allow TCP $port > /dev/null 2>&1
 INSTALL_DUNITER_DEBIAN_PACKAGE
 
 # Configure Duniter node
-sudo $app config --ipv4 127.0.0.1 --port $port --remoteh $domain --remotep 443 --noupnp --salt $salt --passwd $password
+sudo $app config --ipv4 127.0.0.1 --port $port --remoteh $domain --remotep 443 --noupnp
 
 # Reset Duniter node's existing data (blockchain, not conf)
 sudo $app reset data > /dev/null

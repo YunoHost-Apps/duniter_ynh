@@ -59,25 +59,6 @@
                 "example": "10900",
                 "default": "10900"
             },
-            {   
-                "name": "salt",
-                "ask": {
-                    "en": "Salt of your account. Let credentials as default if you don't have a Duniter account. It is editable on the web admin.",
-                    "fr": "Salt de votre compte. Si vous n’avez pas de compte Duniter, laisser les identifiants par défaut. C’est éditable dans l’interface web."
-                },
-                "example": "joe@example.tld",
-                "default": "joe@example.tld"
-            },
-            {   
-                "name": "password",
-                "type": "password",
-                "ask": {
-                    "en": "Password of your account",
-                    "fr": "Mot de passe de votre compte"
-                },
-                "example": "supersecretpassword",
-                "default": "supersecretpassword"
-            },
             {
                 "name": "admin",
                 "type": "user",
