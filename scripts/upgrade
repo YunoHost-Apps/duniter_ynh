@@ -15,11 +15,6 @@ arch=$(ynh_app_setting_get "$app" arch)
 admin=$(ynh_app_setting_get "$app" admin)
 is_cesium_public=$(ynh_app_setting_get "$app" is_cesium_public)
 
-# Check CPU arch
-if [[ $arch != "x64" && $arch != "armv7l" ]]; then
-	ynh_die "$arch is not supported." 2
-fi
-
 # Stop duniter daemon
 sudo $app stop
 
