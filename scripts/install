@@ -24,7 +24,7 @@ sudo yunohost app checkurl "${domain}${path}" -a "$app" \
 # Check port availability
 sudo yunohost app checkport $port
 if [[ ! $? -eq 0 ]]; then
-  exit 1
+  ynh_die "Port not available: ${port}"
 fi
 
 # Check node availability
