@@ -14,6 +14,7 @@ path=$(ynh_app_setting_get "$app" path)
 port=$(ynh_app_setting_get "$app" port)
 arch=$(ynh_app_setting_get "$app" arch)
 admin=$(ynh_app_setting_get "$app" admin)
+is_cesium_public=$(ynh_app_setting_get "$app" is_cesium_public)
 
 # Check CPU arch
 if [[ $arch != "x64" && $arch != "armv7l" ]]; then
