@@ -6,7 +6,7 @@ set -eu
 # Retrieve arguments
 app=$YNH_APP_INSTANCE_NAME
 domain=$YNH_APP_ARG_DOMAIN
-path=$YNH_APP_ARG_PATH
+path="/"
 port=$YNH_APP_ARG_PORT
 sync_node=$YNH_APP_ARG_SYNC_NODE
 sync_port=$YNH_APP_ARG_SYNC_PORT
@@ -22,11 +22,6 @@ source functions.sh
 # Check domain/path availability
 sudo yunohost app checkurl "${domain}${path}" -a "$app" \
     || ynh_die "Path not available: ${domain}${path}"
-
-# Check path is root
-if [[ $path != '/' ]]; then
-  ynh_die "Duniter can only be installed on root path for now"
-fi
 
 # Check port availability
 sudo yunohost app checkport $port

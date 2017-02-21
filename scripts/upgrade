@@ -10,7 +10,6 @@ source functions.sh
 # Retrive arguments
 app=$YNH_APP_INSTANCE_NAME
 domain=$(ynh_app_setting_get "$app" domain)
-path=$(ynh_app_setting_get "$app" path)
 port=$(ynh_app_setting_get "$app" port)
 arch=$(ynh_app_setting_get "$app" arch)
 admin=$(ynh_app_setting_get "$app" admin)
@@ -31,9 +30,6 @@ INSTALL_DUNITER_DEBIAN_PACKAGE
 
 # Start duniter daemon
 sudo $app webstart
-
-# Remove trailing "/" for next command
-path=${path%/}
 
 CONFIG_SSOWAT_FOR_RESTRICTED_ACCESS
 CONFIG_NGINX_FOR_WEB_ADMIN

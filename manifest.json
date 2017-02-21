@@ -32,16 +32,6 @@
                 "example": "duniter.domain.tld"
             },
             {
-                "name": "path",
-                "type": "path",
-                "ask": {
-                    "en": "Path on which install the web admin (installable only on root path for now)",
-                    "fr": "Chemin sur lequel ajouter l’administration web (installable uniquement à la racine)"
-                },
-                "example": "/",
-                "default": "/"
-            },
-            {
                 "name": "port",
                 "type": "port",
                 "ask": {

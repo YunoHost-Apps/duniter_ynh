@@ -37,7 +37,6 @@ ynh_app_setting_set "$app" unprotected_uris "/"
 CONFIG_NGINX_FOR_WEB_ADMIN () {
 # Configure Nginx
 nginx_conf="../conf/nginx.conf"
-#sudo sed -i "s@YNH_EXAMPLE_PATH@$path@g" $nginx_conf
 sudo sed -i "s@YNH_EXAMPLE_PORT@$port@" $nginx_conf
 sudo sed -i "s@YNH_EXAMPLE_DOMAIN@$domain@" $nginx_conf
 sudo cp $nginx_conf /etc/nginx/conf.d/$domain.d/$app.conf
