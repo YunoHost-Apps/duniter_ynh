@@ -2,12 +2,10 @@
 	auto_remove=1
 	; Manifest
 		domain="domain.tld"	(DOMAIN)
-		path="/path"	(PATH)
+		path="/"	(PATH)
 		port="8999"	(PORT)
 		sync_node="duniter.org"
-		sync_port="8999"
-		salt="joe@example.tld"
-		password="supersecretpassword"	(PASSWORD)
+		sync_port="10900"
 		admin="john"	(USER)
 	; Checks
 		pkg_linter=1
