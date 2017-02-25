@@ -12,7 +12,7 @@
 - Cesium wallet webapp could be set as public. It is accessible at `duniter.domain.tld/cesium`.
 - Web interface is accessible at `duniter.domain.tld/webui`.
 - The API is accessible at `duniter.domain.tld/`.
-- After installation, to compute blocks you will have to configure your identity on the node with [CLI option --keyprompt](https://github.com/duniter/duniter-keypair#cli-options) or from webadmin using HTTPS.
+- After installation, to compute blocks you will have to configure your identity on the node with `duniter wizard key` command or from webadmin using HTTPS.
 
 ```bash
 sudo yunohost app install https://github.com/duniter/duniter_ynh
