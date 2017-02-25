@@ -40,5 +40,5 @@ nginx_conf="../conf/nginx.conf"
 sudo sed -i "s@YNH_EXAMPLE_PORT@$port@" $nginx_conf
 sudo sed -i "s@YNH_EXAMPLE_DOMAIN@$domain@" $nginx_conf
 sudo cp $nginx_conf /etc/nginx/conf.d/$domain.d/$app.conf
-sudo nginx -t && sudo service nginx reload
+sudo service nginx reload
 }
