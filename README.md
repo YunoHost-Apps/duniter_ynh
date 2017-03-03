@@ -37,4 +37,4 @@ Currently, it:
 - [(fr) “Installation d’un nœud Duniter à l’aide de YunoHost”](https://forum.duniter.org/t/installation-d-un-noeud-duniter-a-l-aide-de-yunohost/1420)
 
 ## License
-This package and the Duniter software are under GNU GPL v.3.
+This package and the Duniter software are under GNU AGPL v.3.
