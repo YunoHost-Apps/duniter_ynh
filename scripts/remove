@@ -11,8 +11,8 @@ domain=$(ynh_app_setting_get $app domain)
 port=$(ynh_app_setting_get $app port)
 
 # Remove Duniter
-sudo $app stop
-sudo dpkg -r $app
+sudo duniter stop
+sudo dpkg -r duniter
 
 # Remove data and conf
 sudo rm -rf /root/.conf/duniter
