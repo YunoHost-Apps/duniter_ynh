@@ -32,6 +32,9 @@ fi
 
 # Duniter is public app, with only some parts restricted in nginx.conf
 ynh_app_setting_set "$app" unprotected_uris "/"
+
+# Set URL redirection from root to webadmin
+ynh_app_setting_set "$app" redirected_urls "{'$domain/':'$domain/webui'}"
 }
 
 CONFIG_NGINX_FOR_WEB_ADMIN () {
