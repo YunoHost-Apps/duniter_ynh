@@ -56,8 +56,8 @@
                     "en": "Port of synchronization",
                     "fr": "Port de synchronisation"
                 },
-                "example": "10900",
-                "default": "10900"
+                "example": "10901",
+                "default": "10901"
             },
             {
                 "name": "admin",
