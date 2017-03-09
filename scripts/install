@@ -58,7 +58,7 @@ sudo yunohost firewall allow TCP $port > /dev/null 2>&1
 INSTALL_DUNITER_DEBIAN_PACKAGE
 
 # Configure Duniter node
-sudo $app config --ipv4 127.0.0.1 --port $port --remoteh $domain --remotep 443 --noupnp
+sudo $app config --ipv4 127.0.0.1 --port $port --remoteh $domain --remotep 80 --noupnp --addep "BMAS $domain 443"
 
 # Reset Duniter node's existing data (blockchain, not conf)
 sudo $app reset data > /dev/null
