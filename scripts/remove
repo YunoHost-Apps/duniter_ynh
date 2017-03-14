@@ -20,7 +20,7 @@ sudo rm -rf /root/.conf/duniter
 # Remove Duniter service to YunoHost monitoring
 sudo yunohost service remove $app
 
-# Remove proxy_pass
+# Remove Nginx configuration
 sudo rm -f /etc/nginx/conf.d/$domain.d/$app.conf
 sudo service nginx reload
 

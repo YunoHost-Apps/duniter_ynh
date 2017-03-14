@@ -16,13 +16,12 @@ sudo sed -i "s@\"host\".*@\"host\": \"$domain\",@" /opt/duniter/sources/node_mod
 sudo sed -i "s@\"port\".*@\"port\": \"443\"@" /opt/duniter/sources/node_modules/duniter-ui/public/cesium/config.js
 }
 
-CONFIG_SSOWAT_FOR_RESTRICTED_ACCESS () {
+CONFIG_SSOWAT () {
 # Add admin to the allowed users
 sudo yunohost app addaccess $app -u $admin
 
 # Allow only allowed users to access admin panel
-if [ "$is_cesium_public" = "Yes" ];
-then
+if [ "$is_cesium_public" = "Yes" ]; then
   # Cesium is public, do not protect it
   ynh_app_setting_set "$app" protected_uris "/webui","/webmin"
 else
@@ -37,7 +36,7 @@ ynh_app_setting_set "$app" unprotected_uris "/"
 ynh_app_setting_set "$app" redirected_urls "{'$domain/':'$domain/webui'}"
 }
 
-CONFIG_NGINX_FOR_WEB_ADMIN () {
+CONFIG_NGINX () {
 # Configure Nginx
 nginx_conf="../conf/nginx.conf"
 sudo sed -i "s@YNH_EXAMPLE_PORT@$port@" $nginx_conf
