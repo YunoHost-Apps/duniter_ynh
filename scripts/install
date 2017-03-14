@@ -58,18 +58,18 @@ sudo yunohost firewall allow TCP $port > /dev/null 2>&1
 INSTALL_DUNITER_DEBIAN_PACKAGE
 
 # Configure Duniter node
-sudo $app config --ipv4 127.0.0.1 --port $port --remoteh $domain --remotep 80 --noupnp
+sudo duniter config --ipv4 127.0.0.1 --port $port --remoteh $domain --remotep 80 --noupnp
 sudo duniter config --addep "BMAS $domain 443"
 
 # Reset Duniter node's existing data (blockchain, not conf)
-sudo $app reset data > /dev/null
+sudo duniter reset data > /dev/null
 
 # Synchronize Duniter node
 echo "Synchronizing with $sync_node:$sync_port. It may take a while."
-sudo $app sync $sync_node $sync_port --nointeractive > /dev/null
+sudo duniter sync $sync_node $sync_port --nointeractive > /dev/null
 
 # Launch Duniter node
-sudo $app webstart
+sudo duniter webstart
 
 # Add Duniter service to the YunoHost monitoring
 sudo yunohost service add $app --log /home/admin/.config/$app/"$app"_default/"$app".log
