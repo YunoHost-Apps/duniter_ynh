@@ -7,7 +7,7 @@ set -eu
 app=$YNH_APP_INSTANCE_NAME
 domain=$YNH_APP_ARG_DOMAIN
 path="/"
-port=$YNH_APP_ARG_PORT
+port=10901
 sync_node=$YNH_APP_ARG_SYNC_NODE
 sync_port=$YNH_APP_ARG_SYNC_PORT
 admin=$YNH_APP_ARG_ADMIN

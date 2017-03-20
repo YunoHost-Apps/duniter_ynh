@@ -32,16 +32,6 @@
                 "example": "duniter.domain.tld"
             },
             {
-                "name": "port",
-                "type": "port",
-                "ask": {
-                    "en": "Port of Duniter node",
-                    "fr": "Port du nœud Duniter"
-                },
-                "example": "8999",
-                "default": "8999"
-            },
-            {
                 "name": "sync_node",
                 "ask": {
                     "en": "Node's address (domain name or IP address) to synchronise with",
