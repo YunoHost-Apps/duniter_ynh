@@ -46,10 +46,12 @@ sudo cp $nginx_conf /etc/nginx/conf.d/$domain.d/$app.conf
 sudo service nginx reload
 }
 
-
 REMOVE_DUNITER () {
-# Stop duniter daemon
-sudo duniter stop
+# Stop duniter daemon if running
+sudo duniter status
+if [ `echo "$?"` == 0 ]; then
+    sudo duniter stop
+fi
 
 # Remove Duniter package
 sudo dpkg -r duniter
