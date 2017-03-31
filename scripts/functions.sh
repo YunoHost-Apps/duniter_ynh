@@ -45,3 +45,12 @@ sudo sed -i "s@YNH_EXAMPLE_DOMAIN@$domain@" $nginx_conf
 sudo cp $nginx_conf /etc/nginx/conf.d/$domain.d/$app.conf
 sudo service nginx reload
 }
+
+
+REMOVE_DUNITER () {
+# Stop duniter daemon
+sudo duniter stop
+
+# Remove Duniter package
+sudo dpkg -r duniter
+}

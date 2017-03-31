@@ -15,12 +15,7 @@ arch=$(ynh_app_setting_get "$app" arch)
 admin=$(ynh_app_setting_get "$app" admin)
 is_cesium_public=$(ynh_app_setting_get "$app" is_cesium_public)
 
-# Stop duniter daemon
-sudo duniter stop
-
-# Remove Duniter package
-sudo dpkg -r duniter
-
+REMOVE_DUNITER
 INSTALL_DUNITER_DEBIAN_PACKAGE
 
 # Start duniter daemon
