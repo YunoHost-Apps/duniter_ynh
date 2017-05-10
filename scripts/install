@@ -22,7 +22,10 @@ sudo yunohost app checkurl "${domain}${path}" -a "$app" \
     || ynh_die "Path not available: ${domain}${path}"
 
 # Check port availability
-port=$(ynh_find_port $port)
+sudo yunohost app checkport $port
+if [[ ! $? -eq 0 ]]; then
+  ynh_die "Port not available: ${port}"
+fi
 
 # Check node availability
 if curl --output /dev/null --silent --head --fail "$sync_node:$sync_port/node/summary"; then
