@@ -12,9 +12,10 @@ sudo dpkg -i $deb > /dev/null
 sudo rm -f $deb
 
 # Patch Cesium to access local instance
-cesium_conf="/opt/duniter/sources/node_modules/duniter-ui/public/cesium/config.js"
-sudo sed -i "s@\"host\".*@\"host\": \"$domain\",@" $cesium_conf
-sudo sed -i "s@\"port\".*@\"port\": \"443\"@" $cesium_conf
+# Note by cgeek: Cesium has been removed from Duniter since v1.3
+# cesium_conf="/opt/duniter/sources/node_modules/duniter-ui/public/cesium/config.js"
+# sudo sed -i "s@\"host\".*@\"host\": \"$domain\",@" $cesium_conf
+# sudo sed -i "s@\"port\".*@\"port\": \"443\"@" $cesium_conf
 }
 
 CONFIG_SSOWAT () {
