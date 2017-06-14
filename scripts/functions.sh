@@ -22,14 +22,8 @@ CONFIG_SSOWAT () {
 # Add admin to the allowed users
 sudo yunohost app addaccess $app -u $admin
 
-# Allow only allowed users to access admin panel
-if [ "$is_cesium_public" = "Yes" ]; then
-  # Cesium is public, do not protect it
-  ynh_app_setting_set "$app" protected_uris "/webui","/webmin","/modules"
-else
-  # Cesium is not public, protect it
-  ynh_app_setting_set "$app" protected_uris "/webui","/webmin","/modules","/cesium"
-fi
+# Protect senstive sub-routes
+ynh_app_setting_set "$app" protected_uris "/webui","/webmin","/modules"
 
 # Duniter is public app, with only some parts restricted in nginx.conf
 ynh_app_setting_set "$app" unprotected_uris "/"
