@@ -65,8 +65,8 @@ sudo duniter config --addep "BMAS $domain 443"
 sudo duniter reset data > /dev/null
 
 # Synchronize Duniter node
-echo "Synchronizing with $sync_node:$sync_port. It may take a while."
-sudo duniter sync $sync_node $sync_port --nointeractive > /dev/null
+# Secho "Synchronizing with $sync_node:$sync_port. It may take a while."
+# Ssudo duniter sync $sync_node $sync_port --nointeractive > /dev/null
 
 # Launch Duniter node
 sudo duniter webstart
