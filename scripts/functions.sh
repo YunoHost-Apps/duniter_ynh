@@ -10,26 +10,14 @@ wget -nc --quiet $url -P /tmp
 deb="/tmp/duniter-server-$version-linux-$arch.deb"
 sudo dpkg -i $deb > /dev/null
 sudo rm -f $deb
-
-# Patch Cesium to access local instance
-# Note by cgeek: Cesium has been removed from Duniter since v1.3
-# cesium_conf="/opt/duniter/sources/node_modules/duniter-ui/public/cesium/config.js"
-# sudo sed -i "s@\"host\".*@\"host\": \"$domain\",@" $cesium_conf
-# sudo sed -i "s@\"port\".*@\"port\": \"443\"@" $cesium_conf
 }
 
 CONFIG_SSOWAT () {
 # Add admin to the allowed users
 sudo yunohost app addaccess $app -u $admin
 
-# Allow only allowed users to access admin panel
-if [ "$is_cesium_public" = "Yes" ]; then
-  # Cesium is public, do not protect it
-  ynh_app_setting_set "$app" protected_uris "/webui","/webmin","/modules"
-else
-  # Cesium is not public, protect it
-  ynh_app_setting_set "$app" protected_uris "/webui","/webmin","/modules","/cesium"
-fi
+# Protect senstive sub-routes
+ynh_app_setting_set "$app" protected_uris "/webui","/webmin","/modules"
 
 # Duniter is public app, with only some parts restricted in nginx.conf
 ynh_app_setting_set "$app" unprotected_uris "/"

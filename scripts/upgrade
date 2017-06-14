@@ -13,7 +13,6 @@ domain=$(ynh_app_setting_get "$app" domain)
 port=$(ynh_app_setting_get "$app" port)
 arch=$(ynh_app_setting_get "$app" arch)
 admin=$(ynh_app_setting_get "$app" admin)
-is_cesium_public=$(ynh_app_setting_get "$app" is_cesium_public)
 
 REMOVE_DUNITER
 INSTALL_DUNITER_DEBIAN_PACKAGE
