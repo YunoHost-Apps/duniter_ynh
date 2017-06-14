@@ -32,24 +32,6 @@
                 "example": "duniter.domain.tld"
             },
             {
-                "name": "sync_node",
-                "ask": {
-                    "en": "Node's address (domain name or IP address) to synchronise with",
-                    "fr": "Adresse du nœud (nom de domaine ou adresse IP) avec lequel se synchroniser"
-                },
-                "example": "duniter.org",
-                "default": "duniter.org"
-            },
-            {
-                "name": "sync_port",
-                "ask": {
-                    "en": "Port of synchronization",
-                    "fr": "Port de synchronisation"
-                },
-                "example": "10901",
-                "default": "10901"
-            },
-            {
                 "name": "admin",
                 "type": "user",
 		"ask": {
@@ -57,16 +39,7 @@
 	            "fr": "Administrateur. Ce doit être un utilisateur YunoHost"
 		},
                 "example": "jon doe"
-	    },
-            {
-                "name": "is_cesium_public",
-                "ask": {
-                    "en": "Make Cesium available publicly?",
-                    "fr": "Permettre à Cesium d'être consulté publiquement ?"
-                },
-                "choices": ["Yes", "No"],
-                "default": "Yes"
-            }
+	    }
         ]
     }
 }
