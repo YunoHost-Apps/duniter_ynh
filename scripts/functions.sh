@@ -17,10 +17,10 @@ CONFIG_SSOWAT () {
 sudo yunohost app addaccess $app -u $admin
 
 # Protect senstive sub-routes
-ynh_app_setting_set "$app" protected_uris "/webui","/webmin","/modules"
+ynh_app_setting_set "$app" protected_uris "/webui","/webmin"
 
 # Duniter is public app, with only some parts restricted in nginx.conf
-ynh_app_setting_set "$app" unprotected_uris "/"
+ynh_app_setting_set "$app" unprotected_uris "/","/modules"
 
 # Set URL redirection from root to webadmin
 ynh_app_setting_set "$app" redirected_urls "{'$domain/':'$domain/webui'}"
