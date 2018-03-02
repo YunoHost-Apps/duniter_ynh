@@ -1,15 +1,22 @@
 #/bin/bash
 
 INSTALL_DUNITER_DEBIAN_PACKAGE () {
-# Retrieve url of last version and version number
-url=$(curl -s https://api.github.com/repos/duniter/duniter/releases/latest | grep "browser_" | grep $arch | grep "linux" | grep "server" | sort -r | head -1 | cut -d\" -f4)
-version=$(echo $url | cut -d/ -f8)
+
+version="v1.6.21"
+git_repo="https://git.duniter.org/nodes/typescript/duniter/"
+if [ $arch == "x64" ]; then
+        middle_url="-/jobs/3296/artifacts/raw/work/bin/"
+else
+        middle_url="uploads/94f13f3dd61357ddf2539afbc5dc7893/"
+fi
+deb="duniter-server-$version-linux-$arch.deb"
+url="${git_repo}${middle_url}${deb}"
 
 # Retrieve debian package and install it
 wget -nc --quiet $url -P /tmp
-deb="/tmp/duniter-server-$version-linux-$arch.deb"
-sudo dpkg -i $deb > /dev/null
-sudo rm -f $deb
+deb_path="/tmp/$deb"
+sudo dpkg -i $deb_path > /dev/null
+sudo rm -f $deb_path
 }
 
 CONFIG_SSOWAT () {
