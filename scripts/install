@@ -49,6 +49,7 @@ INSTALL_DUNITER_DEBIAN_PACKAGE
 # Configure Duniter node
 sudo duniter config --ipv4 127.0.0.1 --port $port --remoteh $domain --remotep 80 --noupnp
 sudo duniter config --addep "BMAS $domain 443"
+sudo duniter config --ws2p-host 127.0.0.1 --ws2p-port 20901 --ws2p-remote-host $domain --ws2p-remote-port 443 --ws2p-noupnp 
 
 # Reset Duniter node's existing data (blockchain, not conf)
 sudo duniter reset data > /dev/null
