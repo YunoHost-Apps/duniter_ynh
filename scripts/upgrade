@@ -16,6 +16,7 @@ admin=$(ynh_app_setting_get "$app" admin)
 
 REMOVE_DUNITER
 INSTALL_DUNITER_DEBIAN_PACKAGE
+CONFIGURE_DUNITER
 
 # Start duniter daemon
 sudo duniter webstart

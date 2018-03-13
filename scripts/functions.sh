@@ -19,6 +19,12 @@ sudo dpkg -i $deb_path > /dev/null
 sudo rm -f $deb_path
 }
 
+CONFIGURE_DUNITER () {
+	sudo duniter config --ipv4 127.0.0.1 --port $port --remoteh $domain --remotep 80 --noupnp
+	sudo duniter config --addep "BMAS $domain 443"
+	sudo duniter config --ws2p-host 127.0.0.1 --ws2p-port 20901 --ws2p-remote-host $domain --ws2p-remote-port 443 --ws2p-noupnp
+}
+
 CONFIG_SSOWAT () {
 # Add admin to the allowed users
 sudo yunohost app addaccess $app -u $admin
