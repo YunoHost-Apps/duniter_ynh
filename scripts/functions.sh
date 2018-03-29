@@ -2,10 +2,10 @@
 
 INSTALL_DUNITER_DEBIAN_PACKAGE () {
 
-version="v1.6.22"
+version="v1.6.23"
 git_repo="https://git.duniter.org/nodes/typescript/duniter/"
 if [ $arch == "x64" ]; then
-	middle_url="-/jobs/3584/artifacts/raw/work/bin/"
+	middle_url="-/jobs/4085/artifacts/raw/work/bin/"
 else
 	middle_url="uploads/9176370e5f12dead9e8942fc08a30e49/"
 fi
