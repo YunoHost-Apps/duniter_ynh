@@ -54,7 +54,7 @@ sudo duniter reset data > /dev/null
 sudo duniter webstart
 
 # Add Duniter service to the YunoHost monitoring
-sudo yunohost service add $app --log /home/admin/.config/$app/"$app"_default/"$app".log
+sudo yunohost service add $app --log /root/.config/$app/"$app"_default/"$app".log
 
 CONFIG_SSOWAT
 CONFIG_NGINX
