@@ -13,6 +13,9 @@ port=$(ynh_app_setting_get $app port)
 
 REMOVE_DUNITER
 
+# Disable systemd service
+systemctl disable duniter.service
+
 # Remove data and conf
 rm -rf /root/.conf/duniter
 

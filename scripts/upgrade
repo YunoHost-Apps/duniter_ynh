@@ -16,10 +16,11 @@ admin=$(ynh_app_setting_get "$app" admin)
 
 REMOVE_DUNITER
 INSTALL_DUNITER_DEBIAN_PACKAGE
+INSTALL_SYSTEMD
 CONFIGURE_DUNITER
 
-# Start duniter daemon
-duniter webstart
+# Start duniter service
+systemctl start duniter
 
 CONFIG_SSOWAT
 CONFIG_NGINX
