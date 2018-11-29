@@ -15,11 +15,11 @@ source /usr/share/yunohost/helpers
 source functions.sh
 
 # Check domain/path availability
-sudo yunohost app checkurl "${domain}${path}" -a "$app" \
+yunohost app checkurl "${domain}${path}" -a "$app" \
     || ynh_die "Path not available: ${domain}${path}"
 
 # Check port availability
-sudo yunohost app checkport $port
+yunohost app checkport $port
 if [[ ! $? -eq 0 ]]; then
   ynh_die "Port not available: ${port}"
 fi
@@ -42,19 +42,19 @@ ynh_app_setting_set $app arch $arch
 ynh_app_setting_set "$app" admin "$admin"
 
 # Open port on firewall
-sudo yunohost firewall allow TCP $port > /dev/null 2>&1
+yunohost firewall allow TCP $port > /dev/null 2>&1
 
 INSTALL_DUNITER_DEBIAN_PACKAGE
 CONFIGURE_DUNITER
 
 # Reset Duniter node's existing data (blockchain, not conf)
-sudo duniter reset data > /dev/null
+duniter reset data > /dev/null
 
 # Launch Duniter node
-sudo duniter webstart
+duniter webstart
 
 # Add Duniter service to the YunoHost monitoring
-sudo yunohost service add $app --log /root/.config/$app/"$app"_default/"$app".log
+yunohost service add $app --log /root/.config/$app/"$app"_default/"$app".log
 
 CONFIG_SSOWAT
 CONFIG_NGINX

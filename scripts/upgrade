@@ -19,7 +19,7 @@ INSTALL_DUNITER_DEBIAN_PACKAGE
 CONFIGURE_DUNITER
 
 # Start duniter daemon
-sudo duniter webstart
+duniter webstart
 
 CONFIG_SSOWAT
 CONFIG_NGINX

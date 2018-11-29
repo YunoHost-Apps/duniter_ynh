@@ -14,14 +14,14 @@ port=$(ynh_app_setting_get $app port)
 REMOVE_DUNITER
 
 # Remove data and conf
-sudo rm -rf /root/.conf/duniter
+rm -rf /root/.conf/duniter
 
 # Remove Duniter service to YunoHost monitoring
-sudo yunohost service remove $app
+yunohost service remove $app
 
 # Remove Nginx configuration
-sudo rm -f /etc/nginx/conf.d/$domain.d/$app.conf
-sudo service nginx reload
+rm -f /etc/nginx/conf.d/$domain.d/$app.conf
+service nginx reload
 
 # Close opened port
-sudo yunohost firewall disallow TCP $port
+yunohost firewall disallow TCP $port
