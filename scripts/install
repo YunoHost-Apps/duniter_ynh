@@ -34,11 +34,6 @@ admin=$YNH_APP_ARG_ADMIN
 # CHECK IF THE APP CAN BE INSTALLED WITH THESE ARGS
 #=================================================
 
-### If the app uses nginx as web server (written in HTML/PHP in most cases), the final path should be "/var/www/$app".
-### If the app provides an internal web server (or uses another application server such as uwsgi), the final path should be "/opt/yunohost/$app"
-final_path=/var/www/$app
-test ! -e "$final_path" || ynh_die "This path already contains a folder"
-
 # Normalize the url path syntax
 path_url=$(ynh_normalize_url_path $path_url)
 
@@ -51,8 +46,8 @@ ynh_webpath_register $app $domain $path_url
 # Check domain/path availability
 #=================================================
 
-yunohost app checkurl "${domain}${path}" -a "$app" \
-    || ynh_die "Path not available: ${domain}${path}"
+yunohost app checkurl "${domain}${path_url}" -a "$app" \
+    || ynh_die "Path not available: ${domain}${path_url}"
 
 #=================================================
 # Check port availability
@@ -61,9 +56,6 @@ yunohost app checkurl "${domain}${path}" -a "$app" \
 yunohost app checkport $port
 if [[ ! $? -eq 0 ]]; then
   ynh_die "Port not available: ${port}"
-else
-  # Open port on firewall
-  yunohost firewall allow TCP $port > /dev/null 2>&1
 fi
 
 #=================================================
@@ -71,6 +63,12 @@ fi
 #=================================================
 
 ynh_user_exists $admin
+
+#=================================================
+# Open port on firewall
+#=================================================
+
+yunohost firewall allow TCP $port > /dev/null 2>&1
 
 #=================================================
 # Get CPU architecture and check it
@@ -126,7 +124,7 @@ yunohost service add $app --log /root/.config/$app/"$app"_default/"$app".log
 
 #=================================================
 # CONFIGURATION OF SSOWAT
-#================================================= 
+#=================================================
 
 config_ssowat
 
