@@ -31,32 +31,11 @@ port=10901
 admin=$YNH_APP_ARG_ADMIN
 
 #=================================================
-# CHECK IF THE APP CAN BE INSTALLED WITH THESE ARGS
-#=================================================
-
-# Normalize the url path syntax
-path_url=$(ynh_normalize_url_path $path_url)
-
-# Check web path availability
-ynh_webpath_available $domain $path_url
-# Register (book) web path
-ynh_webpath_register $app $domain $path_url
-
-#=================================================
 # Check domain/path availability
 #=================================================
 
 yunohost app checkurl "${domain}${path_url}" -a "$app" \
     || ynh_die "Path not available: ${domain}${path_url}"
-
-#=================================================
-# Check port availability
-#=================================================
-
-yunohost app checkport $port
-if [[ ! $? -eq 0 ]]; then
-  ynh_die "Port not available: ${port}"
-fi
 
 #=================================================
 # Check the admin exists in YunoHost users
@@ -65,10 +44,16 @@ fi
 ynh_user_exists $admin
 
 #=================================================
-# Open port on firewall
+# Check port availability
 #=================================================
 
-yunohost firewall allow TCP $port > /dev/null 2>&1
+yunohost app checkport $port
+if [[ ! $? -eq 0 ]]; then
+  ynh_die "Port not available: ${port}"
+else
+	yunohost firewall allow TCP $port > /dev/null 2>&1
+fi
+
 
 #=================================================
 # Get CPU architecture and check it
