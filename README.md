@@ -24,9 +24,9 @@ Be carefull when installing applications from the community list.
 - The BMA API is accessible from `https://duniter.domain.tld/` if enabled.
 
 ## Cesium
-Cesium is a wallet webapp. There is currently two ways to install it:
+Cesium is a wallet webapp. You can install it with:
 - [With the YunoHost app](https://github.com/YunoHost-Apps/cesium_ynh)
-- With a Duniter plugin: `duniter plug git+https://github.com/duniter/duniter-ui-cesium.git`
+<!--- With a Duniter plugin: `duniter plug git+https://github.com/duniter/duniter-ui-cesium.git`-->
 
 ## License
 This package and the Duniter software are under GNU AGPL v.3.
