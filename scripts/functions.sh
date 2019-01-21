@@ -1,12 +1,12 @@
 #/bin/bash
 
 INSTALL_DUNITER_DEBIAN_PACKAGE () {
-	version="v1.6.28"
+	version="v1.6.29"
 	git_repo="https://git.duniter.org/nodes/typescript/duniter/"
 	if [ $arch == "x64" ]; then
-		middle_url="-/jobs/15942/artifacts/raw/work/bin/"
+		middle_url="-/jobs/16134/artifacts/raw/work/bin/"
 	else
-		middle_url="uploads/89e94e0ead250bff962d78e5846d57c6/"
+		middle_url="uploads/0914b6e4daf1acbe825bb2965c7af142/
 	fi
 	deb="duniter-server-$version-linux-$arch.deb"
 	url="${git_repo}${middle_url}${deb}"
