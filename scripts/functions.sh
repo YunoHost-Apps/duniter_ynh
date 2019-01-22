@@ -6,7 +6,7 @@ INSTALL_DUNITER_DEBIAN_PACKAGE () {
 	if [ $arch == "x64" ]; then
 		middle_url="-/jobs/16134/artifacts/raw/work/bin/"
 	else
-		middle_url="uploads/0914b6e4daf1acbe825bb2965c7af142/
+		middle_url="uploads/0914b6e4daf1acbe825bb2965c7af142/"
 	fi
 	deb="duniter-server-$version-linux-$arch.deb"
 	url="${git_repo}${middle_url}${deb}"
