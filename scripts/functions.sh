@@ -1,9 +1,9 @@
 #/bin/bash
 
 INSTALL_DUNITER_DEBIAN_PACKAGE () {
-        version="v1.7.17"
+        version="v1.7.18"
 	if [ $arch == "x64" ]; then
-		url_base="https://git.duniter.org/nodes/typescript/duniter/-/jobs/21158/artifacts/raw/work/bin/"
+		url_base="https://git.duniter.org/nodes/typescript/duniter/-/jobs/21913/artifacts/browse/work/bin/"
 	else
 		url_base="https://jytou.fr/duniter/"
 	fi
