@@ -1,15 +1,16 @@
 #/bin/bash
 
 INSTALL_DUNITER_DEBIAN_PACKAGE () {
-        version="v1.7.18"
+	version="v1.7.21"
+	url_base="https://git.duniter.org/nodes/typescript/duniter/"
 	if [ $arch == "x64" ]; then
-		url_base="https://git.duniter.org/nodes/typescript/duniter/-/jobs/21913/artifacts/raw/work/bin/"
+		mid_url="-/jobs/34995/artifacts/raw/work/bin/"
 	else
-		url_base="https://jytou.fr/duniter/"
+		mid_url="uploads/23e768a0c5afc515ae59b4bf536ceecb/"
 	fi
 
         deb="duniter-server-$version-linux-$arch.deb"
-	url="${url_base}${deb}"
+	url="${url_base}${mid_url}${deb}"
 
 	# Retrieve debian package and install it
 	wget -nc --quiet $url -P /tmp
