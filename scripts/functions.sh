@@ -6,7 +6,7 @@ INSTALL_DUNITER_DEBIAN_PACKAGE () {
 	if [ $arch == "x64" ]; then
 		mid_url="-/jobs/40349/artifacts/raw/work/bin/"
 	else
-		mid_url="uploads/ef10ea7293cd8935c6065616254cf708/"
+		mid_url="uploads/afe00e6e6cb318fbdbb977d8c73f4645/"
 	fi
 
         deb="duniter-server-$version-linux-$arch.deb"
