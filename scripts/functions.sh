@@ -49,7 +49,7 @@ CONFIG_NGINX () {
 	sed -i "s@YNH_EXAMPLE_PORT@$port@" $nginx_conf
 	sed -i "s@YNH_EXAMPLE_DOMAIN@$domain@" $nginx_conf
 	cp $nginx_conf /etc/nginx/conf.d/$domain.d/$app.conf
-	service nginx reload
+	systemctl reload nginx
 }
 
 REMOVE_DUNITER () {
