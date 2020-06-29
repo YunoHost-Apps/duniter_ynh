@@ -53,11 +53,8 @@ CONFIG_NGINX () {
 }
 
 REMOVE_DUNITER () {
-	# Stop duniter daemon if running
-	duniter status
-	if [ `echo "$?"` == 0 ]; then
-            systemctl stop duniter
-	fi
+	# Stop duniter daemon
+        systemctl stop duniter
 
 	# Remove Duniter package
 	dpkg -r duniter
