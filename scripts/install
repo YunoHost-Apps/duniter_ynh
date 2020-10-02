@@ -48,9 +48,6 @@ INSTALL_DUNITER_DEBIAN_PACKAGE
 INSTALL_SYSTEMD
 CONFIGURE_DUNITER
 
-# Reset Duniter node's existing data (blockchain, not conf)
-duniter reset data > /dev/null
-
 # Launch Duniter node
 systemctl start duniter
 
