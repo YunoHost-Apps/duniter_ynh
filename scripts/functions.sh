@@ -25,8 +25,7 @@ INSTALL_SYSTEMD () {
 }
 
 CONFIGURE_DUNITER () {
-	duniter config --bma --ipv4 127.0.0.1 --port $port --remoteh $domain --remotep 80 --noupnp
-	duniter config --addep "BMAS $domain 443"
+	duniter config --bma --ipv4 127.0.0.1 --port $port --remoteh $domain --remotep 443 --noupnp
 	duniter config --ws2p-host 127.0.0.1 --ws2p-port 20901 --ws2p-remote-host $domain --ws2p-remote-port 443 --ws2p-noupnp
 }
 
