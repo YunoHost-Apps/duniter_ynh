@@ -1,11 +1,12 @@
 #/bin/bash
 
 INSTALL_DUNITER_DEBIAN_PACKAGE () {
-	version="v1.8.1"
 	url_base="https://git.duniter.org/nodes/typescript/duniter/"
 	if [ $arch == "x64" ]; then
+		version="v1.8.1"
 		mid_url="-/jobs/40430/artifacts/raw/work/bin/"
 	else
+		version="v1.8.0"
 		mid_url="uploads/afe00e6e6cb318fbdbb977d8c73f4645/"
 	fi
 
