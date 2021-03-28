@@ -3,7 +3,7 @@ Description=Duniter node
 After=network.target
 
 [Service]
-Environment="DUNITER_WEB=web"
+Environment="DUNITER_WEB="
 Group=root
 User=root
 Type=forking
