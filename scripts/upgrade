@@ -22,5 +22,5 @@ CONFIGURE_DUNITER
 # Start duniter service
 systemctl start duniter
 
-CONFIG_SSOWAT
+CONFIG_PERMISSIONS
 CONFIG_NGINX

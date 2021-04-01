@@ -3,8 +3,8 @@
 - [YunoHost project](https://yunohost.org)
 
 ## Requirements
-- Debian Stretch
-- YunoHost ≥ 3.7
+- Debian Buster
+- YunoHost ≥ v4.1
 - `x64` or `armlv7` architecture
 - 200Mo free RAM
 - A dedicated domain name to install the app on root path. For instance, `duniter.domain.tld`.

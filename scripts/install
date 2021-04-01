@@ -54,5 +54,5 @@ systemctl start duniter
 # Add Duniter service to the YunoHost monitoring
 yunohost service add $app --log /root/.config/$app/"$app"_default/"$app".log
 
-CONFIG_SSOWAT
+CONFIG_PERMISSIONS
 CONFIG_NGINX

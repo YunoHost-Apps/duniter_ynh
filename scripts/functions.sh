@@ -30,18 +30,17 @@ CONFIGURE_DUNITER () {
 	duniter config --ws2p-host 127.0.0.1 --ws2p-port 20901 --ws2p-remote-host $domain --ws2p-remote-port 443 --ws2p-noupnp
 }
 
-CONFIG_SSOWAT () {
-	# Add admin to the allowed users
-	yunohost app addaccess $app -u $admin
+CONFIG_PERMISSIONS () {
+	# Protect senstive sub-routes to Duniter web admin interface, give access to choosen admin
+	ynh_permission_delete --permission "admin"
+	ynh_permission_create --permission "admin" --url "/webui" --additional_urls "/webmin" --allowed "$admin" --label "Administration" --show_tile=true
 
-	# Protect senstive sub-routes
-	ynh_app_setting_set "$app" protected_uris "/webui","/webmin"
-
-	# Duniter is public app, with only some parts restricted in nginx.conf
-	ynh_app_setting_set "$app" unprotected_uris "/"
-
-	# Set URL redirection from root to webadmin
-	ynh_app_setting_set "$app" redirected_urls "{'$domain/':'$domain/webui'}"
+	# Remove deprecated permission system settings to remove their effects
+	if [ ! -z "$(ynh_app_setting_get --app=$app --key=protected_uris)" ]; then
+		ynh_app_setting_delete --app=$app --key=protected_uris
+		ynh_app_setting_delete --app=$app --key=unprotected_uris
+		ynh_app_setting_delete --app=$app --key=redirected_urls
+	fi
 }
 
 CONFIG_NGINX () {
