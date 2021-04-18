@@ -31,15 +31,19 @@ CONFIGURE_DUNITER () {
 }
 
 CONFIG_PERMISSIONS () {
-	# Protect senstive sub-routes to Duniter web admin interface, give access to choosen admin
-	ynh_permission_delete --permission "admin"
-	ynh_permission_create --permission "admin" --url "/webui" --additional_urls "/webmin" --allowed "$admin" --label "Administration" --show_tile=true
-
 	# Remove deprecated permission system settings to remove their effects
-	if [ ! -z "$(ynh_app_setting_get --app=$app --key=protected_uris)" ]; then
-		ynh_app_setting_delete --app=$app --key=protected_uris
-		ynh_app_setting_delete --app=$app --key=unprotected_uris
-		ynh_app_setting_delete --app=$app --key=redirected_urls
+	if ynh_legacy_permissions_exists; then
+		ynh_legacy_permissions_delete_all
+	fi
+
+	# Protect senstive sub-routes to Duniter web admin interface, give access to choosen admin
+	if ! ynh_permission_exists --permission="admin"; then
+		ynh_permission_create --permission "admin" --url "/webui" --additional_urls "/webmin" --allowed "$admin" --label "Administration" --show_tile=true
+	fi
+	
+	# Set BMA and WS2P APIs accessible to visitors
+	if ! ynh_permission_exists --permission="apis"; then
+		ynh_permission_create --permission="apis" --url="/" --allowed="visitors" --show_tile=false --protected=true
 	fi
 }
 
