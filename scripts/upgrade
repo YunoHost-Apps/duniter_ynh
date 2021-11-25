@@ -22,10 +22,16 @@ ynh_system_user_create --username=$app
 
 REMOVE_DUNITER
 INSTALL_DUNITER_DEBIAN_PACKAGE
+INSTALL_SYSTEMD
 CONFIGURE_DUNITER
 
-# Start duniter daemon
-duniter webstart
+# Start duniter service
+systemctl start duniter
 
-CONFIG_SSOWAT
+CONFIG_PERMISSIONS
 CONFIG_NGINX
+
+#=================================================
+# END OF SCRIPT
+#=================================================
+ynh_script_progression --message="Installation of $app completed" --last

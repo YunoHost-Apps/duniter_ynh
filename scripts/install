@@ -45,16 +45,19 @@ ynh_app_setting_set "$app" admin "$admin"
 yunohost firewall allow TCP $port > /dev/null 2>&1
 
 INSTALL_DUNITER_DEBIAN_PACKAGE
+INSTALL_SYSTEMD
 CONFIGURE_DUNITER
 
-# Reset Duniter node's existing data (blockchain, not conf)
-duniter reset data > /dev/null
-
 # Launch Duniter node
-duniter webstart
+systemctl start duniter
 
 # Add Duniter service to the YunoHost monitoring
 yunohost service add $app --log /root/.config/$app/"$app"_default/"$app".log
 
-CONFIG_SSOWAT
+CONFIG_PERMISSIONS
 CONFIG_NGINX
+
+#=================================================
+# END OF SCRIPT
+#=================================================
+ynh_script_progression --message="Installation of $app completed" --last

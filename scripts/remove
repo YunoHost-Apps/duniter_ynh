@@ -13,15 +13,24 @@ port=$(ynh_app_setting_get $app port)
 
 REMOVE_DUNITER
 
+# Disable systemd service
+systemctl disable duniter.service
+
 # Remove data and conf
-rm -rf /root/.conf/duniter
+rm -rf $USER/.conf/duniter
 
 # Remove Duniter service to YunoHost monitoring
 yunohost service remove $app
 
 # Remove Nginx configuration
 rm -f /etc/nginx/conf.d/$domain.d/$app.conf
-service nginx reload
+systemctl reload nginx
 
 # Close opened port
 yunohost firewall disallow TCP $port
+
+#=================================================
+# END OF SCRIPT
+#=================================================
+
+ynh_script_progression --message="Removal of $app completed" --last
