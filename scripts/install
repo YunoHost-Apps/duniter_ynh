@@ -1,66 +1,125 @@
 #!/bin/bash
 
-# Exit on command errors and treat unset variables as an error
-set -eu
+#=================================================
+# GENERIC START
+#=================================================
+# IMPORT GENERIC HELPERS
+#=================================================
 
-# Retrieve arguments
-app=$YNH_APP_INSTANCE_NAME
+source _common.sh
+source /usr/share/yunohost/helpers
+
+#=================================================
+# MANAGE SCRIPT FAILURE
+#=================================================
+
+# Exit if an error occurs during the execution of the script
+ynh_abort_if_errors
+
+#=================================================
+# RETRIEVE ARGUMENTS FROM THE MANIFEST
+#=================================================
+
 domain=$YNH_APP_ARG_DOMAIN
-path="/"
-port=10901
+path_url="/"
 admin=$YNH_APP_ARG_ADMIN
 
-# Source app helpers and functions
-source /usr/share/yunohost/helpers
-source functions.sh
+app=$YNH_APP_INSTANCE_NAME
 
-# Check domain/path availability
-yunohost app checkurl "${domain}${path}" -a "$app" \
-    || ynh_die "Path not available: ${domain}${path}"
+#=================================================
+# CHECK IF THE APP CAN BE INSTALLED WITH THESE ARGS
+#=================================================
+ynh_script_progression --message="Validating installation parameters..." --time --weight=1
 
-# Check port availability
-yunohost app checkport $port
-if [[ ! $? -eq 0 ]]; then
-  ynh_die "Port not available: ${port}"
-fi
+final_path=/var/www/$app
+test ! -e "$final_path" || ynh_die --message="This path already contains a folder"
+
+# Register (book) web path
+ynh_webpath_register --app=$app --domain=$domain --path_url=$path_url
+
+#=================================================
+# STORE SETTINGS FROM MANIFEST
+#=================================================
+ynh_script_progression --message="Storing installation settings..." --time --weight=1
+
+ynh_app_setting_set --app=$app --key=domain --value=$domain
+ynh_app_setting_set --app=$app --key=path --value=$path_url
+ynh_app_setting_set --app=$app --key=admin --value=$admin
+
+#=================================================
+# FIND AND OPEN A PORT
+#=================================================
+ynh_script_progression --message="Finding an available port..." --time --weight=1
+
+# Find an available port
+port=$(ynh_find_port --port=10901)
+ynh_app_setting_set --app=$app --key=port --value=$port
 
 #=================================================
 # CREATE DEDICATED USER
 #=================================================
-ynh_script_progression --message="Configuring system user..."
+ynh_script_progression --message="Configuring system user..." --time --weight=1
 
 # Create a system user
-ynh_system_user_create --username=$app --home_dir=$final_path
+ynh_system_user_create --username=$app --home_dir="$final_path"
 
-# Get CPU architecture and check it
-arch=$(uname -m)
-if [ $arch == "x86_64" ]; then
-	arch="x64"
+#=================================================
+# INSTALL DUNITER
+#=================================================
+ynh_script_progression --message="Building Duniter.. (this will take some time and resources!)" --weight=60
+
+tempdir="$(mktemp -d)"
+
+ynh_setup_source --dest_dir=$tempdir --source_id=app
+ynh_exec_warn_less dpkg -i $tempdir/duniter-server-v1.8.1-linux-x64.deb
+
+#=================================================
+# ADD A CONFIG FILE
+#=================================================
+ynh_script_progression --message="Adding a configuration file..." --time --weight=1
+
+duniter config --bma --ipv4 127.0.0.1 --port $port --remoteh $domain --remotep 443 --noupnp
+duniter config --ws2p-host 127.0.0.1 --ws2p-port 20901 --ws2p-remote-host $domain --ws2p-remote-port 443 --ws2p-remote-path "/ws2p" --ws2p-noupnp
+
+#=================================================
+# SETUP SYSTEMD
+#=================================================
+ynh_script_progression --message="Configuring a systemd service..." --weight=1
+
+ynh_add_systemd_config
+
+#=================================================
+# INTEGRATE SERVICE IN YUNOHOST
+#=================================================
+ynh_script_progression --message="Integrating service in YunoHost..." --weight=1
+
+yunohost service add $app --description="" --log="/var/log/$app/$app.log"
+
+#=================================================
+# START SYSTEMD SERVICE
+#=================================================
+ynh_script_progression --message="Starting a systemd service..." --weight=2
+
+# Start a systemd service
+ynh_systemd_action --service_name=$app --action=start --log_path=systemd
+
+#=================================================
+# SETUP SSOWAT
+#=================================================
+ynh_script_progression --message="Configuring permissions..." --weight=1
+
+# Make app public if necessary or protect it
+if [ $is_public -eq 1 ]
+then
+	ynh_permission_update --permission="main" --add="visitors"
 fi
-if [[ $arch != "x64" && $arch != "armv7l" ]]; then
-	ynh_die "$arch is not supported." 2
-fi
 
-# Store config on YunoHost instance
-ynh_app_setting_set $app port $port
-ynh_app_setting_set $app arch $arch
-ynh_app_setting_set "$app" admin "$admin"
+#=================================================
+# RELOAD NGINX
+#=================================================
+ynh_script_progression --message="Reloading NGINX web server..." --weight=2
 
-# Open port on firewall
-yunohost firewall allow TCP $port > /dev/null 2>&1
-
-INSTALL_DUNITER_DEBIAN_PACKAGE
-INSTALL_SYSTEMD
-CONFIGURE_DUNITER
-
-# Launch Duniter node
-systemctl start duniter
-
-# Add Duniter service to the YunoHost monitoring
-yunohost service add $app --log $USER/.config/$app/"$app"_default/"$app".log
-
-CONFIG_PERMISSIONS
-CONFIG_NGINX
+ynh_systemd_action --service_name=nginx --action=reload
 
 #=================================================
 # END OF SCRIPT

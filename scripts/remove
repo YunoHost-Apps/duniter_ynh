@@ -1,33 +1,61 @@
 #!/bin/bash
 
-# Exit and treat unset variables as an error
-set -u
+#=================================================
+# GENERIC START
+#=================================================
+# IMPORT GENERIC HELPERS
+#=================================================
 
-# Source app helpers
+source _common.sh
 source /usr/share/yunohost/helpers
-source functions.sh
+
+#=================================================
+# LOAD SETTINGS
+#=================================================
+ynh_script_progression --message="Loading installation settings..." --time --weight=1
 
 app=$YNH_APP_INSTANCE_NAME
-domain=$(ynh_app_setting_get $app domain)
-port=$(ynh_app_setting_get $app port)
 
-REMOVE_DUNITER
+domain=$(ynh_app_setting_get --app=$app --key=domain)
+port=$(ynh_app_setting_get --app=$app --key=port)
+final_path=$(ynh_app_setting_get --app=$app --key=final_path)
 
-# Disable systemd service
-systemctl disable duniter.service
+#=================================================
+# REMOVE SERVICE INTEGRATION IN YUNOHOST
+#=================================================
+
+# Remove the service from the list of services known by YunoHost (added from `yunohost service add`)
+if ynh_exec_warn_less yunohost service status $app >/dev/null
+then
+	ynh_script_progression --message="Removing $app service integration..." --time --weight=1
+	yunohost service remove $app
+fi
+
+#=================================================
+# STOP AND REMOVE SERVICE
+#=================================================
+ynh_script_progression --message="Stopping and removing the systemd service..." --time --weight=1
+
+# Remove the dedicated systemd config
+ynh_remove_systemd_config
+
+#=================================================
+# REMOVE DEPENDENCIES
+#=================================================
+ynh_script_progression --message="Removing dependencies..." --time --weight=1
+
+dpkg -r duniter
+
+#=================================================
+# REMOVE NGINX CONFIGURATION
+#=================================================
+ynh_script_progression --message="Removing NGINX web server configuration..." --time --weight=1
+
+# Remove the dedicated NGINX config
+ynh_remove_nginx_config
 
 # Remove data and conf
 rm -rf $USER/.conf/duniter
-
-# Remove Duniter service to YunoHost monitoring
-yunohost service remove $app
-
-# Remove Nginx configuration
-rm -f /etc/nginx/conf.d/$domain.d/$app.conf
-systemctl reload nginx
-
-# Close opened port
-yunohost firewall disallow TCP $port
 
 #=================================================
 # END OF SCRIPT
