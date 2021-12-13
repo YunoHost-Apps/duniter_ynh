@@ -11,11 +11,11 @@ Si vous n'avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) pour
 
 ## Vue d'ensemble
 
-Nœud qui permet de participer à l’écriture de blocs.
+Nœud qui permet de participer à l’écriture de blocs
 
 **Version incluse :** 1.8.1~ynh1
 
-**Démo :** https://demo.example.com
+
 
 ## Captures d'écran
 
@@ -24,7 +24,6 @@ Nœud qui permet de participer à l’écriture de blocs.
 ## Documentations et ressources
 
 * Site officiel de l'app : https://duniter.org
-* Documentation officielle de l'admin : https://yunohost.org/packaging_apps
 * Dépôt de code officiel de l'app : https://git.duniter.org/nodes/typescript/duniter
 * Documentation YunoHost pour cette app : https://yunohost.org/app_duniter
 * Signaler un bug : https://github.com/YunoHost-Apps/duniter_ynh/issues

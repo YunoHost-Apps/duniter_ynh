@@ -19,7 +19,7 @@ Crypto-currency software to operate Ğ1 libre currency
 
 **Shipped version:** 1.8.1~ynh1
 
-**Demo:** https://demo.example.com
+
 
 ## Screenshots
 
@@ -28,7 +28,6 @@ Crypto-currency software to operate Ğ1 libre currency
 ## Documentation and resources
 
 * Official app website: https://duniter.org
-* Official admin documentation: https://yunohost.org/packaging_apps
 * Upstream app code repository: https://git.duniter.org/nodes/typescript/duniter
 * YunoHost documentation for this app: https://yunohost.org/app_duniter
 * Report a bug: https://github.com/YunoHost-Apps/duniter_ynh/issues
