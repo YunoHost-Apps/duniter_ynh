@@ -4,7 +4,7 @@
     "packaging_format": 1,
     "description": {
         "en": "Crypto-currency software to operate Ğ1 libre currency",
-        "fr": "Nœud qui permet de participer à l’écriture de blocs."
+        "fr": "Nœud qui permet de participer à l’écriture de blocs"
     },
     "version": "1.8.1~ynh1",
     "url": "https://duniter.org",
@@ -12,8 +12,6 @@
     "upstream": {
         "license": "AGPLv3",
         "website": "https://duniter.org",
-        "demo": "https://demo.example.com",
-        "admindoc": "https://yunohost.org/packaging_apps",
         "code": "https://git.duniter.org/nodes/typescript/duniter"
     },
     "maintainer": {
