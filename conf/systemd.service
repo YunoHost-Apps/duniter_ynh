@@ -1,0 +1,19 @@
+[Unit]
+Description=Duniter node
+After=network.target
+
+[Service]
+Environment="DUNITER_WEB=web"
+Environment="DUNITER_HOME=__DATADIR__"
+Environment="DUNITER_DATA=duniter_default"
+Environment="DUNITER_OPTS="
+Group=duniter
+User=duniter
+Type=forking
+ExecStart=/usr/bin/duniter ${DUNITER_WEB}start --home ${DUNITER_HOME} --mdb ${DUNITER_DATA} $DUNITER_OPTS
+ExecReload=/usr/bin/duniter ${DUNITER_WEB}restart --home ${DUNITER_HOME} --mdb ${DUNITER_DATA} $DUNITER_OPTS
+ExecStop=/usr/bin/duniter stop --home ${DUNITER_HOME} --mdb ${DUNITER_DATA}
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
