@@ -6,7 +6,8 @@
 # IMPORT GENERIC HELPERS
 #=================================================
 
-source _common.sh
+# Keep this path for calling _common.sh inside the execution's context of backup and restore scripts
+source ../settings/scripts/_common.sh
 source /usr/share/yunohost/helpers
 
 #=================================================
@@ -20,59 +21,49 @@ ynh_clean_setup () {
 ynh_abort_if_errors
 
 #=================================================
-# RETRIEVE ARGUMENTS FROM THE MANIFEST
+# LOAD SETTINGS
 #=================================================
-
-domain=$YNH_APP_ARG_DOMAIN
-path_url="/"
-admin=$YNH_APP_ARG_ADMIN
+ynh_script_progression --message="Loading installation settings..."
 
 app=$YNH_APP_INSTANCE_NAME
 
-#=================================================
-# CHECK IF THE APP CAN BE INSTALLED WITH THESE ARGS
-#=================================================
-ynh_script_progression --message="Validating installation parameters..."
-
-# Register (book) web path
-ynh_webpath_register --app=$app --domain=$domain --path_url=$path_url
+domain=$(ynh_app_setting_get --app=$app --key=domain)
+path_url=$(ynh_app_setting_get --app=$app --key=path)
+datadir=$(ynh_app_setting_get --app=$app --key=datadir)
+port=$(ynh_app_setting_get --app=$app --key=port)
 
 #=================================================
-# STORE SETTINGS FROM MANIFEST
+# STANDARD RESTORATION STEPS
 #=================================================
-ynh_script_progression --message="Storing installation settings..."
-
-ynh_app_setting_set --app=$app --key=domain --value=$domain
-ynh_app_setting_set --app=$app --key=path --value=$path_url
-ynh_app_setting_set --app=$app --key=admin --value=$admin
-
+# RESTORE THE NGINX CONFIGURATION
 #=================================================
-# FIND AND OPEN A PORT
-#=================================================
-ynh_script_progression --message="Finding an available port..."
+ynh_script_progression --message="Restoring the NGINX web server configuration..."
 
-# Find an available port
-port=$(ynh_find_port --port=10901)
-ynh_app_setting_set --app=$app --key=port --value=$port
+ynh_restore_file --origin_path="/etc/nginx/conf.d/$domain.d/$app.conf"
 
 #=================================================
-# CREATE DEDICATED USER
+# RECREATE THE DEDICATED USER
 #=================================================
-ynh_script_progression --message="Configuring system user..."
+ynh_script_progression --message="Recreating the dedicated system user..."
 
-# Create a system user
+# Create the dedicated user (if not existing)
 ynh_system_user_create --username=$app
 
 #=================================================
-# NGINX CONFIGURATION
+# RESTORE THE DATA DIRECTORY
 #=================================================
-ynh_script_progression --message="Configuring NGINX web server..."
+ynh_script_progression --message="Restoring the data directory..."
 
-# Create a dedicated NGINX config
-ynh_add_nginx_config
+ynh_restore_file --origin_path="$datadir" --not_mandatory
+
+mkdir -p $datadir
+
+chmod 750 "$datadir"
+chmod -R o-rwx "$datadir"
+chown -R $app:www-data "$datadir"
 
 #=================================================
-# SPECIFIC SETUP
+# SPECIFIC RESTORATION
 #=================================================
 # INSTALL DUNITER
 #=================================================
@@ -84,20 +75,6 @@ ynh_setup_source --dest_dir=$tempdir --source_id=app
 ynh_exec_warn_less dpkg -i $tempdir/duniter-server-v1.8.1-linux-x64.deb
 
 #=================================================
-# CREATE DATA DIRECTORY
-#=================================================
-ynh_script_progression --message="Creating a data directory..."
-
-datadir=/home/yunohost.app/$app
-ynh_app_setting_set --app=$app --key=datadir --value=$datadir
-
-mkdir -p $datadir
-
-chmod 750 "$datadir"
-chmod -R o-rwx "$datadir"
-chown -R $app:www-data "$datadir"
-
-#=================================================
 # ADD A CONFIG FILE
 #=================================================
 ynh_script_progression --message="Adding a configuration file..."
@@ -106,12 +83,12 @@ duniter config --bma --ipv4 127.0.0.1 --port $port --remoteh $domain --remotep 4
 duniter config --ws2p-host 127.0.0.1 --ws2p-port 20901 --ws2p-remote-host $domain --ws2p-remote-port 443 --ws2p-remote-path "/ws2p" --ws2p-noupnp
 
 #=================================================
-# SETUP SYSTEMD
+# RESTORE SYSTEMD
 #=================================================
-ynh_script_progression --message="Configuring a systemd service..."
+ynh_script_progression --message="Restoring the systemd configuration..."
 
-# Create a dedicated systemd config
-ynh_add_systemd_config
+ynh_restore_file --origin_path="/etc/systemd/system/$app.service"
+systemctl enable $app.service --quiet
 
 #=================================================
 # INTEGRATE SERVICE IN YUNOHOST
@@ -125,17 +102,10 @@ yunohost service add $app
 #=================================================
 ynh_script_progression --message="Starting a systemd service..."
 
-# Start a systemd service
 ynh_systemd_action --service_name=$app --action="start" --log_path=systemd
 
 #=================================================
-# SETUP SSOWAT
-#=================================================
-ynh_script_progression --message="Configuring permissions..."
-
-# Make app public
-ynh_permission_update --permission="main" --add="visitors"
-
+# GENERIC FINALIZATION
 #=================================================
 # RELOAD NGINX
 #=================================================
@@ -147,4 +117,4 @@ ynh_systemd_action --service_name=nginx --action=reload
 # END OF SCRIPT
 #=================================================
 
-ynh_script_progression --message="Installation of $app completed"
+ynh_script_progression --message="Restoration completed for $app"

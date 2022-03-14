@@ -8,9 +8,9 @@
     },
     "version": "1.8.1~ynh1",
     "url": "https://duniter.org",
-    "license": "AGPLv3",
+    "license": "AGPL-3.0-or-later",
     "upstream": {
-        "license": "AGPLv3",
+        "license": "AGPL-3.0-or-later",
         "website": "https://duniter.org",
         "code": "https://git.duniter.org/nodes/typescript/duniter"
     },
@@ -20,7 +20,7 @@
         "url": "https://moul.re"
     },
     "requirements": {
-        "yunohost": ">> 4.3.0"
+        "yunohost": ">= 4.3.0"
     },
     "multi_instance": false,
     "services": [
