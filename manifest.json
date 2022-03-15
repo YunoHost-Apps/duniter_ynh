@@ -3,18 +3,24 @@
     "id": "duniter",
     "packaging_format": 1,
     "description": {
-        "en": "Duniter node which permits participate to blockchain writing. Monetary system with universal dividend, libre money, relative theory of the money. This package permit to join an existing money.",
-        "fr": "Nœud Duniter qui permet de participer à l’écriture de blocs. Système monétaire à dividende universel, monnaie libre, thérorie relative de la monnaie. Ce paquet permet de rejoindre une monnaie déjà existante."
+        "en": "Crypto-currency software to operate Ğ1 libre currency",
+        "fr": "Nœud qui permet de participer à l’écriture de blocs"
     },
+    "version": "1.8.1~ynh1",
     "url": "https://duniter.org",
-    "license": "free",
+    "license": "AGPL-3.0-or-later",
+    "upstream": {
+        "license": "AGPL-3.0-or-later",
+        "website": "https://duniter.org",
+        "code": "https://git.duniter.org/nodes/typescript/duniter"
+    },
     "maintainer": {
         "name": "Moul",
         "email": "moul@moul.re",
         "url": "https://moul.re"
     },
     "requirements": {
-        "yunohost": ">> 4.1.7"
+        "yunohost": ">= 4.3.0"
     },
     "multi_instance": false,
     "services": [
@@ -24,21 +30,11 @@
         "install" : [
             {
                 "name": "domain",
-                "type": "domain",
-                "ask": {
-                    "en": "Dedicated domain name on which no application must be installed. Install will be done on root path.",
-                    "fr": "Nom de domaine dédié sur lequel aucune application ne doit être installée. L’installation sera faite à la racine."
-                },
-                "example": "duniter.domain.tld"
+                "type": "domain"
             },
             {
                 "name": "admin",
-                "type": "user",
-		"ask": {
-		    "en": "Administrator. Must a YunoHost user.",
-	            "fr": "Administrateur. Ce doit être un utilisateur YunoHost"
-		},
-                "example": "jon doe"
+                "type": "user"
 	    }
         ]
     }
