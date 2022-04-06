@@ -6,7 +6,7 @@
         "en": "Crypto-currency software to operate Ğ1 libre currency",
         "fr": "Nœud qui permet de participer à l’écriture de blocs"
     },
-    "version": "1.8.1~ynh1",
+    "version": "1.8.1~ynh2",
     "url": "https://duniter.org",
     "license": "AGPL-3.0-or-later",
     "upstream": {

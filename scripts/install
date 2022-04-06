@@ -28,6 +28,7 @@ path_url="/"
 admin=$YNH_APP_ARG_ADMIN
 
 app=$YNH_APP_INSTANCE_NAME
+architecture=$YNH_ARCH
 
 #=================================================
 # CHECK IF THE APP CAN BE INSTALLED WITH THESE ARGS
@@ -80,8 +81,8 @@ ynh_script_progression --message="Building Duniter.. (this will take some time a
 
 tempdir="$(mktemp -d)"
 
-ynh_setup_source --dest_dir=$tempdir --source_id=app
-ynh_exec_warn_less dpkg -i $tempdir/duniter-server-v1.8.1-linux-x64.deb
+ynh_setup_source --dest_dir=$tempdir --source_id=$architecture
+ynh_exec_warn_less dpkg -i $tempdir/duniter-server-v1.8.*-linux-*.deb
 
 #=================================================
 # CREATE DATA DIRECTORY
