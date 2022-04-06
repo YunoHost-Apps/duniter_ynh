@@ -13,7 +13,7 @@ Si vous n'avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) pour
 
 Nœud qui permet de participer à l’écriture de blocs
 
-**Version incluse :** 1.8.1~ynh1
+**Version incluse :** 1.8.1~ynh2
 
 
 
