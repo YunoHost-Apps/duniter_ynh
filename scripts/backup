@@ -23,7 +23,7 @@ ynh_abort_if_errors
 #=================================================
 # LOAD SETTINGS
 #=================================================
-ynh_print_info --message="Loading installation settings..."
+ynh_print_info --message="Loading installation settings…"
 
 app=$YNH_APP_INSTANCE_NAME
 
@@ -33,7 +33,7 @@ datadir=$(ynh_app_setting_get --app=$app --key=datadir)
 #=================================================
 # DECLARE DATA AND CONF FILES TO BACKUP
 #=================================================
-ynh_print_info --message="Declaring files to be backed up..."
+ynh_print_info --message="Declaring files to be backed up…"
 
 #=================================================
 # BACKUP THE DATA DIR

@@ -24,7 +24,7 @@ app=$YNH_APP_INSTANCE_NAME
 #=================================================
 # LOAD SETTINGS
 #=================================================
-ynh_script_progression --message="Loading installation settings..."
+ynh_script_progression --message="Loading installation settings…"
 
 # Needed for helper "ynh_add_nginx_config"
 final_path=$(ynh_app_setting_get --app=$app --key=final_path)
@@ -37,7 +37,7 @@ final_path=$(ynh_app_setting_get --app=$app --key=final_path)
 #=================================================
 # BACKUP BEFORE CHANGE URL THEN ACTIVE TRAP
 #=================================================
-ynh_script_progression --message="Backing up the app before changing its URL (may take a while)..."
+ynh_script_progression --message="Backing up the app before changing its URL (may take a while)…"
 
 # Backup the current version of the app
 ynh_backup_before_upgrade
@@ -73,14 +73,14 @@ fi
 #=================================================
 # STOP SYSTEMD SERVICE
 #=================================================
-ynh_script_progression --message="Stopping a systemd service..."
+ynh_script_progression --message="Stopping a systemd service…"
 
 ynh_systemd_action --service_name=$app --action="stop" --log_path=systemd
 
 #=================================================
 # MODIFY URL IN NGINX CONF
 #=================================================
-ynh_script_progression --message="Updating NGINX web server configuration..."
+ynh_script_progression --message="Updating NGINX web server configuration…"
 
 nginx_conf_path=/etc/nginx/conf.d/$old_domain.d/$app.conf
 
@@ -109,7 +109,7 @@ fi
 #=================================================
 # SPECIFIC MODIFICATIONS
 #=================================================
-# ...
+# …
 #=================================================
 
 #=================================================
@@ -117,7 +117,7 @@ fi
 #=================================================
 # START SYSTEMD SERVICE
 #=================================================
-ynh_script_progression --message="Starting a systemd service..."
+ynh_script_progression --message="Starting a systemd service…"
 
 # Start a systemd service
 ynh_systemd_action --service_name=$app --action="start" --log_path=systemd
@@ -125,7 +125,7 @@ ynh_systemd_action --service_name=$app --action="start" --log_path=systemd
 #=================================================
 # RELOAD NGINX
 #=================================================
-ynh_script_progression --message="Reloading NGINX web server..."
+ynh_script_progression --message="Reloading NGINX web server…"
 
 ynh_systemd_action --service_name=nginx --action=reload
 
