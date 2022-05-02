@@ -23,7 +23,7 @@ ynh_abort_if_errors
 #=================================================
 # LOAD SETTINGS
 #=================================================
-ynh_script_progression --message="Loading installation settings..."
+ynh_script_progression --message="Loading installation settings…"
 
 app=$YNH_APP_INSTANCE_NAME
 
@@ -38,14 +38,14 @@ architecture=$YNH_ARCH
 #=================================================
 # RESTORE THE NGINX CONFIGURATION
 #=================================================
-ynh_script_progression --message="Restoring the NGINX web server configuration..."
+ynh_script_progression --message="Restoring the NGINX web server configuration…"
 
 ynh_restore_file --origin_path="/etc/nginx/conf.d/$domain.d/$app.conf"
 
 #=================================================
 # RECREATE THE DEDICATED USER
 #=================================================
-ynh_script_progression --message="Recreating the dedicated system user..."
+ynh_script_progression --message="Recreating the dedicated system user…"
 
 # Create the dedicated user (if not existing)
 ynh_system_user_create --username=$app
@@ -53,7 +53,7 @@ ynh_system_user_create --username=$app
 #=================================================
 # RESTORE THE DATA DIRECTORY
 #=================================================
-ynh_script_progression --message="Restoring the data directory..."
+ynh_script_progression --message="Restoring the data directory…"
 
 ynh_restore_file --origin_path="$datadir" --not_mandatory
 
@@ -68,7 +68,7 @@ chown -R $app:www-data "$datadir"
 #=================================================
 # INSTALL DUNITER
 #=================================================
-ynh_script_progression --message="Building Duniter.. (this will take some time and resources!)"
+ynh_script_progression --message="Installation of Debian package of Duniter…"
 
 tempdir="$(mktemp -d)"
 
@@ -78,7 +78,7 @@ ynh_exec_warn_less dpkg -i $tempdir/duniter-server-v1.8.*-linux-*.deb
 #=================================================
 # ADD A CONFIG FILE
 #=================================================
-ynh_script_progression --message="Adding a configuration file..."
+ynh_script_progression --message="Adding a configuration file…"
 
 duniter config --bma --ipv4 127.0.0.1 --port $port --remoteh $domain --remotep 443 --noupnp
 duniter config --ws2p-host 127.0.0.1 --ws2p-port 20901 --ws2p-remote-host $domain --ws2p-remote-port 443 --ws2p-remote-path "/ws2p" --ws2p-noupnp
@@ -86,7 +86,7 @@ duniter config --ws2p-host 127.0.0.1 --ws2p-port 20901 --ws2p-remote-host $domai
 #=================================================
 # RESTORE SYSTEMD
 #=================================================
-ynh_script_progression --message="Restoring the systemd configuration..."
+ynh_script_progression --message="Restoring the systemd configuration…"
 
 ynh_restore_file --origin_path="/etc/systemd/system/$app.service"
 systemctl enable $app.service --quiet
@@ -94,14 +94,14 @@ systemctl enable $app.service --quiet
 #=================================================
 # INTEGRATE SERVICE IN YUNOHOST
 #=================================================
-ynh_script_progression --message="Integrating service in YunoHost..."
+ynh_script_progression --message="Integrating service in YunoHost…"
 
 yunohost service add $app
 
 #=================================================
 # START SYSTEMD SERVICE
 #=================================================
-ynh_script_progression --message="Starting a systemd service..."
+ynh_script_progression --message="Starting a systemd service…"
 
 ynh_systemd_action --service_name=$app --action="start" --log_path=systemd
 
@@ -110,7 +110,7 @@ ynh_systemd_action --service_name=$app --action="start" --log_path=systemd
 #=================================================
 # RELOAD NGINX
 #=================================================
-ynh_script_progression --message="Reloading NGINX web server..."
+ynh_script_progression --message="Reloading NGINX web server…"
 
 ynh_systemd_action --service_name=nginx --action=reload
 
