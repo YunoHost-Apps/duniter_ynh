@@ -20,7 +20,9 @@ domain=$(ynh_app_setting_get --app=$app --key=domain)
 path_url=$(ynh_app_setting_get --app=$app --key=path)
 admin=$(ynh_app_setting_get --app=$app --key=admin)
 datadir=$(ynh_app_setting_get --app=$app --key=datadir)
-port=$(ynh_app_setting_get --app=$app --key=port)
+local_bma_port=$(ynh_app_setting_get --app=$app --key=local_bma_port)
+local_ws2p_port=$(ynh_app_setting_get --app=$app --key=local_ws2p_port)
+webadmin_port=$(ynh_app_setting_get --app=$app --key=webadmin_port)
 architecture=$YNH_ARCH
 
 #=================================================

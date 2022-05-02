@@ -48,13 +48,19 @@ ynh_app_setting_set --app=$app --key=path --value=$path_url
 ynh_app_setting_set --app=$app --key=admin --value=$admin
 
 #=================================================
-# FIND AND OPEN A PORT
+# FIND AVAILABLE PORTS
 #=================================================
-ynh_script_progression --message="Finding an available port…"
+ynh_script_progression --message="Finding available ports…"
 
-# Find an available port
-port=$(ynh_find_port --port=10901)
-ynh_app_setting_set --app=$app --key=port --value=$port
+# Find available ports
+local_bma_port=$(ynh_find_port --port=10901)
+ynh_app_setting_set --app=$app --key=local_bma_port --value=$local_bma_port
+
+local_ws2p_port=$(ynh_find_port --port=20901)
+ynh_app_setting_set --app=$app --key=local_ws2p_port --value=$local_ws2p_port
+
+web_admin_port=$(ynh_find_port --port=9220)
+ynh_app_setting_set --app=$app --key=web_admin_port --value=$web_admin_port
 
 #=================================================
 # CREATE DEDICATED USER

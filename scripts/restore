@@ -30,7 +30,8 @@ app=$YNH_APP_INSTANCE_NAME
 domain=$(ynh_app_setting_get --app=$app --key=domain)
 path_url=$(ynh_app_setting_get --app=$app --key=path)
 datadir=$(ynh_app_setting_get --app=$app --key=datadir)
-port=$(ynh_app_setting_get --app=$app --key=port)
+local_bma_port=$(ynh_app_setting_get --app=$app --key=local_bma_port)
+local_ws2p_port=$(ynh_app_setting_get --app=$app --key=local_ws2p_port)
 architecture=$YNH_ARCH
 
 #=================================================
