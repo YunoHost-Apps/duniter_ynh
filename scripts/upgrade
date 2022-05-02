@@ -97,6 +97,17 @@ ynh_setup_source --dest_dir=$tempdir --source_id=$architecture
 ynh_exec_warn_less dpkg -i $tempdir/duniter-server-v1.8.*-linux-*.deb
 
 #=================================================
+# MOVE DUNITER DIRECTORY
+#=================================================
+if [[ ! -d "${datadir}" ]]; then
+	ynh_script_progression --message="Moving data directory…"
+	mv /root/.config/duniter $datadir
+	chmod 750 "$datadir"
+	chmod -R o-rwx "$datadir"
+	chown -R $app:www-data "$datadir"
+fi
+
+#=================================================
 # UPDATE A CONFIG FILE
 #=================================================
 ynh_script_progression --message="Updating a configuration file…"
