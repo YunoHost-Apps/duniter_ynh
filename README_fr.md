@@ -13,7 +13,7 @@ Si vous n'avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) pour
 
 Logiciel de cryptomonnaie pour faire fonctionner la monnaie libre Ğ1
 
-**Version incluse :** 1.8.2~ynh0
+**Version incluse :** 1.8.2~ynh1
 
 
 

@@ -6,7 +6,7 @@
         "en": "Crypto-currency software to operate Ğ1 libre currency",
         "fr": "Logiciel de cryptomonnaie pour faire fonctionner la monnaie libre Ğ1"
     },
-    "version": "1.8.2~ynh0",
+    "version": "1.8.2~ynh1",
     "url": "https://duniter.org",
     "license": "AGPL-3.0-or-later",
     "upstream": {
