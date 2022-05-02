@@ -11,7 +11,7 @@ Si vous n'avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) pour
 
 ## Vue d'ensemble
 
-Nœud qui permet de participer à l’écriture de blocs
+Logiciel de cryptomonnaie pour faire fonctionner la monnaie libre Ğ1
 
 **Version incluse :** 1.8.2~ynh0
 
