@@ -72,7 +72,8 @@ fi
 ynh_script_progression --message="Making sure dedicated system user exists…"
 
 # Create a dedicated user (if not existing)
-ynh_system_user_create --username=$app
+datadir=/home/yunohost.app/$app
+ynh_system_user_create --username=$app --home_dir=$datadir --use_shell
 
 #=================================================
 # NGINX CONFIGURATION
@@ -112,8 +113,8 @@ fi
 #=================================================
 ynh_script_progression --message="Updating a configuration file…"
 
-duniter config --bma --ipv4 127.0.0.1 --port $port --remoteh $domain --remotep 443 --noupnp
-duniter config --ws2p-host 127.0.0.1 --ws2p-port 20901 --ws2p-remote-host $domain --ws2p-remote-port 443 --ws2p-remote-path "/ws2p" --ws2p-noupnp
+ynh_exec_as duniter duniter config --bma --ipv4 127.0.0.1 --port $port --remoteh $domain --remotep 443 --noupnp
+ynh_exec_as duniter duniter config --ws2p-host 127.0.0.1 --ws2p-port 20901 --ws2p-remote-host $domain --ws2p-remote-port 443 --ws2p-remote-path "/ws2p" --ws2p-noupnp
 
 #=================================================
 # SETUP SYSTEMD
