@@ -30,7 +30,8 @@ app=$YNH_APP_INSTANCE_NAME
 domain=$(ynh_app_setting_get --app=$app --key=domain)
 path_url=$(ynh_app_setting_get --app=$app --key=path)
 datadir=$(ynh_app_setting_get --app=$app --key=datadir)
-port=$(ynh_app_setting_get --app=$app --key=port)
+bma_local_port=$(ynh_app_setting_get --app=$app --key=bma_local_port)
+ws2p_local_port=$(ynh_app_setting_get --app=$app --key=ws2p_local_port)
 architecture=$YNH_ARCH
 
 #=================================================
@@ -80,8 +81,8 @@ ynh_exec_warn_less dpkg -i $tempdir/duniter-server-v1.8.*-linux-*.deb
 #=================================================
 ynh_script_progression --message="Adding a configuration file…"
 
-ynh_exec_as duniter duniter --home $datadir config --bma --ipv4 127.0.0.1 --port $port --remoteh $domain --remotep 443 --noupnp
-ynh_exec_as duniter duniter --home $datadir config --ws2p-host 127.0.0.1 --ws2p-port 20901 --ws2p-remote-host $domain --ws2p-remote-port 443 --ws2p-remote-path "/ws2p" --ws2p-noupnp
+ynh_exec_as duniter duniter --home $datadir config --bma --ipv4 127.0.0.1 --port $bma_local_port --remoteh $domain --remotep 443 --noupnp
+ynh_exec_as duniter duniter --home $datadir config --ws2p-host 127.0.0.1 --ws2p-port $ws2p_local_port --ws2p-remote-host $domain --ws2p-remote-port 443 --ws2p-remote-path "/ws2p" --ws2p-noupnp
 
 #=================================================
 # RESTORE SYSTEMD

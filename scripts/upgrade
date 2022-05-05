@@ -20,8 +20,14 @@ domain=$(ynh_app_setting_get --app=$app --key=domain)
 path_url=$(ynh_app_setting_get --app=$app --key=path)
 admin=$(ynh_app_setting_get --app=$app --key=admin)
 datadir=$(ynh_app_setting_get --app=$app --key=datadir)
-port=$(ynh_app_setting_get --app=$app --key=port)
+bma_local_port=$(ynh_app_setting_get --app=$app --key=bma_local_port)
+ws2p_local_port=$(ynh_app_setting_get --app=$app --key=ws2p_local_port)
+webadmin_port=$(ynh_app_setting_get --app=$app --key=webadmin_port)
 architecture=$YNH_ARCH
+
+# In case it wasn’t defined by previous installation
+bma_local_port=${bma_local_port:-10901}
+ws2p_local_port=${ws2p_local_port:-20901}
 
 #=================================================
 # CHECK VERSION
@@ -113,8 +119,8 @@ fi
 #=================================================
 ynh_script_progression --message="Updating a configuration file…"
 
-ynh_exec_as duniter duniter config --bma --ipv4 127.0.0.1 --port $port --remoteh $domain --remotep 443 --noupnp
-ynh_exec_as duniter duniter config --ws2p-host 127.0.0.1 --ws2p-port 20901 --ws2p-remote-host $domain --ws2p-remote-port 443 --ws2p-remote-path "/ws2p" --ws2p-noupnp
+ynh_exec_as duniter duniter config --bma --ipv4 127.0.0.1 --port $bma_local_port --remoteh $domain --remotep 443 --noupnp
+ynh_exec_as duniter duniter config --ws2p-host 127.0.0.1 --ws2p-port $ws2p_local_port --ws2p-remote-host $domain --ws2p-remote-port 443 --ws2p-remote-path "/ws2p" --ws2p-noupnp
 
 #=================================================
 # SETUP SYSTEMD
