@@ -17,7 +17,7 @@ If you don't have YunoHost, please consult [the guide](https://yunohost.org/#/in
 
 Crypto-currency software to operate Ğ1 libre currency
 
-**Shipped version:** 1.8.2~ynh2
+**Shipped version:** 1.8.3~ynh0
 
 
 
