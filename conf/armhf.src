@@ -1,7 +1,7 @@
-SOURCE_URL=https://git.duniter.org/nodes/typescript/duniter/uploads/727923b2f5eb6b0569b8e9362b24c234/duniter-server-v1.8.2-linux-armv7l.deb
-SOURCE_SUM=dbc01b88c726d7a70c6bfa549bae3b9d4c99c07cc23918ed8c2e68314ac6d669
+SOURCE_URL=https://git.duniter.org/nodes/typescript/duniter/uploads/8773273a64956cb02de555ec72e4d2bd/duniter-server-v1.8.5-linux-armv7l.deb
+SOURCE_SUM=498e3a7766e167887de2d71dd43ffa6c1add11f976bf00e2a44ccc3cec5d5da0
 SOURCE_SUM_PRG=sha256sum
 SOURCE_FORMAT=deb
 SOURCE_IN_SUBDIR=true
-SOURCE_FILENAME=duniter-server-v1.8.2-linux-armv7l.deb
+SOURCE_FILENAME=duniter-server-v1.8.5-linux-armv7l.deb
 SOURCE_EXTRACT=false

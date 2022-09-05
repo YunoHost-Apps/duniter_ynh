@@ -6,7 +6,7 @@
         "en": "Crypto-currency software to operate Ğ1 libre currency",
         "fr": "Logiciel de cryptomonnaie pour faire fonctionner la monnaie libre Ğ1"
     },
-    "version": "1.8.5~ynh0",
+    "version": "1.8.5~ynh1",
     "url": "https://duniter.org",
     "license": "AGPL-3.0-or-later",
     "upstream": {
@@ -20,7 +20,7 @@
         "url": "https://moul.re"
     },
     "requirements": {
-        "yunohost": ">= 4.3.0"
+        "yunohost": ">= 11.0.0"
     },
     "multi_instance": false,
     "services": [
