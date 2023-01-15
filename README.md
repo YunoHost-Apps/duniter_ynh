@@ -19,7 +19,6 @@ Crypto-currency software to operate Ğ1 libre currency
 
 **Shipped version:** 1.8.5~ynh1
 
-
 ## Screenshots
 
 ![Screenshot of Duniter](./doc/screenshots/duniter_admin_g1.png)
