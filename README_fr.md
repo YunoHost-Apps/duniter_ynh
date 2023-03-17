@@ -5,42 +5,43 @@ It shall NOT be edited by hand.
 
 # Duniter pour YunoHost
 
-[![Niveau d'intégration](https://dash.yunohost.org/integration/duniter.svg)](https://dash.yunohost.org/appci/app/duniter) ![Statut du fonctionnement](https://ci-apps.yunohost.org/ci/badges/duniter.status.svg) ![Statut de maintenance](https://ci-apps.yunohost.org/ci/badges/duniter.maintain.svg)  
+[![Niveau d’intégration](https://dash.yunohost.org/integration/duniter.svg)](https://dash.yunohost.org/appci/app/duniter) ![Statut du fonctionnement](https://ci-apps.yunohost.org/ci/badges/duniter.status.svg) ![Statut de maintenance](https://ci-apps.yunohost.org/ci/badges/duniter.maintain.svg)
+
 [![Installer Duniter avec YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=duniter)
 
 *[Read this readme in english.](./README.md)*
 
-> *Ce package vous permet d'installer Duniter rapidement et simplement sur un serveur YunoHost.
-Si vous n'avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) pour savoir comment l'installer et en profiter.*
+> *Ce package vous permet d’installer Duniter rapidement et simplement sur un serveur YunoHost.
+Si vous n’avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) pour savoir comment l’installer et en profiter.*
 
-## Vue d'ensemble
+## Vue d’ensemble
 
 Logiciel de cryptomonnaie pour faire fonctionner la monnaie libre Ğ1
 
 **Version incluse :** 1.8.5~ynh1
 
-## Captures d'écran
+## Captures d’écran
 
-![Capture d'écran de Duniter](./doc/screenshots/duniter_admin_g1.png)
+![Capture d’écran de Duniter](./doc/screenshots/duniter_admin_g1.png)
 
 ## Avertissements / informations importantes
 
-## Configurations
-- In order to compute blocks you will have to set your member credentials with `sudo su - duniter -c "duniter --home \$HOME wizard key"` or from the webadmin.
-- BMA, the client API is accessible from `https://duniter.domain.tld/bma/` if enabled . The last `/` is necessary. It can be used in Cesium and Silkaj.
-- The web administration interface is accessible via `https://duniter.domain.tld/` and is only accessible to the administrator specified at the installation.
-- **Warning**: In case the Webui tells you your network configuration is wrong and proposes to correct it, do not apply it, otherwise it breaks the specific configuration made for this package.
-You can manually reset the configuration with following command:
-`sudo su - duniter -c "duniter --home \$HOME config --bma --ipv4 127.0.0.1 --port CHOSEN_PORT --remoteh YOUR_DOMAIN --remotep 443 --noupnp"`
-
-## Cesium
-Cesium is a wallet webapp. You can install it with:
-- [With the YunoHost app](https://github.com/YunoHost-Apps/cesium_ynh)
+## Première synchronisation
+La première synchronisation pouvant demander beaucoup de temps, il peut être envisagé de la faire en ligne de commande par ssh plutôt que par l'interface graphique WEB. Afin de pouvoir laisser la synchronisation se faire sans garder la fenêtre du terminal ouverte connecté en ssh, il est recommandé d'utiliser `tmux` ou `screen`.
+`screen -S duniter` afin d'ouvrir un nouvel "écran".
+Dans cet écran appelé "duniter" :
+```
+sudo systemctl stop duniter
+sudo su - duniter -c "duniter --home \$HOME sync g1.duniter.org" && sudo systemctl start duniter
+```
+Pendant la synchronisation, vous pouvez faire CTRL+SHIFT+a+d afin de quitter sans fermer l'écran "duniter", vous pouvez alors quitter la connexion ssh.
+Pour revenir à votre écran "duniter" pour voir si la synchro est terminée, vous devez lancer la commande
+`screen -d duniter`
 
 ## Documentations et ressources
 
-* Site officiel de l'app : <https://duniter.org>
-* Dépôt de code officiel de l'app : <https://git.duniter.org/nodes/typescript/duniter>
+* Site officiel de l’app : <https://duniter.org>
+* Dépôt de code officiel de l’app : <https://git.duniter.org/nodes/typescript/duniter>
 * Documentation YunoHost pour cette app : <https://yunohost.org/app_duniter>
 * Signaler un bug : <https://github.com/YunoHost-Apps/duniter_ynh/issues>
 
@@ -56,4 +57,4 @@ ou
 sudo yunohost app upgrade duniter -u https://github.com/YunoHost-Apps/duniter_ynh/tree/testing --debug
 ```
 
-**Plus d'infos sur le packaging d'applications :** <https://yunohost.org/packaging_apps>
+**Plus d’infos sur le packaging d’applications :** <https://yunohost.org/packaging_apps>

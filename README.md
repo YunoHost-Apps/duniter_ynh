@@ -5,7 +5,8 @@ It shall NOT be edited by hand.
 
 # Duniter for YunoHost
 
-[![Integration level](https://dash.yunohost.org/integration/duniter.svg)](https://dash.yunohost.org/appci/app/duniter) ![Working status](https://ci-apps.yunohost.org/ci/badges/duniter.status.svg) ![Maintenance status](https://ci-apps.yunohost.org/ci/badges/duniter.maintain.svg)  
+[![Integration level](https://dash.yunohost.org/integration/duniter.svg)](https://dash.yunohost.org/appci/app/duniter) ![Working status](https://ci-apps.yunohost.org/ci/badges/duniter.status.svg) ![Maintenance status](https://ci-apps.yunohost.org/ci/badges/duniter.maintain.svg)
+
 [![Install Duniter with YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=duniter)
 
 *[Lire ce readme en français.](./README_fr.md)*
@@ -24,6 +25,18 @@ Crypto-currency software to operate Ğ1 libre currency
 ![Screenshot of Duniter](./doc/screenshots/duniter_admin_g1.png)
 
 ## Disclaimers / important information
+
+## First synchronization
+
+The first synchronization can be very time consuming, it can be considered to do it from the command line via ssh rather than via the graphical WEB interface. In order to let the synchronization be done without keeping the terminal window open connected in ssh, it is recommended to use `tmux` or `screen`. `screen -S duniter` in order to open a new "screen". In this screen called "duniter":
+
+```
+sudo systemctl stop duniter
+sudo su - duniter -c "duniter --home \$HOME sync g1.duniter.org" && sudo systemctl start duniter
+```
+
+During the synchronization, you can press CTRL+SHIFT+a+d to exit without closing the "duniter" screen, you can then leave the ssh connection.
+To come back to your "duniter" screen to see if the sync is finished, you have to run the command `screen -d duniter`
 
 ## Configurations
 - In order to compute blocks you will have to set your member credentials with `sudo su - duniter -c "duniter --home \$HOME wizard key"` or from the webadmin.
