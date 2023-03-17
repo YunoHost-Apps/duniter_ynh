@@ -25,7 +25,7 @@ Crypto-currency software to operate Ğ1 libre currency
 
 ## Disclaimers / important information
 
-##First synchronization
+## First synchronization
 
 The first synchronization can be very time consuming, it can be considered to do it from the command line via ssh rather than via the graphical WEB interface. In order to let the synchronization be done without keeping the terminal window open connected in ssh, it is recommended to use tmux/screen. `screen -S duniter` in order to open a new "screen". In this screen called "duniter" :
 
