@@ -26,7 +26,7 @@ Logiciel de cryptomonnaie pour faire fonctionner la monnaie libre Ğ1
 ## Avertissements / informations importantes
 
 ## Première synchronisation
-La première synchronisation pouvant demander beaucoup de temps, il peut-être envisager de la faire en ligne de commande par ssh plutôt que par l'interface graphique WEB. Afin de pouvoir laisser la synchronisation se faire sans garder la fenêtre du terminal ouverte connecté en ssh, il est recommandé d'utiliser tmux/screen.
+La première synchronisation pouvant demander beaucoup de temps, il peut-être envisagé de la faire en ligne de commande par ssh plutôt que par l'interface graphique WEB. Afin de pouvoir laisser la synchronisation se faire sans garder la fenêtre du terminal ouverte connecté en ssh, il est recommandé d'utiliser tmux/screen.
 `screen -S duniter` afin d'ouvrir un nouvel "écran".
 Dans cet écran appelé "duniter" :
 ```
