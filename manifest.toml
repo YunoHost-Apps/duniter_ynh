@@ -51,14 +51,14 @@ ram.runtime = "50M"
 
     [resources.permissions]
     main.url = "/"
-    main.add_url = ["/webmin"]
+    main.add_url = "/webmin"
 
     api.url = "/bma"
-    api.additional_urls = "/ws2p"
+    api.additional_urls = ["/ws2p"]
     api.auth_header = false
     api.allowed = "visitors"
 
     apis.url = "/bma"
-    apis.additional_urls = "/ws2p"
+    apis.additional_urls = ["/ws2p"]
     apis.auth_header = false
     apis.allowed = "visitors"
