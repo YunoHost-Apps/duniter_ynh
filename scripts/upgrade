@@ -12,15 +12,15 @@ source /usr/share/yunohost/helpers
 #=================================================
 # LOAD SETTINGS
 #=================================================
-ynh_script_progression --message="Loading installation settings…"
+#REMOVEME? ynh_script_progression --message="Loading installation settings…"
 
-app=$YNH_APP_INSTANCE_NAME
+#REMOVEME? app=$YNH_APP_INSTANCE_NAME
 
-domain=$(ynh_app_setting_get --app=$app --key=domain)
-path_url=$(ynh_app_setting_get --app=$app --key=path)
-admin=$(ynh_app_setting_get --app=$app --key=admin)
-datadir=$(ynh_app_setting_get --app=$app --key=datadir)
-port=$(ynh_app_setting_get --app=$app --key=port)
+#REMOVEME? domain=$(ynh_app_setting_get --app=$app --key=domain)
+#REMOVEME? path=$(ynh_app_setting_get --app=$app --key=path)
+#REMOVEME? admin=$(ynh_app_setting_get --app=$app --key=admin)
+#REMOVEME? data_dir=$(ynh_app_setting_get --app=$app --key=data_dir)
+#REMOVEME? port=$(ynh_app_setting_get --app=$app --key=port)
 architecture=$YNH_ARCH
 
 #=================================================
@@ -33,17 +33,17 @@ upgrade_type=$(ynh_check_app_version_changed)
 #=================================================
 # BACKUP BEFORE UPGRADE THEN ACTIVE TRAP
 #=================================================
-ynh_script_progression --message="Backing up the app before upgrading (may take a while)…"
+#REMOVEME? ynh_script_progression --message="Backing up the app before upgrading (may take a while)…"
 
 # Backup the current version of the app
-ynh_backup_before_upgrade
-ynh_clean_setup () {
+#REMOVEME? ynh_backup_before_upgrade
+#REMOVEME? ynh_clean_setup () {
 	ynh_clean_check_starting
 	# Restore it if the upgrade fails
-	ynh_restore_upgradebackup
+#REMOVEME? 	ynh_restore_upgradebackup
 }
 # Exit if an error occurs during the execution of the script
-ynh_abort_if_errors
+#REMOVEME? ynh_abort_if_errors
 
 #=================================================
 # STANDARD UPGRADE STEPS
@@ -60,8 +60,8 @@ ynh_systemd_action --service_name=$app --action="stop" --log_path=systemd
 ynh_script_progression --message="Ensuring downward compatibility…"
 
 # Cleaning legacy permissions
-if ynh_legacy_permissions_exists; then
-	ynh_legacy_permissions_delete_all
+#REMOVEME? if ynh_legacy_permissions_exists; then
+#REMOVEME? 	ynh_legacy_permissions_delete_all
 
 	ynh_app_setting_delete --app=$app --key=is_public
 fi
@@ -69,11 +69,11 @@ fi
 #=================================================
 # CREATE DEDICATED USER
 #=================================================
-ynh_script_progression --message="Making sure dedicated system user exists…"
+#REMOVEME? ynh_script_progression --message="Making sure dedicated system user exists…"
 
 # Create a dedicated user (if not existing)
-datadir=/home/yunohost.app/$app
-ynh_system_user_create --username=$app --home_dir=$datadir --use_shell
+#REMOVEME? data_dir=/home/yunohost.app/$app
+#REMOVEME? ynh_system_user_create --username=$app --home_dir=$data_dir --use_shell
 
 #=================================================
 # NGINX CONFIGURATION
@@ -100,12 +100,12 @@ ynh_exec_warn_less dpkg -i $tempdir/duniter-server-v1.8.*-linux-*.deb
 #=================================================
 # MOVE DUNITER DIRECTORY
 #=================================================
-if [[ ! -d "${datadir}" ]]; then
+if [[ ! -d "${data_dir}" ]]; then
 	ynh_script_progression --message="Moving data directory…"
-	mv /root/.config/duniter $datadir
-	chmod 750 "$datadir"
-	chmod -R o-rwx "$datadir"
-	chown -R $app:www-data "$datadir"
+	mv /root/.config/duniter $data_dir
+	chmod 750 "$data_dir"
+	chmod -R o-rwx "$data_dir"
+	chown -R $app:www-data "$data_dir"
 fi
 
 #=================================================
@@ -140,9 +140,9 @@ ynh_systemd_action --service_name=$app --action="start" --log_path=systemd
 #=================================================
 # RELOAD NGINX
 #=================================================
-ynh_script_progression --message="Reloading NGINX web server…"
+#REMOVEME? ynh_script_progression --message="Reloading NGINX web server…"
 
-ynh_systemd_action --service_name=nginx --action=reload
+#REMOVEME? ynh_systemd_action --service_name=nginx --action=reload
 
 #=================================================
 # END OF SCRIPT

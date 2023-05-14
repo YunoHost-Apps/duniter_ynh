@@ -13,57 +13,57 @@ source /usr/share/yunohost/helpers
 # MANAGE SCRIPT FAILURE
 #=================================================
 
-ynh_clean_setup () {
+#REMOVEME? ynh_clean_setup () {
 	ynh_clean_check_starting
 }
 # Exit if an error occurs during the execution of the script
-ynh_abort_if_errors
+#REMOVEME? ynh_abort_if_errors
 
 #=================================================
 # RETRIEVE ARGUMENTS FROM THE MANIFEST
 #=================================================
 
-domain=$YNH_APP_ARG_DOMAIN
-path_url="/"
-admin=$YNH_APP_ARG_ADMIN
+#REMOVEME? domain=$YNH_APP_ARG_DOMAIN
+path="/"
+#REMOVEME? admin=$YNH_APP_ARG_ADMIN
 
-app=$YNH_APP_INSTANCE_NAME
+#REMOVEME? app=$YNH_APP_INSTANCE_NAME
 architecture=$YNH_ARCH
 
 #=================================================
 # CHECK IF THE APP CAN BE INSTALLED WITH THESE ARGS
 #=================================================
-ynh_script_progression --message="Validating installation parameters…"
+#REMOVEME? ynh_script_progression --message="Validating installation parameters…"
 
 # Register (book) web path
-ynh_webpath_register --app=$app --domain=$domain --path_url=$path_url
+#REMOVEME? ynh_webpath_register --app=$app --domain=$domain --path=$path
 
 #=================================================
 # STORE SETTINGS FROM MANIFEST
 #=================================================
-ynh_script_progression --message="Storing installation settings…"
+#REMOVEME? ynh_script_progression --message="Storing installation settings…"
 
-ynh_app_setting_set --app=$app --key=domain --value=$domain
-ynh_app_setting_set --app=$app --key=path --value=$path_url
-ynh_app_setting_set --app=$app --key=admin --value=$admin
+#REMOVEME? ynh_app_setting_set --app=$app --key=domain --value=$domain
+#REMOVEME? ynh_app_setting_set --app=$app --key=path --value=$path
+#REMOVEME? ynh_app_setting_set --app=$app --key=admin --value=$admin
 
 #=================================================
 # FIND AND OPEN A PORT
 #=================================================
-ynh_script_progression --message="Finding an available port…"
+#REMOVEME? ynh_script_progression --message="Finding an available port…"
 
 # Find an available port
-port=$(ynh_find_port --port=10901)
-ynh_app_setting_set --app=$app --key=port --value=$port
+#REMOVEME? port=$(ynh_find_port --port=10901)
+#REMOVEME? ynh_app_setting_set --app=$app --key=port --value=$port
 
 #=================================================
 # CREATE DEDICATED USER
 #=================================================
-ynh_script_progression --message="Configuring system user…"
+#REMOVEME? ynh_script_progression --message="Configuring system user…"
 
 # Create a system user
-datadir=/home/yunohost.app/$app
-ynh_system_user_create --username=$app --home_dir=$datadir --use_shell
+#REMOVEME? data_dir=/home/yunohost.app/$app
+#REMOVEME? ynh_system_user_create --username=$app --home_dir=$data_dir --use_shell
 
 #=================================================
 # NGINX CONFIGURATION
@@ -90,13 +90,13 @@ ynh_exec_warn_less dpkg -i $tempdir/duniter-server-v1.8.*-linux-*.deb
 #=================================================
 ynh_script_progression --message="Creating a data directory…"
 
-ynh_app_setting_set --app=$app --key=datadir --value=$datadir
+#REMOVEME? ynh_app_setting_set --app=$app --key=data_dir --value=$data_dir
 
-mkdir -p $datadir
+mkdir -p $data_dir
 
-chmod 750 "$datadir"
-chmod -R o-rwx "$datadir"
-chown -R $app:www-data "$datadir"
+chmod 750 "$data_dir"
+chmod -R o-rwx "$data_dir"
+chown -R $app:www-data "$data_dir"
 
 #=================================================
 # CONFIGURE DUNITER
@@ -131,21 +131,21 @@ ynh_systemd_action --service_name=$app --action="start" --log_path=systemd
 #=================================================
 # SETUP SSOWAT
 #=================================================
-ynh_script_progression --message="Configuring permissions…"
+#REMOVEME? ynh_script_progression --message="Configuring permissions…"
 
 # Change main group to protect sensitive sub-routes (client, API) to Duniter web admin interface, give access to choosen admin
-ynh_permission_update --permission "main" --add "$admin" --remove "all_users"
+#REMOVEME? ynh_permission_update --permission "main" --add "$admin" --remove "all_users"
 ynh_permission_url --permission "main" --add_url "/webmin"
 
 # Create apis permission group to public to allow BMA and WS2P APIs accessible to visitors
-ynh_permission_create --permission "apis" --url "/bma" --additional_urls "/ws2p" --auth_header=false --allowed "visitors"
+#REMOVEME? ynh_permission_create --permission "apis" --url "/bma" --additional_urls "/ws2p" --auth_header=false --allowed "visitors"
 
 #=================================================
 # RELOAD NGINX
 #=================================================
-ynh_script_progression --message="Reloading NGINX web server…"
+#REMOVEME? ynh_script_progression --message="Reloading NGINX web server…"
 
-ynh_systemd_action --service_name=nginx --action=reload
+#REMOVEME? ynh_systemd_action --service_name=nginx --action=reload
 
 #=================================================
 # END OF SCRIPT
