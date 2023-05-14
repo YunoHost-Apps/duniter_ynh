@@ -1,0 +1,1 @@
+Crypto-currency software to operate Ğ1 libre currency
