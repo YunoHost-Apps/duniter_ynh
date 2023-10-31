@@ -54,7 +54,7 @@ Cesium is a wallet webapp. You can install it with:
 
 * Official app website: <https://duniter.org>
 * Upstream app code repository: <https://git.duniter.org/nodes/typescript/duniter>
-* YunoHost documentation for this app: <https://yunohost.org/app_duniter>
+* YunoHost Store: <https://apps.yunohost.org/app/duniter>
 * Report a bug: <https://github.com/YunoHost-Apps/duniter_ynh/issues>
 
 ## Developer info

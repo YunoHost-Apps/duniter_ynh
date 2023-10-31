@@ -54,7 +54,7 @@ Cesium est une application portefeuilles web. Vous pouvez l’installer :
 
 * Site officiel de l’app : <https://duniter.org>
 * Dépôt de code officiel de l’app : <https://git.duniter.org/nodes/typescript/duniter>
-* Documentation YunoHost pour cette app : <https://yunohost.org/app_duniter>
+* YunoHost Store: <https://apps.yunohost.org/app/duniter>
 * Signaler un bug : <https://github.com/YunoHost-Apps/duniter_ynh/issues>
 
 ## Informations pour les développeurs
