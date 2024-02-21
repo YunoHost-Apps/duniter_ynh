@@ -41,6 +41,7 @@ ram.runtime = "50M" # FIXME: replace with an **estimate** minimum ram requiremen
     armhf.sha256 = "498e3a7766e167887de2d71dd43ffa6c1add11f976bf00e2a44ccc3cec5d5da0"
 
     format = "whatever"
+    extract = false
     rename = "duniter-server.deb"
 
     [resources.system_user]
