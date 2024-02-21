@@ -58,4 +58,6 @@ ram.runtime = "50M" # FIXME: replace with an **estimate** minimum ram requiremen
     [resources.ports]
     local_bma.default = 10901
     local_ws2p.default = 20901
+    # Dunno how to configure this…
     web_admin.default = 9220
+    web_admin.fixed = true
