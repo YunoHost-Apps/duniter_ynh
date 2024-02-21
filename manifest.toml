@@ -1,0 +1,60 @@
+#:schema https://raw.githubusercontent.com/YunoHost/apps/master/schemas/manifest.v2.schema.json
+
+packaging_format = 2
+
+id = "duniter"
+name = "Duniter"
+description.en = "Crypto-currency software to operate Ğ1 libre currency"
+description.fr = "Logiciel de cryptomonnaie pour faire fonctionner la monnaie libre Ğ1"
+
+version = "1.8.7~ynh0"
+
+maintainers = ["Moul"]
+
+[upstream]
+license = "AGPL-3.0-or-later"
+website = "https://duniter.org"
+code = "https://git.duniter.org/nodes/typescript/duniter"
+
+[integration]
+yunohost = ">= 11.0.0"
+architectures = ["amd64", "armhf"]
+multi_instance = false
+ldap = "not_relevant"
+sso = "not_relevant"
+disk = "50M" # FIXME: replace with an **estimate** minimum disk requirement. e.g. 20M, 400M, 1G, ...
+ram.build = "50M" # FIXME: replace with an **estimate** minimum ram requirement. e.g. 50M, 400M, 1G, ...
+ram.runtime = "50M" # FIXME: replace with an **estimate** minimum ram requirement. e.g. 50M, 400M, 1G, ...
+
+[install]
+    [install.domain]
+    type = "domain"
+
+    [install.admin]
+    type = "user"
+
+[resources]
+    [resources.sources.main]
+    amd64.url = "https://git.duniter.org/nodes/typescript/duniter/-/jobs/110607/artifacts/raw/work/bin/duniter-server-v1.8.7-linux-x64.deb"
+    amd64.sha256 = "a3b3f44b09a76f40d93f761872f9d798ee68bea8cc2eb73fe63c9cc6ad8b6519"
+    armhf.url = "https://git.duniter.org/nodes/typescript/duniter/uploads/8773273a64956cb02de555ec72e4d2bd/duniter-server-v1.8.5-linux-armv7l.deb"
+    armhf.sha256 = "498e3a7766e167887de2d71dd43ffa6c1add11f976bf00e2a44ccc3cec5d5da0"
+
+    format = "whatever"
+    rename = "duniter-server.deb"
+
+    [resources.system_user]
+
+    [resources.install_dir]
+
+    [resources.data_dir]
+
+    [resources.permissions]
+    main.url = "/"
+    admin.allowed = "admins"
+    admin.additional_urls = ["/webmin"]
+
+    [resources.ports]
+    local_bma.default = 10901
+    local_ws2p.default = 20901
+    web_admin.default = 9220

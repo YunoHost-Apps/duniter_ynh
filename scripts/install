@@ -10,99 +10,23 @@ source _common.sh
 source /usr/share/yunohost/helpers
 
 #=================================================
-# MANAGE SCRIPT FAILURE
-#=================================================
-
-ynh_clean_setup () {
-	ynh_clean_check_starting
-}
-# Exit if an error occurs during the execution of the script
-ynh_abort_if_errors
-
-#=================================================
-# RETRIEVE ARGUMENTS FROM THE MANIFEST
-#=================================================
-
-domain=$YNH_APP_ARG_DOMAIN
-path_url="/"
-admin=$YNH_APP_ARG_ADMIN
-
-app=$YNH_APP_INSTANCE_NAME
-architecture=$YNH_ARCH
-
-#=================================================
-# CHECK IF THE APP CAN BE INSTALLED WITH THESE ARGS
-#=================================================
-ynh_script_progression --message="Validating installation parameters…"
-
-# Register (book) web path
-ynh_webpath_register --app=$app --domain=$domain --path_url=$path_url
-
-#=================================================
-# STORE SETTINGS FROM MANIFEST
-#=================================================
-ynh_script_progression --message="Storing installation settings…"
-
-ynh_app_setting_set --app=$app --key=domain --value=$domain
-ynh_app_setting_set --app=$app --key=path --value=$path_url
-ynh_app_setting_set --app=$app --key=admin --value=$admin
-
-#=================================================
-# FIND AVAILABLE PORTS
-#=================================================
-ynh_script_progression --message="Finding available ports…"
-
-# Find available ports
-local_bma_port=$(ynh_find_port --port=10901)
-ynh_app_setting_set --app=$app --key=local_bma_port --value=$local_bma_port
-
-local_ws2p_port=$(ynh_find_port --port=20901)
-ynh_app_setting_set --app=$app --key=local_ws2p_port --value=$local_ws2p_port
-
-web_admin_port=$(ynh_find_port --port=9220)
-ynh_app_setting_set --app=$app --key=web_admin_port --value=$web_admin_port
-
-#=================================================
-# CREATE DEDICATED USER
-#=================================================
-ynh_script_progression --message="Configuring system user…"
-
-# Create a system user
-datadir=/home/yunohost.app/$app
-ynh_system_user_create --username=$app --home_dir=$datadir --use_shell
-
-#=================================================
-# NGINX CONFIGURATION
-#=================================================
-ynh_script_progression --message="Configuring NGINX web server…"
-
-# Create a dedicated NGINX config
-ynh_add_nginx_config
-
-#=================================================
 # SPECIFIC SETUP
 #=================================================
 # INSTALL DUNITER
 #=================================================
 ynh_script_progression --message="Installation of Debian package of Duniter…"
 
-tempdir="$(mktemp -d)"
-
-ynh_setup_source --dest_dir=$tempdir --source_id=$architecture
-ynh_exec_warn_less dpkg -i $tempdir/duniter-server-v1.8.*-linux-*.deb
+ynh_setup_source --dest_dir="$install_dir" --source_id=$architecture
+ynh_exec_warn_less dpkg -i "$install_dir/duniter-server.deb"
+ynh_secure_remove "$install_dir/duniter-server.deb"
 
 #=================================================
 # CREATE DATA DIRECTORY
 #=================================================
-ynh_script_progression --message="Creating a data directory…"
+ynh_script_progression --message="Configuring a data directory…"
 
-ynh_app_setting_set --app=$app --key=datadir --value=$datadir
-
-mkdir -p $datadir
-
-chmod 750 "$datadir"
-chmod -R o-rwx "$datadir"
-chown -R $app:www-data "$datadir"
+chmod -R o-rwx "$data_dir"
+chown -R $app:www-data "$data_dir"
 
 #=================================================
 # CONFIGURE DUNITER
@@ -112,19 +36,16 @@ ynh_script_progression --message="Configure Duniter…"
 CONFIGURE_DUNITER
 
 #=================================================
-# SETUP SYSTEMD
+# SYSTEM CONFIGURATION
 #=================================================
-ynh_script_progression --message="Configuring a systemd service…"
+ynh_script_progression --message="Adding system configurations related to $app..." --weight=1
+
+# Create a dedicated NGINX config
+ynh_add_nginx_config
 
 # Create a dedicated systemd config
 ynh_add_systemd_config
-
-#=================================================
-# INTEGRATE SERVICE IN YUNOHOST
-#=================================================
-ynh_script_progression --message="Integrating service in YunoHost…"
-
-yunohost service add $app
+yunohost service add "$app"
 
 #=================================================
 # START SYSTEMD SERVICE
@@ -132,26 +53,7 @@ yunohost service add $app
 ynh_script_progression --message="Starting a systemd service…"
 
 # Start a systemd service
-ynh_systemd_action --service_name=$app --action="start" --log_path=systemd
-
-#=================================================
-# SETUP SSOWAT
-#=================================================
-ynh_script_progression --message="Configuring permissions…"
-
-# Change main group to protect sensitive sub-routes (client, API) to Duniter web admin interface, give access to choosen admin
-ynh_permission_update --permission "main" --add "$admin" --remove "all_users"
-ynh_permission_url --permission "main" --add_url "/webmin"
-
-# Create apis permission group to public to allow BMA and WS2P APIs accessible to visitors
-ynh_permission_create --permission "apis" --url "/bma" --additional_urls "/ws2p" --auth_header=false --allowed "visitors"
-
-#=================================================
-# RELOAD NGINX
-#=================================================
-ynh_script_progression --message="Reloading NGINX web server…"
-
-ynh_systemd_action --service_name=nginx --action=reload
+ynh_systemd_action --service_name="$app" --action="start" --log_path=systemd
 
 #=================================================
 # END OF SCRIPT
