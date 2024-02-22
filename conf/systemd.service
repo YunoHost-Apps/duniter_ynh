@@ -10,8 +10,8 @@ Environment="DUNITER_OPTS="
 Group=duniter
 User=duniter
 Type=forking
-ExecStart=/usr/bin/duniter ${DUNITER_WEB}start --home ${DUNITER_HOME} --mdb ${DUNITER_DATA} $DUNITER_OPTS
-ExecReload=/usr/bin/duniter ${DUNITER_WEB}restart --home ${DUNITER_HOME} --mdb ${DUNITER_DATA} $DUNITER_OPTS
+ExecStart=/usr/bin/duniter ${DUNITER_WEB}start --home ${DUNITER_HOME} --mdb ${DUNITER_DATA} $DUNITER_OPTS --webmport __PORT_WEB_ADMIN__
+ExecReload=/usr/bin/duniter ${DUNITER_WEB}restart --home ${DUNITER_HOME} --mdb ${DUNITER_DATA} $DUNITER_OPTS --webmport __PORT_WEB_ADMIN__
 ExecStop=/usr/bin/duniter stop --home ${DUNITER_HOME} --mdb ${DUNITER_DATA}
 Restart=on-failure
 
