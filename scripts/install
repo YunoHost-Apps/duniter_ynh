@@ -53,7 +53,7 @@ yunohost service add "$app"
 ynh_script_progression --message="Starting a systemd service…"
 
 # Start a systemd service
-ynh_systemd_action --service_name="$app" --action="start" --log_path=systemd
+ynh_systemd_action --service_name="$app" --action="start" --log_path=systemd --line_match="Web administration accessible"
 
 #=================================================
 # END OF SCRIPT
