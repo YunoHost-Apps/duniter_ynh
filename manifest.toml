@@ -18,7 +18,7 @@ code = "https://git.duniter.org/nodes/typescript/duniter"
 
 [integration]
 yunohost = ">= 11.0.0"
-architectures = ["amd64", "armhf"]
+architectures = ["amd64"]
 multi_instance = false
 ldap = "not_relevant"
 sso = "not_relevant"
@@ -41,8 +41,6 @@ ram.runtime = "50M" # FIXME: replace with an **estimate** minimum ram requiremen
     [resources.sources.main]
     amd64.url = "https://git.duniter.org/nodes/typescript/duniter/-/jobs/110607/artifacts/raw/work/bin/duniter-server-v1.8.7-linux-x64.deb"
     amd64.sha256 = "a3b3f44b09a76f40d93f761872f9d798ee68bea8cc2eb73fe63c9cc6ad8b6519"
-    armhf.url = "https://git.duniter.org/nodes/typescript/duniter/uploads/8773273a64956cb02de555ec72e4d2bd/duniter-server-v1.8.5-linux-armv7l.deb"
-    armhf.sha256 = "498e3a7766e167887de2d71dd43ffa6c1add11f976bf00e2a44ccc3cec5d5da0"
 
     format = "whatever"
     extract = false
