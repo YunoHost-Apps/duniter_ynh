@@ -19,7 +19,7 @@ Si vous n’avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) po
 Crypto-currency software to operate the Ğ1 libre currency.
 
 
-**Version incluse :** 1.8.7~ynh0
+**Version incluse :** 1.8.7~ynh1
 
 ## Captures d’écran
 
