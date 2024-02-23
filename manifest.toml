@@ -7,7 +7,7 @@ name = "Duniter"
 description.en = "Crypto-currency software to operate Ğ1 libre currency"
 description.fr = "Logiciel de cryptomonnaie pour faire fonctionner la monnaie libre Ğ1"
 
-version = "1.8.7~ynh0"
+version = "1.8.7~ynh1"
 
 maintainers = ["Moul"]
 

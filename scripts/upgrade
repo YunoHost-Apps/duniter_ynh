@@ -29,6 +29,10 @@ if [ -z "$(ls -A "$data_dir")" ]; then
     chown -R "$app:www-data" "$data_dir"
 fi
 
+if ynh_compare_current_package_version --comparison lt --version 1.8.7~ynh1; then
+    run_duniter reset data
+fi
+
 #=================================================
 # SPECIFIC UPGRADE
 #=================================================
