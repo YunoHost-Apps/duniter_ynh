@@ -17,7 +17,7 @@ source /usr/share/yunohost/helpers
 #=================================================
 ynh_script_progression --message="Installation of Debian package of Duniter…"
 
-ynh_setup_source --dest_dir="$install_dir"
+ynh_setup_source --dest_dir="$install_dir" --full_replace=1
 ynh_exec_warn_less dpkg -i "$install_dir/duniter-server.deb"
 ynh_secure_remove "$install_dir/duniter-server.deb"
 
