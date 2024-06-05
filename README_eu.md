@@ -19,7 +19,7 @@ EZ editatu eskuz.
 Crypto-currency software to operate the Ğ1 libre currency.
 
 
-**Paketatutako bertsioa:** 1.8.7~ynh1
+**Paketatutako bertsioa:** 1.8.7~ynh2
 
 ## Pantaila-argazkiak
 

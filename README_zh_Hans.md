@@ -19,7 +19,7 @@
 Crypto-currency software to operate the Ğ1 libre currency.
 
 
-**分发版本：** 1.8.7~ynh1
+**分发版本：** 1.8.7~ynh2
 
 ## 截图
 
