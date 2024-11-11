@@ -5,7 +5,7 @@ EZ editatu eskuz.
 
 # Duniter YunoHost-erako
 
-[![Integrazio maila](https://dash.yunohost.org/integration/duniter.svg)](https://dash.yunohost.org/appci/app/duniter) ![Funtzionamendu egoera](https://ci-apps.yunohost.org/ci/badges/duniter.status.svg) ![Mantentze egoera](https://ci-apps.yunohost.org/ci/badges/duniter.maintain.svg)
+[![Integrazio maila](https://dash.yunohost.org/integration/duniter.svg)](https://ci-apps.yunohost.org/ci/apps/duniter/) ![Funtzionamendu egoera](https://ci-apps.yunohost.org/ci/badges/duniter.status.svg) ![Mantentze egoera](https://ci-apps.yunohost.org/ci/badges/duniter.maintain.svg)
 
 [![Instalatu Duniter YunoHost-ekin](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=duniter)
 
@@ -19,7 +19,7 @@ EZ editatu eskuz.
 Crypto-currency software to operate the Ğ1 libre currency.
 
 
-**Paketatutako bertsioa:** 1.8.7~ynh2
+**Paketatutako bertsioa:** 1.8.7~ynh3
 
 ## Pantaila-argazkiak
 
