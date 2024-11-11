@@ -35,7 +35,7 @@ ram.runtime = "200M"
 
     [install.init_main_permission]
     type = "group"
-    default = "visitors"
+    default = "admins"
 
 [resources]
     [resources.sources.main]
@@ -56,6 +56,11 @@ ram.runtime = "200M"
     main.url = "/"
     admin.allowed = "admins"
     admin.additional_urls = ["/webmin"]
+
+    apis.url = "/bma"
+    apis.show_tile = true
+    apis.allowed = "visitors"
+    apis.additional_urls = ["/ws2p"]
 
     [resources.ports]
     web_admin.default = 8000
