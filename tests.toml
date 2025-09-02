@@ -5,3 +5,4 @@ test_format = 1
 [default]
 
     test_upgrade_from.70eaf1b90afe598445690e30debe3f39e1082c72.name = "1.8.5~ynh1"
+    test_upgrade_from.73740afb05459d9507a1e09dea86ac404ee1adc8.name = "Helpers v1"
