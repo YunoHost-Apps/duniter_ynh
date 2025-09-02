@@ -5,7 +5,7 @@
 #=================================================
 
 run_duniter() {
-    ynh_exec_as "duniter" duniter --home "$data_dir" "$@"
+    ynh_exec_as_app duniter --home "$data_dir" "$@"
 }
 
 CONFIGURE_DUNITER() {
