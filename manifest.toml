@@ -7,7 +7,7 @@ name = "Duniter"
 description.en = "Crypto-currency software to operate Ğ1 libre currency"
 description.fr = "Logiciel de cryptomonnaie pour faire fonctionner la monnaie libre Ğ1"
 
-version = "1.8.7~ynh3"
+version = "1.8.7~ynh4"
 
 maintainers = ["Moul"]
 
@@ -17,11 +17,14 @@ website = "https://duniter.org"
 code = "https://git.duniter.org/nodes/typescript/duniter"
 
 [integration]
-yunohost = ">= 11.2"
+yunohost = ">= 11.2.18"
+helpers_version = "2.1"
 architectures = ["amd64"]
 multi_instance = false
+
 ldap = "not_relevant"
 sso = "not_relevant"
+
 disk = "50M"
 ram.build = "150M"
 ram.runtime = "200M"
@@ -51,6 +54,7 @@ ram.runtime = "200M"
     [resources.install_dir]
 
     [resources.data_dir]
+    group = "www-data:r-x"
 
     [resources.permissions]
     main.url = "/"
